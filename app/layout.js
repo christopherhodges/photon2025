@@ -1,5 +1,5 @@
 import Header from '@/app/components/Header';
-import '@/app/globals.css';
+import '@/app/globals.scss';
 import { getNavigationMenu } from '@/lib/contentful/header';
 
 export default async function RootLayout({ children }) {

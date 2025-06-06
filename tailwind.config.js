@@ -1,15 +1,15 @@
-import typography from "@tailwindcss/typography";
+import typography from '@tailwindcss/typography';
 
-export default {
+const tailwindCongig = {
   content: [
-    "./app/**/*.{js,jsx}",
-    "./components/**/*.{js,jsx}",
-    "./lib/**/*.{js,jsx}",
+    './app/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}',
+    './lib/**/*.{js,jsx}',
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)"],
+        sans: ['var(--font-inter)'],
       },
     },
   },
@@ -17,4 +17,6 @@ export default {
     hoverOnlyWhenSupported: true,
   },
   plugins: [typography],
-}
+};
+
+export default tailwindCongig;

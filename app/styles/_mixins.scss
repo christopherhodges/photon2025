@@ -1,0 +1,44 @@
+/**
+  Gradient Button Background
+  - gradient that goes behind certain buttons on hover
+ */
+@mixin gradientButtonBg(
+  $radius: 8px,
+  $gradient: var(--gradient-primary),
+  $inner-bg: #fff
+) {
+  position: relative;
+
+  > span {
+    position: relative;
+    z-index: 2;
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    display: block;
+  }
+
+  &:before {
+    width: calc(100% + 4px);
+    height: calc(100% + 5px);
+    opacity: 0;
+    z-index: 0;
+    top: -2px;
+    background: $gradient;
+    border-radius: $radius;
+  }
+
+  &:after {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    background: $inner-bg;
+    border-radius: $radius;
+  }
+}
