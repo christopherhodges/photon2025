@@ -27,7 +27,7 @@ export default function Header({ menu }) {
   const mainItems = itemsCollection?.items;
   const firstPart = mainItems.slice(0, -2); // all except last 2 (empty if < 2)
   const lastPart = mainItems.slice(-2); // last 2 (empty if < 2)
-
+  console.log(mainItems);
   return (
     <header className="header fixed left-1/2 top-[60px] flex w-full max-w-[1360px] -translate-x-1/2 items-center justify-between rounded-[16px] bg-white px-[16px] py-[20px]">
       <Link href="/" className="flex items-center gap-2">
@@ -51,6 +51,7 @@ export default function Header({ menu }) {
         {firstPart.map(entry =>
           entry.__typename === 'NavLink' ? (
             <NavLink
+              external={entry.external}
               type="default"
               classes="text-sm"
               key={entry.label}
@@ -66,7 +67,7 @@ export default function Header({ menu }) {
         <nav className="flex items-center gap-3">
           {lastPart.map(entry =>
             entry.__typename === 'NavLink' ? (
-              <NavLink key={entry.label} {...entry} />
+              <NavLink external={entry.external} key={entry.label} {...entry} />
             ) : (
               <NavGroup key={entry.label} {...entry} />
             ),
@@ -81,10 +82,9 @@ function NavLink({ label, href, type, style, external, onClick }) {
   const classes = linkClass(style);
   const pathname = usePathname();
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
-
   return (
     <SmartLink
-      external
+      external={external}
       href={href}
       className={clsx(classes)}
       target="_blank"
@@ -190,6 +190,10 @@ function NavGroup({ label, linksCollection }) {
               className="radius-[20px] group flex w-1/2 items-center gap-4 rounded-[20px] border border-transparent p-[9px] hover:border-[var(--blue)]"
               key={link.label}
               href={link.href}
+              onClick={() => {
+                console.log('hlleo');
+                setDropdownOpen(false);
+              }}
             >
               <div className="transiton-colors flex h-[60px] w-[60px] items-center justify-center rounded-[20px] bg-[var(--light-gray)] group-hover:bg-[var(--blue)]">
                 <Image
