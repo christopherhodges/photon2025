@@ -1,0 +1,9 @@
+@mixin fp() {
+  font-family: 'Acid Grotesk TRIAL', sans-serif;
+  font-weight: 300;
+}
+
+@mixin fp--bold() {
+  font-family: 'Acid Grotesk TRIAL', sans-serif;
+  font-weight: bold;
+}

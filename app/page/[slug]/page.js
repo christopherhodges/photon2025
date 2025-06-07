@@ -1,5 +1,6 @@
 import { draftMode } from 'next/headers';
 
+import Hero from '@/app/components/Hero';
 import { getAllPages, getPage } from '@/lib/contentful/pages';
 import { notFound } from 'next/navigation';
 
@@ -13,6 +14,14 @@ export async function generateStaticParams() {
 export default async function Page({ params }) {
   const { isEnabled } = draftMode();
   const { page } = await getPage(params.slug, isEnabled);
+  const { hero } = page;
   if (!page) notFound();
-  return <h1>{page.title}</h1>;
+  return (
+    <Hero
+      title={hero.title}
+      subtitle={hero.subtitle}
+      media={hero.media}
+      textColor={hero.textColor}
+    />
+  );
 }

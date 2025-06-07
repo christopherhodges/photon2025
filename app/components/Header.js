@@ -17,9 +17,6 @@ const linkClass = style =>
     outline: 'button-outline',
   })[style] || 'text-gray-700 hover:text-gray-900';
 
-// ---------------------------------------------------------------------------
-//  <Header menu={navigationMenu} />
-// ---------------------------------------------------------------------------
 export default function Header({ menu }) {
   if (!menu) return null; // renders nothing until CMS entry exists
 
@@ -27,9 +24,8 @@ export default function Header({ menu }) {
   const mainItems = itemsCollection?.items;
   const firstPart = mainItems.slice(0, -2); // all except last 2 (empty if < 2)
   const lastPart = mainItems.slice(-2); // last 2 (empty if < 2)
-  console.log(mainItems);
   return (
-    <header className="header fixed left-1/2 top-[60px] flex w-full max-w-[1360px] -translate-x-1/2 items-center justify-between rounded-[16px] bg-white px-[16px] py-[20px]">
+    <header className="l-header invisible fixed left-1/2 top-[60px] flex w-full max-w-[1360px] -translate-x-1/2 items-center justify-between rounded-[16px] bg-white px-[16px] py-[20px] md:visible">
       <Link href="/" className="flex items-center gap-2">
         {logo && (
           <Image
@@ -191,7 +187,6 @@ function NavGroup({ label, linksCollection }) {
               key={link.label}
               href={link.href}
               onClick={() => {
-                console.log('hlleo');
                 setDropdownOpen(false);
               }}
             >

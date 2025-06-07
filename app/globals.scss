@@ -1,9 +1,12 @@
 @use '@/app/styles/mixins' as *;
+@use '@/app/styles/fonts';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  font-family: var(--font-acid-grotesk), sans-serif;
   --seafoam: #0bd0de;
   --blue: #472ff7;
   --gray: #908e8e;
@@ -15,11 +18,41 @@
     #ff5d52 50%,
     #b2dfe7 100%
   );
+  --gradient-secondary: linear-gradient(180deg, #003ca6 0%, #001740 84.49%);
 }
 
+html,
 body {
-  font-family: Arial;
+  height: 100%;
+}
+body {
   color: black;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+  letter-spacing: 2%;
+}
+
+.l-container {
+  width: 100%;
+  max-width: 1440px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.05;
+}
+
+.bg-gradient-secondary {
+  background: var(--gradient-secondary);
 }
 
 .button-primary,
@@ -31,6 +64,7 @@ body {
   min-width: 100px;
   display: inline-block;
   border: 2px solid transparent;
+  font-weight: normal;
 }
 
 .button-primary {
@@ -56,6 +90,14 @@ body {
       opacity: 1;
     }
   }
+}
+
+// sticky footer
+.l-main {
+  flex: 1 0 auto;
+}
+.l-footer {
+  flex-shrink: 0;
 }
 
 .navDropdown {

@@ -9,7 +9,8 @@ const tailwindCongig = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
+        sans: ['var(--font-grotesk)'],
+        sansBold: ['var(--font-grotesk-bold'],
       },
     },
   },
