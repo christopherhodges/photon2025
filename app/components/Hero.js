@@ -11,7 +11,7 @@ const Hero = ({ title, subtitle, media, textColor }) => {
         textColor === 'white' ? 'text-white' : 'text-black',
       )}
     >
-      {media.contentType.includes('video') && (
+      {media?.contentType?.includes('video') && (
         <div className="video absolute left-1/2 z-[-1] h-full w-full -translate-x-1/2">
           <video
             className="h-full w-full object-cover"

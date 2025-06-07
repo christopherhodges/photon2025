@@ -14,14 +14,20 @@ export async function generateStaticParams() {
 export default async function Page({ params }) {
   const { isEnabled } = draftMode();
   const { page } = await getPage(params.slug, isEnabled);
+  if (!page) return notFound();
+
   const { hero } = page;
-  if (!page) notFound();
+
   return (
-    <Hero
-      title={hero.title}
-      subtitle={hero.subtitle}
-      media={hero.media}
-      textColor={hero.textColor}
-    />
+    <>
+      {hero && (
+        <Hero
+          title={hero.title}
+          subtitle={hero.subtitle}
+          media={hero.media}
+          textColor={hero.textColor}
+        />
+      )}
+    </>
   );
 }
