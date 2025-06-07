@@ -17,7 +17,7 @@ const Footer = footer => {
             height={footerItems.logo.height}
           />
         </Link>
-        <div className="flex items-center justify-between py-[40px] text-sm">
+        <div className="flex flex-col items-center justify-between py-[40px] text-sm sm:flex-row">
           <ul className="flex items-center gap-[24px]">
             {footerLinks.map(link => {
               return (
@@ -29,7 +29,7 @@ const Footer = footer => {
               );
             })}
           </ul>
-          <p>{footerItems.copyright}</p>
+          <p className="mt-[20px] sm:mt-0">{footerItems.copyright}</p>
         </div>
       </div>
     </footer>
