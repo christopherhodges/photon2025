@@ -63,6 +63,10 @@ h6 {
   background: var(--gradient-secondary);
 }
 
+.bg-gradient-secondary--reversed {
+  background: var(--gradient-secondary-reversed);
+}
+
 .button-primary,
 .button-outline {
   padding: 7px 16px;

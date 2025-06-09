@@ -25,7 +25,7 @@ export default function Testimonials({ items = [] }) {
   useEffect(() => {
     if (items.length > 1) restart();
     return () => clearTimeout(timerRef.current);
-  }, [index, items]);
+  }, [index, items, restart()]);
 
   // ─── Height adjustment ──────────────────────────────────────────────────
   useLayoutEffect(() => {

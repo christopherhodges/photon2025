@@ -71,7 +71,7 @@ const Hero = ({
 
           {pathname === '/' && (
             <TestDriveForm
-              className="mt-[30px] w-full max-w-[464px]"
+              className="mb-[40px] mt-[30px] w-full max-w-[464px]"
               title="Test drive the patient experience"
               inputPlaceholder="Enter your phone number"
               buttonLabel="Try it out"

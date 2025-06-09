@@ -21,7 +21,10 @@ const Footer = footer => {
             {footerLinks.map(link => {
               return (
                 <li key={link.label}>
-                  <Link className="hover:underline" href={link.href}>
+                  <Link
+                    className="underline hover:no-underline"
+                    href={link.href}
+                  >
                     {link.label}
                   </Link>
                 </li>

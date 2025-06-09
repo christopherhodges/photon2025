@@ -13,8 +13,8 @@ const linkClass = style =>
   ({
     default:
       'nav-link relative group flex items-center gap-2 rounded-[20px] bg-transparent transition-colors hover:bg-[var(--light-gray)]',
-    primary: 'button-primary',
-    outline: 'button-outline',
+    primary: 'button-primary text-sm',
+    outline: 'button-outline text-sm',
   })[style] || 'text-gray-700 hover:text-gray-900';
 
 export default function Header({ menu }) {

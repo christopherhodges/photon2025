@@ -10,7 +10,7 @@ const TestDriveForm = ({
   return (
     <div
       className={clsx(
-        'test-drive-form mb-[40px] rounded-[10px] border border-white/40 bg-white/20 p-[20px] backdrop-blur-[104px]',
+        'test-drive-form rounded-[10px] border border-white/40 bg-white/10 p-[20px] backdrop-blur-[104px]',
         className,
       )}
     >
@@ -21,7 +21,7 @@ const TestDriveForm = ({
           type="text"
           placeholder={inputPlaceholder}
         />
-        <button className="button-tertiary absolute right-[20px] top-1/2 -translate-y-1/2 text-sm">
+        <button className="button-primary button--black absolute right-[20px] top-1/2 -translate-y-1/2 text-sm">
           {buttonLabel}
         </button>
       </div>

@@ -1,6 +1,7 @@
 import { draftMode } from 'next/headers';
 
 import CardGrid from '@/app/components/CardGrid';
+import FeaturedArticles from '@/app/components/FeaturedArticles';
 import FeaturedContent from '@/app/components/FeaturedContent';
 import Hero from '@/app/components/Hero';
 import LogoGrid from '@/app/components/LogoGrid';
@@ -15,6 +16,8 @@ export default async function Page() {
   if (!page) return notFound();
 
   const { hero, bodyContentCollection } = page;
+
+  console.log(bodyContentCollection);
   return (
     <>
       {hero && (
@@ -70,6 +73,15 @@ export default async function Page() {
               <Testimonials
                 key={section.__typename}
                 items={section.testimonialsCollection.items}
+              />
+            );
+          } else if (section.__typename === 'ComponentFeaturedPost') {
+            return (
+              <FeaturedArticles
+                key={section.__typename}
+                sectionTitle={section.title}
+                crumb={section.crumb}
+                items={section.postsCollection.items}
               />
             );
           }
