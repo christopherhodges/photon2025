@@ -21,6 +21,11 @@
     #b2dfe7 160%
   );
   --gradient-secondary: linear-gradient(180deg, #003ca6 0%, #001740 84.49%);
+  --gradient-secondary-reversed: linear-gradient(
+    180deg,
+    #001740 0%,
+    #003ca6 100%
+  );
 }
 
 html,

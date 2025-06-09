@@ -17,7 +17,7 @@ const Hero = ({
   return (
     <section
       className={clsx(
-        'hero relative h-dvh max-h-[822px] w-full',
+        'hero relative mt-[35px] h-dvh max-h-[822px] w-full',
         textColor === 'white' ? 'text-white' : 'text-black',
       )}
     >
@@ -47,7 +47,7 @@ const Hero = ({
       {centerImage && (
         <div className="pointer-events-none absolute bottom-0 z-[0] flex h-full w-full items-end">
           <ContentfulImage
-            className="mx-auto mt-auto h-auto w-[360px]"
+            className="mx-auto mt-auto h-auto"
             src={centerImage.url}
             width={centerImage.width}
             height={centerImage.height}
