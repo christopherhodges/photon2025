@@ -1,3 +1,4 @@
+import AnnouncementBar from '@/app/components/AnnouncementBar';
 import Footer from '@/app/components/Footer';
 import Header from '@/app/components/Header';
 import '@/app/globals.scss';
@@ -16,14 +17,42 @@ export default async function RootLayout({ children }) {
       <Head>
         <link
           rel="preload"
-          href="/fonts/AcidGrotesk-Light-TRIAL.woff2"
+          href="/fonts/FFFAcidGrotesk-Light.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/AcidGrotesk-Bold-TRIAL.woff2"
+          href="/fonts/FFFAcidGrotesk-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/FFFAcidGrotesk-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/FFFAcidGrotesk-Bold.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/FFFAcidGrotesk-Medium.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/FFFAcidGrotesk-Regular.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
@@ -37,8 +66,9 @@ export default async function RootLayout({ children }) {
         />
       </Head>
       <html lang="en" className={clsx(acidGrotesk.className)}>
-        <body className="bg-neutral-300">
+        <body>
           <main className="l-main">
+            <AnnouncementBar content="Announcement Bar" />
             <Header menu={nav} />
             {children}
           </main>

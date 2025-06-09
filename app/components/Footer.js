@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 const Footer = footer => {
   const footerItems = footer.footer;
-  console.log(footerItems);
   const footerLinks = footerItems.linksCollection.items;
   return (
     <footer className="l-footer bg-gradient-secondary text-white">

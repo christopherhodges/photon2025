@@ -25,7 +25,7 @@ export default function Header({ menu }) {
   const firstPart = mainItems.slice(0, -2); // all except last 2 (empty if < 2)
   const lastPart = mainItems.slice(-2); // last 2 (empty if < 2)
   return (
-    <header className="l-header invisible fixed left-1/2 top-[60px] flex w-full max-w-[1360px] -translate-x-1/2 items-center justify-between rounded-[16px] bg-white px-[16px] py-[20px] md:visible">
+    <header className="l-header invisible fixed left-1/2 top-[60px] z-[10000] flex w-[1360px] max-w-[calc(100%-80px)] -translate-x-1/2 items-center justify-between rounded-[16px] bg-white px-[16px] py-[20px] lg:visible">
       <Link href="/" className="flex items-center gap-2">
         {logo && (
           <Image
@@ -34,7 +34,7 @@ export default function Header({ menu }) {
             height={logo.height}
             alt={logo.description || menu.title}
             priority
-            className="w-[170px]"
+            className="h-auto w-[170px]"
           />
         )}
         <span className="sr-only">{menu.title}</span>
@@ -114,6 +114,9 @@ function NavGroup({ label, linksCollection }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const wrapperRef = useRef(null);
   const buttonRef = useRef(null);
+  const pathname = usePathname();
+  const isActive = pathname === '/about-us' || pathname === '/careers';
+
   useEffect(() => {
     function handleClickOutside(e) {
       if (
@@ -135,7 +138,11 @@ function NavGroup({ label, linksCollection }) {
       <button
         ref={buttonRef}
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className={clsx('nav-link group', dropdownOpen && 'active')}
+        className={clsx(
+          'nav-link group',
+          dropdownOpen && 'active',
+          isActive && 'current',
+        )}
       >
         <span
           className={clsx(
@@ -183,29 +190,53 @@ function NavGroup({ label, linksCollection }) {
         <div className="mx-auto flex w-full max-w-[938px] items-center justify-center gap-8 py-[16px]">
           {linksCollection.items.map(link => (
             <SmartLink
-              className="radius-[20px] group flex w-1/2 items-center gap-4 rounded-[20px] border border-transparent p-[9px] hover:border-[var(--blue)]"
+              className={clsx(
+                'radius-[20px] group flex w-1/2 items-center gap-4 rounded-[20px] border p-[9px]',
+                pathname === link.href
+                  ? 'border-[var(--blue)]'
+                  : 'border-transparent hover:border-[var(--blue)]',
+              )}
               key={link.label}
               href={link.href}
               onClick={() => {
                 setDropdownOpen(false);
               }}
             >
-              <div className="transiton-colors flex h-[60px] w-[60px] items-center justify-center rounded-[20px] bg-[var(--light-gray)] group-hover:bg-[var(--blue)]">
+              <div
+                className={clsx(
+                  'transiton-colors flex h-[60px] w-[60px] items-center justify-center rounded-[20px]',
+                  pathname === link.href
+                    ? 'bg-[var(--blue)]'
+                    : 'bg-[var(--light-gray)] group-hover:bg-[var(--blue)]',
+                )}
+              >
                 <Image
                   src={link.icon.url}
                   alt={link.label}
                   width={link.icon.width}
                   height={link.icon.height}
-                  className="transiton-all group-hover:invert"
+                  className={clsx(
+                    'transiton-all',
+                    pathname === link.href ? 'invert' : 'group-hover:invert',
+                  )}
                 />
               </div>
               <div className="group flex flex-col">
-                <span className="transition-colors group-hover:font-bold group-hover:text-[var(--blue)]">
+                <span
+                  className={clsx(
+                    'transition-colors',
+                    pathname === link.href
+                      ? 'font-bold text-[var(--blue)]'
+                      : 'group-hover:font-bold group-hover:text-[var(--blue)]',
+                  )}
+                >
                   {link.label}
                 </span>
-                <span className="text-xs text-[var(--gray)]">
-                  Lorem ipsum dolor sit amet.
-                </span>
+                {link.shortDescription && (
+                  <span className="text-xs text-[var(--gray)]">
+                    {link.shortDescription}
+                  </span>
+                )}
               </div>
             </SmartLink>
           ))}

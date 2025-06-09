@@ -14,7 +14,7 @@ export default function SmartLink({
   // common props
   const props = {
     href,
-    className: clsx(className),
+    className: clsx('pointer', className),
     onClick,
     // add target / rel only for external links
     ...(external && { target: '_blank', rel: 'noopener noreferrer' }),

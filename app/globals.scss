@@ -9,8 +9,10 @@
   font-family: var(--font-acid-grotesk), sans-serif;
   --seafoam: #0bd0de;
   --blue: #472ff7;
+  --dark-blue: #001740;
   --gray: #908e8e;
   --light-gray: #f0f0f0;
+  --med-gray: #707070;
   --dark-gray: #121212;
   --gradient-primary: linear-gradient(
     180deg,
@@ -25,13 +27,14 @@ html,
 body {
   height: 100%;
 }
+
 body {
   color: black;
+  background: #f1f1f1;
   line-height: 1.5;
   display: flex;
   flex-direction: column;
   font-weight: 300;
-  letter-spacing: 2%;
 }
 
 .l-container {
@@ -71,6 +74,16 @@ h6 {
   background: var(--seafoam);
   text-transform: capitalize;
 
+  &.button--black {
+    background: black;
+    color: white;
+  }
+
+  &.button--white {
+    background: white;
+    color: black;
+  }
+
   &:hover {
     background-color: var(--blue);
     color: white;
@@ -92,6 +105,23 @@ h6 {
   }
 }
 
+.crumb {
+  text-transform: uppercase;
+  display: inline-flex;
+  font-size: 14px;
+  align-items: center;
+  border-radius: 30px;
+  gap: 8px;
+
+  i {
+    border-radius: 100%;
+    background: var(--seafoam);
+    box-shadow: 0px 0px 4px 2px var(--seafoam) 33;
+    width: 7px;
+    height: 7px;
+  }
+}
+
 // sticky footer
 .l-main {
   flex: 1 0 auto;
@@ -104,7 +134,8 @@ h6 {
   > .nav-link {
     @include gradientButtonBg($radius: 20px);
 
-    &.active {
+    &.active,
+    &.current {
       &:before {
         opacity: 1;
       }
