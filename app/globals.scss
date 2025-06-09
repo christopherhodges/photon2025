@@ -18,7 +18,7 @@
     180deg,
     #472ff7 0%,
     #ff5d52 50%,
-    #b2dfe7 100%
+    #b2dfe7 160%
   );
   --gradient-secondary: linear-gradient(180deg, #003ca6 0%, #001740 84.49%);
 }
@@ -154,4 +154,23 @@ h6 {
   > span {
     padding: 7px 16px;
   }
+}
+
+.richText sup {
+  font-size: inherit;
+  top: 0;
+  background-image: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.richText sup:nth-of-type(1n) {
+  background-position: 37% 82%;
+}
+.richText sup:nth-of-type(2n) {
+  background-position: 91% 14%;
+}
+.richText sup:nth-of-type(3n) {
+  background-position: 5% 65%;
 }

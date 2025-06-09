@@ -17,8 +17,6 @@ export default async function Page({ params }) {
   const { page } = await getPage(params.slug, isEnabled);
   if (!page) return notFound();
 
-  console.log(page);
-
   const { hero } = page;
 
   return (

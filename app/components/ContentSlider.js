@@ -1,8 +1,8 @@
-/* components/ContentSlider.js ------------------------------------------- */
 'use client';
 
 import ContentfulImage from '@/app/components/contentful-image';
 import clsx from 'clsx';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function ContentSlider({ items = [] }) {
@@ -73,16 +73,13 @@ export default function ContentSlider({ items = [] }) {
                       className="inline-flex items-center gap-2 text-sm text-white hover:underline"
                     >
                       Case&nbsp;Study
-                      <svg
-                        width="16"
-                        height="16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
+                      <Image
+                        width={12}
+                        height={12}
+                        src="/icons/arrow-right-up.svg"
+                        className="h-[12px] w-[12px]"
+                        alt="Arrow Right up"
+                      />
                     </a>
                   </div>
                 </>

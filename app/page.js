@@ -5,6 +5,7 @@ import FeaturedContent from '@/app/components/FeaturedContent';
 import Hero from '@/app/components/Hero';
 import LogoGrid from '@/app/components/LogoGrid';
 import SectionHeader from '@/app/components/SectionHeader';
+import Testimonials from '@/app/components/Testimonials';
 import { getPage } from '@/lib/contentful/pages';
 import { notFound } from 'next/navigation';
 
@@ -14,7 +15,6 @@ export default async function Page() {
   if (!page) return notFound();
 
   const { hero, bodyContentCollection } = page;
-  console.log(bodyContentCollection);
   return (
     <>
       {hero && (
@@ -63,6 +63,13 @@ export default async function Page() {
                 buttonLabel={section.buttonText}
                 buttonLink={section.buttonLink}
                 items={section.caseStudiesCollection.items}
+              />
+            );
+          } else if (section.__typename === 'TestimonialSlider') {
+            return (
+              <Testimonials
+                key={section.__typename}
+                items={section.testimonialsCollection.items}
               />
             );
           }

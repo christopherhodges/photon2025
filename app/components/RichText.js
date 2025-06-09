@@ -65,5 +65,9 @@ const renderOptions = {
 
 export default function RichText({ document }) {
   if (!document) return null;
-  return <>{documentToReactComponents(document, renderOptions)}</>;
+  return (
+    <div className="richText">
+      {documentToReactComponents(document, renderOptions)}
+    </div>
+  );
 }
