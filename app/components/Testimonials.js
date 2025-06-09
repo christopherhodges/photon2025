@@ -69,22 +69,24 @@ export default function Testimonials({ items = [] }) {
               >
                 {/* author row */}
                 <header className="mb-8 flex items-center justify-center gap-4">
-                  <ContentfulImage
-                    src={t.image.url}
-                    alt={t.name}
-                    width={56}
-                    height={56}
-                    className="rounded-full object-cover"
-                  />
-                  {t.logo && (
+                  <div className="flex flex-row-reverse items-center">
+                    {t.logo && (
+                      <ContentfulImage
+                        src={t.logo.url}
+                        alt={`${t.name} logo`}
+                        width={40}
+                        height={40}
+                        className="relative z-0 h-[40px] w-[40px] overflow-hidden rounded-lg object-contain"
+                      />
+                    )}
                     <ContentfulImage
-                      src={t.logo.url}
-                      alt={`${t.name} logo`}
-                      width={40}
-                      height={40}
-                      className="-ml-4 rounded-lg object-contain ring-4 ring-white"
+                      src={t.image.url}
+                      alt={t.name}
+                      width={56}
+                      height={56}
+                      className="z-1 relative h-[50px] w-[50px] rounded-full border-white object-cover ring-4 ring-white"
                     />
-                  )}
+                  </div>
                   <div className="text-left">
                     <p className="font-semibold">{t.name}</p>
                     <p className="text-sm text-gray-500">{t.jobTitle}</p>
