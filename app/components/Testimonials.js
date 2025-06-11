@@ -54,7 +54,7 @@ export default function Testimonials({ items = [] }) {
 
   return (
     <section className="py-[40px]">
-      <div className="l-container relative rounded-[16px] bg-white pb-[40px]">
+      <div className="l-container l-container--testimonials relative rounded-[16px] bg-white pb-[40px]">
         {/* ─── Wrapper that animates height ─────────────────────────────── */}
         <div
           ref={wrapperRef}

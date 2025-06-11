@@ -15,17 +15,22 @@ const TwoColumnContent = ({
   img2,
 }) => {
   return (
-    <div className={clsx(className, 'two-column-content bg-white pt-[64px]')}>
+    <div
+      className={clsx(
+        className,
+        'two-column-content bg-white pb-[40px] pt-[40px]',
+      )}
+    >
       <div className="l-container">
         <div
           className={clsx(
-            'flex items-stretch justify-between gap-10',
+            'flex flex-col justify-between gap-10 lg:flex-row lg:items-stretch',
             textPlacement === 'Right' && 'flex-row-reverse',
           )}
         >
           {content && (
             <>
-              <div className="flex w-1/2 flex-col items-start gap-4 font-normal">
+              <div className="flex flex-col items-start gap-4 font-normal lg:w-1/2">
                 <Crumb label={crumb} borderStyles="border" />
                 <h2 className="text-[38px] leading-[105%]">{title}</h2>
                 <RichText
@@ -39,11 +44,11 @@ const TwoColumnContent = ({
                   }}
                 />
               </div>
-              {!img1 && !img2 && <div className="w-1/2"></div>}
+              {!img1 && !img2 && <div className="lg:w-1/2"></div>}
             </>
           )}
           {img1 && (
-            <div className="w-1/2">
+            <div className="overflow-hidden rounded-lg lg:w-1/2">
               <ContentfulImage
                 src={img1.url}
                 width={img1.width}
@@ -53,7 +58,7 @@ const TwoColumnContent = ({
             </div>
           )}
           {img2 && (
-            <div className="w-1/2">
+            <div className="overflow-hidden rounded-lg lg:w-1/2">
               <ContentfulImage
                 src={img2.url}
                 width={img2.width}

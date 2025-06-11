@@ -53,9 +53,23 @@ body {
 .l-container {
   width: 100%;
   max-width: 1440px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin: 0 auto;
+
+  @media screen and (min-width: 1024px) {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  &.l-container--testimonials {
+    width: 1440px;
+    max-width: calc(100% - 40px);
+
+    @media screen and (min-width: 1024px) {
+      max-width: calc(100% - 80px);
+    }
+  }
 }
 
 h1,
@@ -189,4 +203,8 @@ h6 {
 }
 .richText sup:nth-of-type(3n) {
   background-position: 5% 65%;
+}
+
+.two-column-content + .two-column-content {
+  padding-top: 0;
 }
