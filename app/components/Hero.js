@@ -58,7 +58,7 @@ const Hero = ({
       )}
       <div
         className={clsx(
-          'l-container relative z-0 flex items-end pb-[40px]',
+          'l-container relative z-0 flex justify-center pb-[40px] lg:items-end lg:justify-start',
           media ? 'h-dvh max-h-[822px]' : '',
         )}
       >
@@ -95,7 +95,7 @@ const Hero = ({
 
           {pathname === '/' && (
             <TestDriveForm
-              className="mb-[40px] mt-[30px] w-full max-w-[464px]"
+              className="invisible mb-[40px] mt-[30px] w-full max-w-[464px] lg:visible"
               title="Test drive the patient experience"
               inputPlaceholder="Enter your phone number"
               buttonLabel="Try it out"

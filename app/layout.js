@@ -1,6 +1,6 @@
 import AnnouncementBar from '@/app/components/AnnouncementBar';
 import Footer from '@/app/components/Footer';
-import Header from '@/app/components/Header';
+import HeaderFull from '@/app/components/HeaderFull';
 import '@/app/globals.scss';
 import { getFooter } from '@/lib/contentful/Footer';
 import { getNavigationMenu } from '@/lib/contentful/header';
@@ -69,7 +69,8 @@ export default async function RootLayout({ children }) {
         <body>
           <main className="l-main">
             <AnnouncementBar content="Announcement Bar" />
-            <Header menu={nav} />
+            {/*<Header menu={nav} />*/}
+            <HeaderFull menu={nav} />
             {children}
           </main>
           <Footer footer={footer} />
