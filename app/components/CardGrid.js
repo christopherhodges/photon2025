@@ -17,8 +17,9 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
 
     /** Simple 3-up, equal size */
     'three-up': {
-      grid: `grid sm:grid-cols-3 gap-${gap}`,
-      item: () => 'rounded-xl bg-white overflow-hidden',
+      grid: `grid lg:grid-cols-3 gap-${gap}`,
+      item: () =>
+        'rounded-xl h-full flex-col flex text-sm bg-white overflow-hidden',
     },
 
     /** Quilted 2×2, Z-shape */
