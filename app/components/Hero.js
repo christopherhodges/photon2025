@@ -48,7 +48,7 @@ const Hero = ({
       {centerImage && (
         <div className="pointer-events-none absolute bottom-0 z-[0] flex h-full w-full items-end">
           <ContentfulImage
-            className="mx-auto mt-auto h-auto max-w-[360px]"
+            className="mx-auto mt-auto h-auto w-[360px] max-w-[27vw]"
             src={centerImage.url}
             width={centerImage.width}
             height={centerImage.height}
