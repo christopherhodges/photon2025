@@ -66,7 +66,7 @@ export default async function RootLayout({ children }) {
         />
       </Head>
       <html lang="en" className={clsx(acidGrotesk.className)}>
-        <body>
+        <body className="text-[14px] lg:text-[16px]">
           <main className="l-main">
             <AnnouncementBar content="Announcement Bar" />
             {/*<Header menu={nav} />*/}

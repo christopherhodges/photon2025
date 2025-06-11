@@ -18,7 +18,7 @@ const Hero = ({
     <section
       className={clsx(
         'hero relative mt-[35px] w-full',
-        media ? 'h-dvh max-h-[822px]' : 'pt-[200px]',
+        media ? 'h-[820px] lg:h-dvh lg:max-h-[822px]' : 'pt-[200px]',
         textColor === 'white' && media ? 'text-white' : 'text-black',
       )}
     >
@@ -48,7 +48,7 @@ const Hero = ({
       {centerImage && (
         <div className="pointer-events-none absolute bottom-0 z-[0] flex h-full w-full items-end">
           <ContentfulImage
-            className="mx-auto mt-auto h-auto w-[360px] max-w-[27vw]"
+            className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
             src={centerImage.url}
             width={centerImage.width}
             height={centerImage.height}
@@ -59,20 +59,21 @@ const Hero = ({
       <div
         className={clsx(
           'l-container relative z-0 flex justify-center pb-[40px] lg:items-end lg:justify-start',
-          media ? 'h-dvh max-h-[822px]' : '',
+          media ? 'h-[820px] lg:h-dvh lg:max-h-[822px]' : '',
         )}
       >
         <div
           className={clsx(
-            'w-full',
+            'mt-[140px] w-full lg:mt-0',
             media && pathname === '/' ? 'max-w-[460px]' : 'max-w-[400px]',
           )}
         >
           <PageTitle
             className={clsx(
+              'text-[27px]',
               media && titleSize === 'Small (38px)'
-                ? 'text-[38px]'
-                : 'text-[48px]',
+                ? 'lg:text-[38px]'
+                : 'lg:text-[48px]',
               media ? 'capitalize' : 'max-w-[702px] text-[66px]',
             )}
             title={title}

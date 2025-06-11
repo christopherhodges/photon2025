@@ -42,6 +42,14 @@ body {
   font-weight: 300;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .l-container {
   width: 100%;
   max-width: 1440px;

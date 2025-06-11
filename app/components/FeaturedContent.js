@@ -10,7 +10,7 @@ const FeaturedContent = ({
   items,
 }) => {
   return (
-    <div className="featuredContent bg-[var(--dark-blue)] py-[60px]">
+    <div className="featuredContent overflow-hidden bg-[var(--dark-blue)] py-[60px]">
       <div className="l-container">
         <header className="flex flex-col items-center justify-center gap-[24px] text-center">
           <Crumb
