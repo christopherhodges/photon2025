@@ -18,7 +18,9 @@ const Hero = ({
     <section
       className={clsx(
         'hero relative mt-[35px] w-full',
-        media ? 'h-[820px] lg:h-dvh lg:max-h-[822px]' : 'pt-[200px]',
+        media
+          ? 'h-[820px] lg:h-dvh lg:max-h-[822px]'
+          : 'pt-[120px] lg:pt-[200px]',
         textColor === 'white' && media ? 'text-white' : 'text-black',
       )}
     >
@@ -64,17 +66,18 @@ const Hero = ({
       >
         <div
           className={clsx(
-            'mt-[140px] w-full lg:mt-0',
-            media && pathname === '/' ? 'max-w-[460px]' : 'max-w-[400px]',
+            'w-full lg:mt-0',
+            pathname === '/' && media && 'mt-[140px] max-w-[460px]',
+            pathname !== '/' && media && 'mt-[auto] max-w-[400px]',
+            !media && 'mt-[120px] max-w-none',
           )}
         >
           <PageTitle
             className={clsx(
               'text-[27px]',
-              media && titleSize === 'Small (38px)'
-                ? 'lg:text-[38px]'
-                : 'lg:text-[48px]',
-              media ? 'capitalize' : 'max-w-[702px] text-[66px]',
+              media && 'lg:text-[38px]',
+              media && titleSize !== 'Small (38px)' && 'lg:text-[48px]',
+              media ? 'capitalize' : 'text-[66px] lg:max-w-[702px]',
             )}
             title={title}
           />
