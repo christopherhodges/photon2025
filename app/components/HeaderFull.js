@@ -312,7 +312,7 @@ function NavGroup({ label, linksCollection }) {
   const wrapperRef = useRef(null);
   const buttonRef = useRef(null);
   const pathname = usePathname();
-  const isActive = pathname === '/about-us' || pathname === '/careers';
+  const isActive = pathname === '/about-us' || pathname === '/join-us';
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -344,7 +344,7 @@ function NavGroup({ label, linksCollection }) {
         <span
           className={clsx(
             'relative flex items-center gap-2 rounded-[20px] transition-colors',
-            dropdownOpen
+            dropdownOpen || isActive
               ? 'bg-[var(--light-gray)] font-bold'
               : 'bg-transparent hover:bg-[var(--light-gray)] group-hover:font-medium',
           )}
