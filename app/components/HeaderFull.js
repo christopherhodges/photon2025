@@ -451,7 +451,7 @@ function NavLink({ label, href, type, style, external, onClick }) {
     <SmartLink
       external={external}
       href={href}
-      className={clsx(classes)}
+      className={clsx(classes, 'group')}
       target="_blank"
       onClick={onClick}
     >
