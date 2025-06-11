@@ -106,7 +106,7 @@ export default function HeaderFull({ menu }) {
         {/* inner card */}
         <div className="mx-4 mt-[110px] rounded-[20px] bg-white p-6">
           {/* main nav list */}
-          <ul className="space-y-4">
+          <ul>
             {firstPart.map(item =>
               item.__typename === 'NavLink' ? (
                 <MobileNavLink key={item.label} {...item} />
