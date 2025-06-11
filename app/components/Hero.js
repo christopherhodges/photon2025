@@ -17,8 +17,9 @@ const Hero = ({
   return (
     <section
       className={clsx(
-        'hero relative mt-[35px] h-dvh max-h-[822px] w-full',
-        textColor === 'white' ? 'text-white' : 'text-black',
+        'hero relative mt-[35px] w-full',
+        media ? 'h-dvh max-h-[822px]' : 'pt-[200px]',
+        textColor === 'white' && media ? 'text-white' : 'text-black',
       )}
     >
       {media?.contentType?.includes('video') && (
@@ -55,19 +56,38 @@ const Hero = ({
           />
         </div>
       )}
-      <div className="l-container relative z-0 flex h-dvh max-h-[822px] items-end pb-[40px]">
+      <div
+        className={clsx(
+          'l-container relative z-0 flex items-end pb-[40px]',
+          media !== null ? 'h-dvh max-h-[822px]' : '',
+        )}
+      >
         <div className="w-full">
           <PageTitle
             className={clsx(
-              'w-1/4 capitalize',
               pathname === '/' ? 'min-w-[460px]' : 'min-w-[400px]',
-              titleSize === 'Small (38px)' ? 'text-[38px]' : 'text-[48px]',
+              media && titleSize === 'Small (38px)'
+                ? 'text-[38px]'
+                : 'text-[48px]',
+              media ? 'w-1/4 capitalize' : 'max-w-[702px] text-[66px]',
             )}
             title={title}
           />
-          <p className="pt-[30px] font-light opacity-[.8] md:w-1/3">
+          <p
+            className={clsx(
+              'pt-[30px] font-light opacity-[.8]',
+              media ? 'md:w-1/3' : 'w-full text-[24px]',
+            )}
+          >
             {subtitle}
           </p>
+
+          {!media && (
+            <div
+              className="bg-gradient-primary my-[40px] h-[13px]"
+              style={{ '--tw-gradient-angle': '270deg' }}
+            ></div>
+          )}
 
           {pathname === '/' && (
             <TestDriveForm
