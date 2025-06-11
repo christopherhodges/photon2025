@@ -1,12 +1,9 @@
 'use client';
 import Crumb from '@/app/components/Crumb';
-import TestDriveForm from '@/app/components/TestDriveForm';
 import ContentfulImage from '@/app/components/contentful-image';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 
 const FeaturedArticles = ({ sectionTitle, crumb, items }) => {
-  const pathname = usePathname();
   return (
     <div className="featured-posts bg-gradient-secondary--reversed pt-[64px]">
       <div className="l-container pb-[106px]">
@@ -48,17 +45,6 @@ const FeaturedArticles = ({ sectionTitle, crumb, items }) => {
           })}
         </div>
       </div>
-      {pathname === '/' && (
-        <div className="pb-[40px]">
-          <TestDriveForm
-            className="mx-auto w-full max-w-[670px] text-white"
-            title="Subscribe to our newsletter"
-            inputPlaceholder="Enter your email address"
-            buttonLabel="Try it out"
-            additionalText="This is just a test script. Not real, not fillable, and definitely not reaching a pharmacy near you."
-          />
-        </div>
-      )}
     </div>
   );
 };

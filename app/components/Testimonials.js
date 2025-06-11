@@ -2,8 +2,15 @@
 
 import ContentfulImage from '@/app/components/contentful-image';
 import RichText from '@/app/components/RichText';
+import { BLOCKS } from '@contentful/rich-text-types';
 import clsx from 'clsx';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 const DURATION = 8000; // 8s
 const FADE_MS = 700;
@@ -15,17 +22,19 @@ export default function Testimonials({ items = [] }) {
   const timerRef = useRef(null);
 
   // ─── Auto-advance ───────────────────────────────────────────────────────
-  const restart = () => {
+  const restart = useCallback(() => {
     clearTimeout(timerRef.current);
+
     timerRef.current = setTimeout(
       () => setIndex(i => (i + 1) % items.length),
       DURATION,
     );
-  };
+  }, [items.length]);
   useEffect(() => {
     if (items.length > 1) restart();
+
     return () => clearTimeout(timerRef.current);
-  }, [index, items, restart()]);
+  }, [index, items.length, restart]);
 
   // ─── Height adjustment ──────────────────────────────────────────────────
   useLayoutEffect(() => {
@@ -93,8 +102,17 @@ export default function Testimonials({ items = [] }) {
                   </div>
                 </header>
                 {/* quote */}
-                <blockquote className="richText mx-auto max-w-3xl text-center text-2xl leading-snug text-black">
-                  <RichText document={t.testimonial.json} />
+                <blockquote className="richText mx-auto max-w-[860px] text-center leading-snug text-black">
+                  <RichText
+                    document={t.testimonial.json}
+                    options={{
+                      renderNode: {
+                        [BLOCKS.PARAGRAPH]: (_, children) => (
+                          <p className="mb-[40px] text-[38px]">{children}</p>
+                        ),
+                      },
+                    }}
+                  />
                 </blockquote>
               </div>
             </article>

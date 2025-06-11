@@ -21,7 +21,7 @@ const Crumb = ({
         'crumb',
         textColor,
         pressura.className,
-        borderStyles || 'border-[var(--light-gray)]',
+        borderStyles || 'border-[#DBDBDB]',
         sizeClasses,
       )}
     >

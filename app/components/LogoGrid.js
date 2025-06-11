@@ -1,9 +1,10 @@
 import ContentfulImage from '@/app/components/contentful-image';
 import Crumb from '@/app/components/Crumb';
+import clsx from 'clsx';
 
-const LogoGrid = ({ title, logos }) => {
+const LogoGrid = ({ className, title, logos }) => {
   return (
-    <div className="logoGrid bg-white py-[35px]">
+    <div className={clsx(className, 'logoGrid py-[35px]')}>
       <div className="text-center">
         <Crumb label={title} />
       </div>

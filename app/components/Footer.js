@@ -1,3 +1,4 @@
+import TestDriveForm from '@/app/components/TestDriveForm';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -7,6 +8,16 @@ const Footer = footer => {
   return (
     <footer className="l-footer bg-gradient-secondary text-white">
       <div className="l-container">
+        <div className="py-[40px]">
+          <TestDriveForm
+            className="mx-auto w-full max-w-[670px] text-white"
+            title="Subscribe to our newsletter"
+            inputPlaceholder="Enter your email address"
+            buttonLabel="Try it out"
+            additionalText="This is just a test script. Not real, not fillable, and definitely not reaching a pharmacy near you."
+          />
+        </div>
+
         <Link href="/">
           <Image
             className="mt-[80px] h-auto w-full"
