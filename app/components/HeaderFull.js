@@ -10,8 +10,8 @@ const linkClass = style =>
   ({
     default:
       'relative flex items-center gap-2 rounded-[20px] px-4 py-2 transition-colors hover:bg-[var(--light-gray)]',
-    primary: 'button-primary',
-    outline: 'button-outline',
+    primary: 'button-primary text-sm',
+    outline: 'button-outline text-sm',
   })[style] || 'text-gray-700 hover:text-gray-900';
 
 export default function HeaderFull({ menu }) {
@@ -343,7 +343,7 @@ function NavGroup({ label, linksCollection }) {
       >
         <span
           className={clsx(
-            'relative flex items-center gap-2 rounded-[20px] transition-colors',
+            'classes="text-sm" relative flex items-center gap-2 rounded-[20px] transition-colors',
             dropdownOpen || isActive
               ? 'bg-[var(--light-gray)] font-bold'
               : 'bg-transparent hover:bg-[var(--light-gray)] group-hover:font-medium',
@@ -458,7 +458,7 @@ function NavLink({ label, href, type, style, external, onClick }) {
       {type === 'default' && (
         <span
           className={clsx(
-            'relative flex items-center gap-2 rounded-[20px] transition-colors',
+            'relative flex items-center gap-2 rounded-[20px] text-sm transition-colors',
             isActive
               ? 'bg-[var(--light-gray)] font-bold'
               : 'bg-transparent group-hover:bg-[var(--light-gray)] group-hover:font-medium',
