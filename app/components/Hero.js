@@ -84,7 +84,7 @@ const Hero = ({
 
           {!media && (
             <div
-              className="bg-gradient-primary my-[40px] h-[13px]"
+              className="my-[40px] h-[13px] bg-gradient-primary"
               style={{ '--tw-gradient-angle': '270deg' }}
             ></div>
           )}
