@@ -118,7 +118,7 @@ export default function HeaderFull({ menu }) {
             {/* docs or single links left */}
             {lastPart
               .filter(item => item.__typename === 'NavLink')
-              .map((link, i) => (
+              .map(link => (
                 <Fragment key={link.label}>
                   <MobileNavLink {...link} />
                 </Fragment>
@@ -459,7 +459,6 @@ function NavLink({
   const classes = linkClass(style);
   const pathname = usePathname();
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
-  console.log(showIcon);
   return (
     <SmartLink
       external={external}
