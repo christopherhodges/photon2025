@@ -2,7 +2,7 @@ import ContentfulImage from '@/app/components/contentful-image';
 import CrumbList from '@/app/components/CrumbList';
 import clsx from 'clsx';
 
-const Card = ({ className, crumbs, title, description, image }) => {
+const Card = ({ className, crumbs, title, description, image, type }) => {
   return (
     <div className={clsx(className, 'card bg-white')}>
       <div className="p-[32px]">
@@ -11,7 +11,7 @@ const Card = ({ className, crumbs, title, description, image }) => {
         <p className="mt-[10px] opacity-[.8]">{description}</p>
       </div>
       <ContentfulImage
-        className="mt-auto h-[220px] w-full object-cover"
+        className="mt-auto min-h-[245px] w-full object-cover"
         src={image.url}
         width={image.width}
         height={image.height}

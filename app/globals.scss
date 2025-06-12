@@ -208,3 +208,9 @@ h6 {
 .two-column-content + .two-column-content {
   padding-top: 0;
 }
+
+.row-span-2 {
+  img {
+    height: 100%;
+  }
+}
