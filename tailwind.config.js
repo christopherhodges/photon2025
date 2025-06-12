@@ -8,6 +8,17 @@ const tailwindCongig = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        /* translate half the strip → seamless loop */
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' }, // move left by 50 %
+        },
+      },
+      animation: {
+        /* duration ≈ 20 s; change to taste */
+        marquee: 'marquee 20s linear infinite',
+      },
       fontFamily: {
         sans: ['var(--font-grotesk)'],
         sansBold: ['var(--font-grotesk-bold'],

@@ -126,15 +126,16 @@ export default function Testimonials({ items = [] }) {
             <button
               onClick={() => go((index + 1) % items.length)}
               aria-label="Next testimonial"
-              className="relative h-12 w-12 rounded-full text-blue-900"
+              className="#121212 relative h-12 w-12 rounded-full"
             >
               <svg className="absolute inset-0 -rotate-90" viewBox="0 0 44 44">
                 <circle
+                  className="opacity-20"
                   cx="22"
                   cy="22"
                   r="20"
                   fill="none"
-                  stroke="#E5E7EB"
+                  stroke="#707070"
                   strokeWidth="2"
                 />
                 <circle
