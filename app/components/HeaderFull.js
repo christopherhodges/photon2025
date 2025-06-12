@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 
 const linkClass = style =>
   ({
@@ -118,8 +118,10 @@ export default function HeaderFull({ menu }) {
             {/* docs or single links left */}
             {lastPart
               .filter(item => item.__typename === 'NavLink')
-              .map(link => (
-                <MobileNavLink key={link.label} {...link} />
+              .map((link, i) => (
+                <Fragment key={link.label}>
+                  <MobileNavLink {...link} />
+                </Fragment>
               ))}
           </ul>
         </div>
@@ -195,13 +197,15 @@ export default function HeaderFull({ menu }) {
 
         {lastPart.length > 0 && (
           <nav className="flex items-center gap-3">
-            {lastPart.map(entry =>
+            {lastPart.map((entry, i) =>
               entry.__typename === 'NavLink' ? (
-                <NavLink
-                  external={entry.external}
-                  key={entry.label}
-                  {...entry}
-                />
+                <Fragment key={entry.label}>
+                  <NavLink
+                    showIcon={lastPart.length === i + 1}
+                    external={entry.external}
+                    {...entry}
+                  />
+                </Fragment>
               ) : (
                 <NavGroup key={entry.label} {...entry} />
               ),
@@ -443,15 +447,24 @@ function NavGroup({ label, linksCollection }) {
   );
 }
 
-function NavLink({ label, href, type, style, external, onClick }) {
+function NavLink({
+  showIcon = false,
+  label,
+  href,
+  type,
+  style,
+  external,
+  onClick,
+}) {
   const classes = linkClass(style);
   const pathname = usePathname();
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
+  console.log(showIcon);
   return (
     <SmartLink
       external={external}
       href={href}
-      className={clsx(classes, 'group')}
+      className={clsx(classes, 'group', 'link-' + pathname)}
       target="_blank"
       onClick={onClick}
     >
@@ -473,7 +486,20 @@ function NavLink({ label, href, type, style, external, onClick }) {
           {label}
         </span>
       )}
-      {type !== 'default' && <span>{label}</span>}
+      {type !== 'default' && (
+        <span className={showIcon && 'flex items-center gap-2'}>
+          {label}
+          {showIcon && (
+            <Image
+              className="invert"
+              width={10}
+              height={11}
+              src="/icons/arrow-right-up.svg"
+              alt="right arrow up"
+            />
+          )}
+        </span>
+      )}
     </SmartLink>
   );
 }
