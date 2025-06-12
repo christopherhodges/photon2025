@@ -17,7 +17,7 @@ const Hero = ({
   return (
     <section
       className={clsx(
-        'hero relative mt-[35px] w-full',
+        'hero relative w-full pt-[35px]',
         media
           ? 'h-[820px] lg:h-dvh lg:max-h-[822px]'
           : 'pt-[120px] lg:pt-[200px]',
