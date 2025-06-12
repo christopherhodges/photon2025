@@ -11,7 +11,7 @@ const Card = ({ className, crumbs, title, description, image }) => {
         <p className="mt-[10px] opacity-[.8]">{description}</p>
       </div>
       <ContentfulImage
-        className="mt-auto min-h-[245px] w-full object-cover"
+        className="mt-auto min-h-[250px] w-full object-cover"
         src={image.url}
         width={image.width}
         height={image.height}

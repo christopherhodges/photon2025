@@ -33,7 +33,7 @@ export default function HeaderFull({ menu }) {
   return (
     <>
       {/* top bar (logo + toggle) */}
-      <header className="fixed left-1/2 top-[60px] z-[10000] flex h-[70px] w-[calc(100%-40px)] -translate-x-1/2 items-center justify-between rounded-[16px] bg-white px-4 lg:hidden">
+      <header className="fixed left-1/2 top-[60px] z-[10000] flex h-[70px] w-[calc(100%-40px)] -translate-x-1/2 items-center justify-between rounded-[8px] bg-white px-4 md:rounded-[16px] lg:hidden">
         <Link href="/" className="flex items-center gap-2">
           {logo && (
             <Image
@@ -127,7 +127,7 @@ export default function HeaderFull({ menu }) {
         </div>
 
         {/* buttons */}
-        <div className="mx-4 mt-8 flex flex-col flex-col-reverse gap-3">
+        <div className="mx-4 mt-8 flex flex-col-reverse gap-3">
           {lastPart
             .filter(
               item => item.__typename === 'NavLink' && item.style !== 'default',
@@ -161,7 +161,7 @@ export default function HeaderFull({ menu }) {
       {/* ------------------------------------------------------------------ */
       /*  DESKTOP  ( lg: ) – your original header, almost untouched         */
       /* ------------------------------------------------------------------ */}
-      <header className="invisible fixed left-1/2 top-[70px] z-[10000] hidden w-[1360px] max-w-[calc(100%-80px)] -translate-x-1/2 items-center justify-between rounded-[16px] bg-white px-[16px] py-[13px] lg:visible lg:flex">
+      <header className="invisible fixed left-1/2 top-[70px] z-[10000] hidden w-[1360px] max-w-[calc(100%-80px)] -translate-x-1/2 items-center justify-between rounded-[8px] bg-white px-[16px] py-[13px] md:rounded-[16px] lg:visible lg:flex">
         <Link href="/" className="flex items-center gap-2">
           {logo && (
             <Image
@@ -283,6 +283,7 @@ function MobileAccordion({ label, linksCollection }) {
           <li key={link.label}>
             <SmartLink
               href={link.href}
+              target={link.external ? '_blank' : ''}
               className="flex items-center gap-3 rounded-[12px] px-2 py-3"
             >
               <Image
@@ -382,7 +383,7 @@ function NavGroup({ label, linksCollection }) {
       <div
         ref={wrapperRef}
         className={clsx(
-          'absolute left-0 top-full mt-[16px] w-full rounded-[16px] bg-white p-2 transition-all duration-150',
+          'absolute left-0 top-full mt-[16px] w-full rounded-[8px] bg-white p-2 transition-all duration-150 md:rounded-[16px]',
           dropdownOpen
             ? 'visible translate-y-[0] opacity-100'
             : 'invisible translate-y-[-16px] opacity-0',
@@ -399,6 +400,7 @@ function NavGroup({ label, linksCollection }) {
               )}
               key={link.label}
               href={link.href}
+              target={link.external ? '_blank' : ''}
               onClick={() => {
                 setDropdownOpen(false);
               }}
@@ -486,7 +488,7 @@ function NavLink({
         </span>
       )}
       {type !== 'default' && (
-        <span className={showIcon && 'flex items-center gap-2'}>
+        <span className={showIcon ? 'flex items-center gap-2' : ''}>
           {label}
           {showIcon && (
             <Image

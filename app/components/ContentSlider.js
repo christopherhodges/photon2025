@@ -96,13 +96,17 @@ export default function ContentSlider({ items = [] }) {
             key={i}
             aria-label={`go to slide ${i + 1}`}
             onClick={() => setIndex(i)}
-            className={clsx(
-              'h-2 w-2 rounded-full transition-colors',
-              i === index
-                ? 'bg-[var(--seafoam)]'
-                : 'bg-white/30 hover:bg-white/60',
-            )}
-          />
+            className="group -mx-1 inline-flex items-center justify-center p-2"
+          >
+            <span
+              className={clsx(
+                'block h-2 w-2 rounded-full transition-colors',
+                i === index
+                  ? 'bg-[var(--seafoam)]'
+                  : 'bg-white/30 group-hover:bg-white/60',
+              )}
+            />
+          </button>
         ))}
       </div>
     </div>

@@ -25,7 +25,7 @@ const FeaturedArticles = ({ sectionTitle, crumb, items }) => {
                   src={post.coverImage.url}
                   width={post.coverImage.width}
                   height={post.coverImage.height}
-                  className="rounded-[16px]"
+                  className="rounded-[8px] md:rounded-[16px]"
                   alt={post.coverImage.title}
                 />
                 <div className="mt-[24px] flex items-center justify-between">

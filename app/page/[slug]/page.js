@@ -39,12 +39,12 @@ export default async function Page({ params }) {
         <BodyContent bodyContent={bodyContentCollection} />
       </section>
 
-      {slug === 'about-us' ||
+      {slug === '/about-us' ||
         (slug === 'join-us' && (
           <div className="open-roles py-[40px]">
             <div className="l-container">
               <div className="flex items-center justify-between gap-[40px]">
-                <div className="w-1/2 max-w-[670px]">
+                <div className="w-1/2">
                   <Crumb label="Careers" borderStyles="border" />
                   <h2 className="mb-[40px] mt-[20px] text-[38px]">
                     Open Roles
@@ -66,8 +66,11 @@ export default async function Page({ params }) {
                     />
                   </a>
                 </div>
-                <div className="w-1/2 max-w-[670px]">
-                  <Testimonials items={testimonialItems} />
+                <div className="testimonials--small w-[770px]">
+                  <Testimonials
+                    titleStyles="mb-[20px] leading-1 text-[32px]"
+                    items={testimonialItems}
+                  />
                 </div>
               </div>
             </div>

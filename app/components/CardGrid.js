@@ -5,7 +5,7 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
   const presets = {
     /** 2 cols × 2 rows. Card 0 spans both rows in col 1. */
     'left-tall': {
-      grid: `grid grid-cols-2 grid-rows-2 gap-${gap}`,
+      grid: `left-tall grid grid-cols-2 grid-rows-2 gap-${gap}`,
       item: i =>
         clsx(
           'rounded-xl bg-white overflow-hidden',

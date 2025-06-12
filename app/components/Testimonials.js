@@ -15,7 +15,7 @@ import {
 const DURATION = 8000; // 8s
 const FADE_MS = 700;
 
-export default function Testimonials({ items = [] }) {
+export default function Testimonials({ titleStyles, items = [] }) {
   const [index, setIndex] = useState(0);
   const wrapperRef = useRef(null);
   const contentRefs = useRef([]); // will point at the inner content divs
@@ -54,7 +54,7 @@ export default function Testimonials({ items = [] }) {
 
   return (
     <section className="py-[40px]">
-      <div className="l-container l-container--testimonials relative rounded-[16px] bg-white pb-[40px]">
+      <div className="l-container l-container--testimonials relative rounded-[8px] bg-white px-[50p] pb-[40px] md:rounded-[16px]">
         {/* ─── Wrapper that animates height ─────────────────────────────── */}
         <div
           ref={wrapperRef}
@@ -108,7 +108,13 @@ export default function Testimonials({ items = [] }) {
                     options={{
                       renderNode: {
                         [BLOCKS.PARAGRAPH]: (_, children) => (
-                          <p className="mb-[40px] text-[38px]">{children}</p>
+                          <p
+                            className={clsx(
+                              titleStyles ?? 'mb-[40px] text-[38px]',
+                            )}
+                          >
+                            {children}
+                          </p>
                         ),
                       },
                     }}
@@ -126,7 +132,7 @@ export default function Testimonials({ items = [] }) {
             <button
               onClick={() => go((index + 1) % items.length)}
               aria-label="Next testimonial"
-              className="#121212 relative h-12 w-12 rounded-full"
+              className="testimonials__arrow-button relative h-12 w-12 rounded-full"
             >
               <svg className="absolute inset-0 -rotate-90" viewBox="0 0 44 44">
                 <circle
@@ -135,7 +141,7 @@ export default function Testimonials({ items = [] }) {
                   cy="22"
                   r="20"
                   fill="none"
-                  stroke="#707070"
+                  stroke="#70707033"
                   strokeWidth="2"
                 />
                 <circle
@@ -144,7 +150,7 @@ export default function Testimonials({ items = [] }) {
                   cy="22"
                   r="20"
                   fill="none"
-                  stroke="var(--seafoam)"
+                  stroke="#707070"
                   strokeWidth="2"
                   strokeDasharray="126"
                   strokeDashoffset="126"
@@ -168,19 +174,25 @@ export default function Testimonials({ items = [] }) {
             </button>
 
             {/* Dot navigation */}
-            <div className="flex gap-2">
+            <div className="relative z-10 mt-4 flex justify-center gap-2">
               {items.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => go(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
                   className={clsx(
-                    'h-2 w-2 rounded-full transition-colors',
-                    i === index
-                      ? 'bg-[var(--seafoam)]'
-                      : 'bg-gray-300 hover:bg-gray-400',
+                    '-mx-1 h-2 w-2 rounded-full p-2 transition-colors',
                   )}
-                />
+                >
+                  <span
+                    className={clsx(
+                      'block h-2 w-2 rounded-full transition-colors',
+                      i === index
+                        ? 'bg-[var(--seafoam)]'
+                        : 'bg-gray-300 hover:bg-gray-400',
+                    )}
+                  ></span>
+                </button>
               ))}
             </div>
           </div>

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Image from 'next/image';
 
 const TestDriveForm = ({
   title,
@@ -21,8 +22,14 @@ const TestDriveForm = ({
           type="text"
           placeholder={inputPlaceholder}
         />
-        <button className="button-primary button--black absolute right-[20px] top-1/2 -translate-y-1/2 text-sm">
+        <button className="button-primary button--black absolute right-[20px] top-1/2 inline-flex -translate-y-1/2 items-center gap-2 text-sm">
           {buttonLabel}
+          <Image
+            width={10}
+            height={11}
+            src="/icons/arrow-right-up.svg"
+            alt="right arrow up"
+          />
         </button>
       </div>
       <span className="text-xs">{additionalText}</span>

@@ -18,7 +18,7 @@
     180deg,
     #472ff7 0%,
     #ff5d52 50%,
-    #b2dfe7 160%
+    #b2dfe7 100%
   );
   --gradient-secondary: linear-gradient(180deg, #003ca6 0%, #001740 84.49%);
   --gradient-secondary-reversed: linear-gradient(
@@ -61,14 +61,25 @@ body {
     padding-left: 40px;
     padding-right: 40px;
   }
+}
 
-  &.l-container--testimonials {
+div:not(.testimonials--small) {
+  .l-container--testimonials {
     width: 1440px;
     max-width: calc(100% - 40px);
 
     @media screen and (min-width: 1024px) {
-      max-width: calc(100% - 80px);
+      width: calc(1440px - 80px);
     }
+  }
+}
+
+.testimonials--small {
+  blockquote {
+    max-width: calc(100% - 50px);
+  }
+  .testimonials__arrow-button {
+    display: none;
   }
 }
 
@@ -95,9 +106,9 @@ h6 {
   text-align: center;
   border-radius: 8px;
   min-width: 100px;
-  display: inline-block;
   border: 2px solid transparent;
   font-weight: normal;
+  line-height: 0.9;
 }
 
 .button-primary {
@@ -149,6 +160,7 @@ h6 {
     box-shadow: 0px 0px 4px 2px var(--seafoam) 33;
     width: 7px;
     height: 7px;
+    animation: pulse 2.5s ease-in-out infinite;
   }
 }
 
@@ -209,12 +221,33 @@ h6 {
   padding-top: 0;
 }
 
-.row-span-2 {
-  img {
-    height: 80%;
+// Cards
+.left-tall {
+  .row-span-2 {
+    img {
+      height: 80%;
+    }
+  }
+  .col-start-2 {
+    img {
+      height: 55%;
+    }
   }
 }
 
 input {
   color: black;
+}
+
+// Animations
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 4px 2px #0bd0de11;
+    opacity: 0.7;
+  }
+  50% {
+    box-shadow: 0 0 8px 4px #0bd0de66;
+    opacity: 1;
+  }
 }
