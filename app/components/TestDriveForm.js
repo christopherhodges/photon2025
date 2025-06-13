@@ -9,12 +9,7 @@ const TestDriveForm = ({
   additionalText,
 }) => {
   return (
-    <div
-      className={clsx(
-        'test-drive-form rounded-[10px] border border-white/40 bg-white/10 p-[20px] backdrop-blur-[104px]',
-        className,
-      )}
-    >
+    <div className={clsx('test-drive-form rounded-[10px] p-[20px]', className)}>
       <h4 className="text-sm">{title}</h4>
       <div className="relative my-[18px] flex items-center justify-center gap-8">
         <input
