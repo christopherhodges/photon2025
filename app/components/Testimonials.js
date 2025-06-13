@@ -181,15 +181,16 @@ export default function Testimonials({ titleStyles, items = [] }) {
                   onClick={() => go(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
                   className={clsx(
-                    '-mx-1 h-2 w-2 rounded-full p-2 transition-colors',
+                    '-mx-1 h-2 rounded-full p-2 transition-colors',
+                    i === index ? 'mr-1 w-[24px]' : 'w-2',
                   )}
                 >
                   <span
                     className={clsx(
-                      'block h-2 w-2 rounded-full transition-colors',
+                      'block h-2 rounded-full transition-colors',
                       i === index
-                        ? 'bg-[var(--seafoam)]'
-                        : 'bg-gray-300 hover:bg-gray-400',
+                        ? 'w-[24px] bg-[var(--seafoam)]'
+                        : 'w-2 bg-gray-300 hover:bg-gray-400',
                     )}
                   ></span>
                 </button>
