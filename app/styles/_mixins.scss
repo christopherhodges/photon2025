@@ -30,7 +30,7 @@
     z-index: 0;
     top: -2px;
     background: $gradient;
-    border-radius: $radius;
+    border-radius: calc($radius + 2px);
   }
 
   &:after {
