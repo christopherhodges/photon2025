@@ -11,7 +11,7 @@ const tailwindCongig = {
       keyframes: {
         marquee: {
           '0%,100%': { transform: 'translateX(0)' }, // reset point
-          '100%': { transform: 'translateX(-50%)' }, // move half its width
+          '100%': { transform: 'translateX(-33.333%)' }, // move half its width
         },
       },
       animation: {

@@ -3,7 +3,7 @@ import Crumb from '@/app/components/Crumb';
 import clsx from 'clsx';
 
 const LogoGrid = ({ className, title, logos }) => {
-  const loopLogos = [...logos, ...logos];
+  const loopLogos = [...logos, ...logos, ...logos];
 
   return (
     <div
