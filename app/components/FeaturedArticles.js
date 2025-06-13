@@ -20,7 +20,7 @@ const FeaturedArticles = ({ sectionTitle, crumb, items }) => {
         <div className="flex gap-8">
           {items.map((post, i) => {
             return (
-              <a key={i} href={post.externalLink}>
+              <a target="_blank" key={i} href={post.externalLink}>
                 <ContentfulImage
                   src={post.coverImage.url}
                   width={post.coverImage.width}
