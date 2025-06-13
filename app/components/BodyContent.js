@@ -2,6 +2,7 @@ import CardGrid from '@/app/components/CardGrid';
 import FeaturedArticles from '@/app/components/FeaturedArticles';
 import FeaturedContent from '@/app/components/FeaturedContent';
 import LogoGrid from '@/app/components/LogoGrid';
+import RichText from '@/app/components/RichText';
 import SectionHeader from '@/app/components/SectionHeader';
 import Testimonials from '@/app/components/Testimonials';
 import ThreeColumnContent from '@/app/components/ThreeColumnContent';
@@ -83,6 +84,17 @@ const BodyContent = ({ bodyContent }) => {
               crumb={section.mainCrumb}
               cards={section.cardsCollection.items}
             />
+          );
+        } else if (section.__typename === 'ComponentBasicContent') {
+          return (
+            <div key={section.sys.id} className="basic-content">
+              <div className="l-container">
+                <RichText
+                  key={section.sys.id}
+                  document={section.content.json}
+                />
+              </div>
+            </div>
           );
         }
       })}

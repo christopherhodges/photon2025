@@ -6,33 +6,30 @@ import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'photon–announcement-dismissed';
 
-const AnnouncementBar = ({ content }) => {
-  const [visible, setVisible] = useState(true);
+export default function AnnouncementBar({ content }) {
+  /**                           ⬇️  “unknown” until we check storage */
+  const [visible, setVisible] = useState(null);
 
-  /* read the flag once the component mounts in the browser */
   useEffect(() => {
-    if (sessionStorage.getItem(STORAGE_KEY) === 'true') {
-      setVisible(false);
-    }
+    // sessionStorage only exists in the browser → safe to call here
+    const dismissed = sessionStorage.getItem(STORAGE_KEY) === 'true';
+    setVisible(!dismissed); // show if not dismissed
   }, []);
 
-  /* click handler */
   function handleClose() {
     setVisible(false);
     sessionStorage.setItem(STORAGE_KEY, 'true');
   }
 
-  if (!visible) return null; // nothing to render
+  /* wait for the first effect → no bar, no mismatch, no flash */
+  if (visible === null) return null;
+
+  if (!visible) return null;
 
   return (
-    <div
-      className={clsx(
-        'announcement-bar align-center absolute left-0 top-0 z-[1000] w-full bg-black py-[11px]',
-        !visible && 'hidden h-0',
-      )}
-    >
+    <div className="announcement-bar absolute left-0 top-0 z-[1000] w-full bg-black py-[11px]">
       <a
-        href="#"
+        href="/announcement"
         className={clsx(
           'flex w-full items-center justify-center gap-4 text-sm uppercase text-white',
           pressura.className,
@@ -40,18 +37,18 @@ const AnnouncementBar = ({ content }) => {
       >
         {content}
         <span className="text-[var(--seafoam)]">
-          Read More <i>→</i>
+          Read&nbsp;More&nbsp;<i>→</i>
         </span>
       </a>
+
+      {/* close button */}
       <button
         aria-label="Close announcement"
         onClick={handleClose}
         className="absolute right-4 top-2 z-[1001] p-2"
       >
-        <Image width={10} height={10} src="/icons/x.svg" alt="x icon" />
+        <Image src="/icons/x.svg" alt="" width={10} height={10} />
       </button>
     </div>
   );
-};
-
-export default AnnouncementBar;
+}
