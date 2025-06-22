@@ -4,24 +4,27 @@ import { useEffect, useRef } from 'react';
 
 export const SignUpForm = ({ show }) => {
   const containerRef = useRef(null);
-  if (!show) return;
+
+  /*  Hook always runs, but bails out early if not showing */
   useEffect(() => {
     if (!show) return;
 
-    const s = document.createElement('script');
-    s.src = 'https://form.jotform.com/jsform/251325703823048';
-    s.async = true;
-    containerRef.current.appendChild(s);
+    const el = containerRef.current;
+    if (!el) return;
 
-    // cleanup when component unmounts or `show` flips back to false
+    const script = document.createElement('script');
+    script.src = 'https://form.jotform.com/jsform/251325703823048';
+    script.async = true;
+    el.appendChild(script);
+
+    /* cleanup */
     return () => {
-      containerRef.current.innerHTML = '';
+      el.innerHTML = '';
     };
   }, [show]);
 
+  /*  Render nothing when hidden */
   if (!show) return null;
 
-  return (
-    <section ref={containerRef} className="sign-up-form pt-[150px]"></section>
-  );
+  return <section ref={containerRef} className="sign-up-form pt-[150px]" />;
 };
