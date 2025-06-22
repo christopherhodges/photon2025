@@ -109,6 +109,7 @@ h6 {
   border: 2px solid transparent;
   font-weight: normal;
   line-height: 0.9;
+  cursor: pointer;
 }
 
 .button-primary {
@@ -347,4 +348,7 @@ input {
   backdrop-filter: blur(104px);
   border: 1px solid #ffffff66;
   background: #ffffff33;
+}
+
+.sign-up-form {
 }

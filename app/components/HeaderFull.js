@@ -42,7 +42,7 @@ export default function HeaderFull({ menu }) {
               height={logo.height}
               alt={logo.description || menu.title}
               priority
-              className="h-auto w-[120px]" /* narrower fit */
+              className="max-w-[120px]" /* narrower fit */
             />
           )}
         </Link>

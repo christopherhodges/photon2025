@@ -5,6 +5,7 @@ import Link from 'next/link';
 const Footer = footer => {
   const footerItems = footer.footer;
   const footerLinks = footerItems.linksCollection.items;
+
   return (
     <footer className="l-footer bg-gradient-secondary text-white">
       <div className="l-container">
@@ -13,6 +14,7 @@ const Footer = footer => {
             className="mx-auto w-full max-w-[670px] text-white"
             title="Subscribe to our newsletter"
             inputPlaceholder="Enter your email address"
+            mobilePlaceholder="Email address"
             buttonLabel="Try it out"
             additionalText="This is just a test script. Not real, not fillable, and definitely not reaching a pharmacy near you."
           />
@@ -20,7 +22,7 @@ const Footer = footer => {
 
         <Link href="/">
           <Image
-            className="mt-[80px] h-auto w-full"
+            className="h-auto w-full sm:mt-[80px]"
             src={footerItems.logo.url}
             alt={footerItems.title}
             width={footerItems.logo.width}
