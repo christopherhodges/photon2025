@@ -8,7 +8,7 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
       grid: `left-tall lg:grid lg:grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 lg:gap-8`,
       item: i =>
         clsx(
-          'lg:rounded-[16px] rounded-[8px] bg-white mb-8 lg:mb-0 overflow-hidden',
+          'lg:rounded-[16px] rounded-[16px] bg-white mb-8 lg:mb-0 overflow-hidden',
           i === 0
             ? 'row-span-2' // big tall card
             : 'col-start-2', // others in col 2
@@ -19,7 +19,7 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
     'three-up': {
       grid: `grid lg:grid-cols-3 gap-${gap}`,
       item: () =>
-        'three-up lg:rounded-[16px] rounded-[8px] h-full flex-col flex text-sm bg-white overflow-hidden',
+        'three-up lg:rounded-[16px] rounded-[16px] h-full flex-col flex text-sm bg-white overflow-hidden',
     },
 
     /** Quilted 2×2, Z-shape */
@@ -27,7 +27,7 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
       grid: `grid grid-cols-2 grid-rows-2 gap-${gap}`,
       item: i =>
         clsx(
-          'lg:rounded-[16px] rounded-[8px] bg-white overflow-hidden',
+          'lg:rounded-[16px] rounded-[16px] bg-white overflow-hidden',
           i === 1 && 'row-span-2', // second card tall
           i === 3 && 'col-start-1', // last card bottom-left
         ),

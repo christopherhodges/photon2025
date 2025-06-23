@@ -54,7 +54,7 @@ export default function Testimonials({ titleStyles, items = [] }) {
 
   return (
     <section className="p-[20px] lg:p-[40px]">
-      <div className="l-container l-container--testimonials relative rounded-[8px] bg-white px-[50px] pb-[40px] md:rounded-[16px]">
+      <div className="l-container l-container--testimonials relative rounded-[16px] bg-white px-[50px] pb-[40px]">
         {/* ─── Wrapper that animates height ─────────────────────────────── */}
         <div
           ref={wrapperRef}

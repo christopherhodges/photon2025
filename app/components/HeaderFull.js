@@ -153,7 +153,7 @@ export default function HeaderFull({ menu }) {
       {/* ------------------------------------------------------------------ */
       /*  DESKTOP  ( lg: ) – your original header, almost untouched         */
       /* ------------------------------------------------------------------ */}
-      <header className="l-header invisible fixed left-1/2 top-[70px] z-[10000] hidden w-[1360px] max-w-[calc(100%-80px)] -translate-x-1/2 items-center justify-between rounded-[8px] bg-white px-[16px] py-[13px] md:rounded-[16px] lg:visible lg:flex">
+      <header className="l-header invisible fixed left-1/2 top-[70px] z-[10000] hidden w-[1360px] max-w-[calc(100%-80px)] -translate-x-1/2 items-center justify-between rounded-[16px] bg-white px-[16px] py-[13px] lg:visible lg:flex">
         <Link href="/" className="flex items-center gap-2">
           {logo && (
             <Image
@@ -375,7 +375,7 @@ function NavGroup({ label, linksCollection }) {
       <div
         ref={wrapperRef}
         className={clsx(
-          'absolute left-0 top-full mt-[16px] w-full rounded-[8px] bg-white p-2 transition-all duration-150 md:rounded-[16px]',
+          'absolute left-0 top-full mt-[16px] w-full rounded-[16px] bg-white p-2 transition-all duration-150',
           dropdownOpen
             ? 'visible translate-y-[0] opacity-100'
             : 'invisible translate-y-[-16px] opacity-0',
