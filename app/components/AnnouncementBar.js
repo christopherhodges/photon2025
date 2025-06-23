@@ -5,26 +5,31 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const STORAGE_KEY = 'photon–announcement-dismissed';
+const BODY_CLASS = 'has-announcement';
 
 export default function AnnouncementBar({ content }) {
-  /**                           ⬇️  “unknown” until we check storage */
-  const [visible, setVisible] = useState(null);
+  const [visible, setVisible] = useState(null); // "null" until checked
 
   useEffect(() => {
-    // sessionStorage only exists in the browser → safe to call here
     const dismissed = sessionStorage.getItem(STORAGE_KEY) === 'true';
-    setVisible(!dismissed); // show if not dismissed
+    const shouldShow = !dismissed;
+    setVisible(shouldShow);
+
+    // Set or remove global body class
+    if (shouldShow) {
+      document.body.classList.add(BODY_CLASS);
+    } else {
+      document.body.classList.remove(BODY_CLASS);
+    }
   }, []);
 
   function handleClose() {
     setVisible(false);
     sessionStorage.setItem(STORAGE_KEY, 'true');
+    document.body.classList.remove(BODY_CLASS);
   }
 
-  /* wait for the first effect → no bar, no mismatch, no flash */
-  if (visible === null) return null;
-
-  if (!visible) return null;
+  if (visible === null || !visible) return null;
 
   return (
     <div className="announcement-bar absolute left-0 top-0 z-[1000] w-full bg-black py-[11px]">
@@ -41,7 +46,6 @@ export default function AnnouncementBar({ content }) {
         </span>
       </a>
 
-      {/* close button */}
       <button
         aria-label="Close announcement"
         onClick={handleClose}

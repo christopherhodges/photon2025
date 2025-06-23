@@ -33,7 +33,7 @@ export default function HeaderFull({ menu }) {
   return (
     <>
       {/* top bar (logo + toggle) */}
-      <header className="fixed left-1/2 top-[60px] z-[10000] flex h-[70px] w-[calc(100%-40px)] -translate-x-1/2 items-center justify-between rounded-[8px] bg-white px-4 md:rounded-[16px] lg:hidden">
+      <header className="l-header--mobile fixed left-1/2 top-[60px] z-[10000] flex h-[70px] w-[calc(100%-40px)] -translate-x-1/2 items-center justify-between rounded-[8px] bg-white px-4 md:rounded-[16px] lg:hidden">
         <Link href="/" className="flex items-center gap-2">
           {logo && (
             <Image
@@ -42,7 +42,7 @@ export default function HeaderFull({ menu }) {
               height={logo.height}
               alt={logo.description || menu.title}
               priority
-              className="max-w-[120px]" /* narrower fit */
+              className="h-auto max-w-[120px]" /* narrower fit */
             />
           )}
         </Link>
@@ -95,14 +95,6 @@ export default function HeaderFull({ menu }) {
           open ? 'translate-y-0' : '-translate-y-full',
         )}
       >
-        {/* announcement bar */}
-        <div className="flex h-[40px] items-center justify-center bg-black text-xs font-medium text-white">
-          ANNOUNCEMENT&nbsp; BAR &nbsp;
-          <Link href="/announcement" className="text-cyan-300 underline">
-            READ&nbsp; MORE&nbsp;→
-          </Link>
-        </div>
-
         {/* inner card */}
         <div className="mx-4 mt-[110px] rounded-[20px] bg-white p-6">
           {/* main nav list */}
@@ -145,7 +137,7 @@ export default function HeaderFull({ menu }) {
         </div>
 
         {/* footer links */}
-        <div className="mx-4 mt-12 border-t border-black pt-4 text-sm">
+        <div className="mx-4 mb-12 mt-12 border-t border-black pt-4 text-sm">
           <p className="mb-2 font-medium">Follow Us</p>
           <ul className="space-y-1">
             <li>
@@ -161,7 +153,7 @@ export default function HeaderFull({ menu }) {
       {/* ------------------------------------------------------------------ */
       /*  DESKTOP  ( lg: ) – your original header, almost untouched         */
       /* ------------------------------------------------------------------ */}
-      <header className="invisible fixed left-1/2 top-[70px] z-[10000] hidden w-[1360px] max-w-[calc(100%-80px)] -translate-x-1/2 items-center justify-between rounded-[8px] bg-white px-[16px] py-[13px] md:rounded-[16px] lg:visible lg:flex">
+      <header className="l-header invisible fixed left-1/2 top-[70px] z-[10000] hidden w-[1360px] max-w-[calc(100%-80px)] -translate-x-1/2 items-center justify-between rounded-[8px] bg-white px-[16px] py-[13px] md:rounded-[16px] lg:visible lg:flex">
         <Link href="/" className="flex items-center gap-2">
           {logo && (
             <Image

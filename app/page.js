@@ -24,11 +24,8 @@ export default async function Page() {
           textColor={hero.textColor}
         />
       )}
-      <section className="mainContent">
-        <section className="mainContent">
-          <BodyContent bodyContent={bodyContentCollection} />
-        </section>
-      </section>
+
+      <BodyContent bodyContent={bodyContentCollection} />
     </>
   );
 }

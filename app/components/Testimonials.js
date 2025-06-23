@@ -110,7 +110,8 @@ export default function Testimonials({ titleStyles, items = [] }) {
                         [BLOCKS.PARAGRAPH]: (_, children) => (
                           <p
                             className={clsx(
-                              titleStyles ?? 'mb-[40px] text-[38px]',
+                              titleStyles ??
+                                'mb-[40px] text-[21px] sm:text-[38px]',
                             )}
                           >
                             {children}

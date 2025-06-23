@@ -21,7 +21,10 @@ export default function ContentSlider({ items = [] }) {
   return (
     <div className="relative mx-auto mt-[40px] w-full max-w-6xl">
       {/* ---------- Slides (absolute stacked) ---------- */}
-      <div className="relative h-[540px]" style={{ perspective: '1440px' }}>
+      <div
+        className="relative h-[402px] sm:h-[540px]"
+        style={{ perspective: '1440px' }}
+      >
         {items.map((item, i) => {
           const offset = getOffset(i);
           if (Math.abs(offset) > 2) return null; /* hide the rest */
@@ -35,7 +38,7 @@ export default function ContentSlider({ items = [] }) {
             <button
               key={i}
               onClick={() => setIndex(i)}
-              className="absolute left-1/2 top-1/2 h-[540px] w-[720px] cursor-pointer outline-none"
+              className="absolute left-1/2 top-1/2 h-[calc(100vw-20px)] max-h-[402px] w-[calc(100vw-40px)] max-w-[720px] cursor-pointer outline-none sm:max-h-[540px]"
               style={{
                 transform: `translate(calc(-50% + ${translateX}%), -50%) scale(${scale}) rotateY(${rotate}deg) `,
                 transition: 'transform 400ms cubic-bezier(.4,0,.2,1)',
@@ -60,12 +63,12 @@ export default function ContentSlider({ items = [] }) {
                     alt={item.logo.title}
                     width={item.logo.width}
                     height={item.logo.height}
-                    className="absolute left-1/2 top-1/2 max-w-[412px] -translate-x-1/2 -translate-y-1/2"
+                    className="absolute left-1/2 top-1/2 w-full max-w-[141px] -translate-x-1/2 -translate-y-1/2 sm:max-w-[412px]"
                     sizes="(max-width: 768px) 90vw, 720px"
                     priority={offset === 0}
                   />
-                  <div className="absolute inset-x-0 bottom-0 flex items-center justify-between rounded-b-xl bg-white/[.1] p-6 text-left backdrop-blur-[5px]">
-                    <p className="text-xl text-white">
+                  <div className="absolute inset-x-0 bottom-0 flex translate-y-[95%] items-center justify-between rounded-b-xl bg-white/[.1] p-[20px] text-left backdrop-blur-[5px] sm:translate-y-0 sm:p-6">
+                    <p className="max-w-[104px] text-[15px] text-white sm:max-w-none sm:text-xl">
                       {item.featuredLinkTitle}
                     </p>
                     <a
@@ -90,7 +93,7 @@ export default function ContentSlider({ items = [] }) {
       </div>
 
       {/* ---------- Dot navigation ---------- */}
-      <div className="mt-4 flex justify-center gap-2">
+      <div className="mt-[80px] flex justify-center gap-2 sm:mt-4">
         {items.map((_, i) => (
           <button
             key={i}

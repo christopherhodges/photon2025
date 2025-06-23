@@ -19,7 +19,7 @@ const Hero = ({
       className={clsx(
         'hero relative w-full',
         media
-          ? 'h-[820px] lg:h-dvh lg:max-h-[822px]'
+          ? 'sm:h-[820px] lg:h-dvh lg:max-h-[822px]'
           : 'pt-[120px] lg:pt-[200px]',
         textColor === 'white' && media ? 'text-white' : 'text-black',
       )}
@@ -48,7 +48,7 @@ const Hero = ({
       )}
 
       {centerImage && (
-        <div className="pointer-events-none absolute bottom-0 z-[0] flex h-full w-full items-end">
+        <div className="hero-center-image pointer-events-none absolute bottom-0 z-[0] hidden h-full w-full items-end sm:flex">
           <ContentfulImage
             className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
             src={centerImage.url}
@@ -60,14 +60,16 @@ const Hero = ({
       )}
       <div
         className={clsx(
-          'l-container relative z-0 flex justify-center pb-[40px] lg:items-end lg:justify-start',
-          media ? 'h-[820px] lg:h-dvh lg:max-h-[822px]' : '',
+          'l-container relative z-0 flex flex-col-reverse justify-center pb-[40px] sm:flex-row lg:items-end lg:justify-start',
+          media ? 'sm:h-[820px] lg:h-dvh lg:max-h-[822px]' : '',
         )}
       >
         <div
           className={clsx(
             'w-full lg:mt-0',
-            pathname === '/' && media && 'mt-[140px] max-w-[460px]',
+            pathname === '/' &&
+              media &&
+              'mt-[160px] max-w-[460px] sm:mt-[140px]',
             pathname !== '/' && media && 'mt-[auto] max-w-[400px]',
             !media && 'mt-[120px] max-w-none',
           )}
@@ -97,14 +99,29 @@ const Hero = ({
             ></div>
           )}
 
+          {centerImage && (
+            <div className="hero-center-image--mobile pointer-events-none z-[0] mt-[60px] h-full w-full sm:hidden">
+              <ContentfulImage
+                className="mx-auto mt-auto h-auto w-full"
+                src={centerImage.url}
+                width={centerImage.width}
+                height={centerImage.height}
+                alt={title}
+              />
+            </div>
+          )}
+
           {pathname === '/' && (
-            <TestDriveForm
-              className="invisible mb-[40px] mt-[30px] w-full max-w-[464px] lg:visible"
-              title="Test drive the patient experience"
-              inputPlaceholder="Enter your phone number"
-              buttonLabel="Try it out"
-              additionalText="(This is just a demo. We promise not to send you any prescriptions.)"
-            />
+            <div className="hero-test-drive">
+              <TestDriveForm
+                className="mb-[40px] mt-[30px] w-full max-w-[464px]"
+                title="Test drive the patient experience"
+                inputPlaceholder="Enter your phone number"
+                mobilePlaceholder="Phone number"
+                buttonLabel="Try it out"
+                additionalText="(This is just a demo. We promise not to send you any prescriptions.)"
+              />
+            </div>
           )}
         </div>
       </div>
