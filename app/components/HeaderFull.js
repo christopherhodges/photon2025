@@ -33,7 +33,7 @@ export default function HeaderFull({ menu }) {
   return (
     <>
       {/* top bar (logo + toggle) */}
-      <header className="l-header--mobile fixed left-1/2 top-[60px] z-[10000] flex h-[70px] w-[calc(100%-40px)] -translate-x-1/2 items-center justify-between rounded-[8px] bg-white px-4 md:rounded-[16px] lg:hidden">
+      <header className="l-header--mobile fixed left-1/2 top-[60px] z-[10000] flex h-[70px] w-[calc(100%-40px)] -translate-x-1/2 items-center justify-between rounded-[16px] bg-white px-4 lg:hidden">
         <Link href="/" className="flex items-center gap-2">
           {logo && (
             <Image
@@ -50,7 +50,7 @@ export default function HeaderFull({ menu }) {
         <button
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={() => setOpen(!open)}
-          className="flex items-center justify-center gap-3 rounded-full bg-[var(--light-gray)] px-[14px] py-[7px] text-sm"
+          className="flex items-center justify-center gap-3 rounded-full bg-[#E8EAF0] px-[14px] py-[7px] text-sm"
         >
           <span>{open ? 'Close' : 'Menu'}</span>
           {open ? (
