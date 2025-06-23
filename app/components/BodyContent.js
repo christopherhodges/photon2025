@@ -52,6 +52,7 @@ const BodyContent = ({ bodyContent }) => {
         } else if (section.__typename === 'TestimonialSlider') {
           return (
             <Testimonials
+              className="mx-auto max-w-[1440px] p-[20px] lg:p-[40px]"
               key={section.sys.id}
               items={section.testimonialsCollection.items}
             />

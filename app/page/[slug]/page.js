@@ -44,8 +44,8 @@ export default async function Page({ params }) {
       {(slug === 'about-us' || slug === 'join-us') && (
         <div className="open-roles py-[40px]">
           <div className="l-container">
-            <div className="flex items-center justify-between gap-[40px]">
-              <div className="w-1/2">
+            <div className="flex flex-col items-center justify-between gap-[40px] lg:flex-row">
+              <div className="md:w-1/2">
                 <Crumb label="Careers" borderStyles="border" />
                 <h2 className="mb-[40px] mt-[20px] text-[38px]">Open Roles</h2>
                 <p className="mt-[16px] opacity-[.8]">
@@ -69,9 +69,9 @@ export default async function Page({ params }) {
                   />
                 </a>
               </div>
-              <div className="testimonials--small w-[770px]">
+              <div className="testimonials--small w-full max-w-full lg:w-[770px]">
                 <Testimonials
-                  titleStyles="mb-[20px] leading-1 text-[32px]"
+                  titleStyles="mb-[20px] leading-1 md:m-0 md:m-[40px] text-[21px] md:text-[32px]"
                   items={testimonialItems}
                 />
               </div>

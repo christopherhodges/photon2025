@@ -70,7 +70,7 @@ const Hero = ({
             pathname === '/' &&
               media &&
               'mt-[160px] lg:mt-[140px] lg:max-w-[460px]',
-            pathname !== '/' && media && 'mt-[auto] max-w-[400px]',
+            pathname !== '/' && media && 'mt-[auto] max-w-[400px] pb-[50px]',
             !media && 'mt-[120px] max-w-none',
           )}
         >

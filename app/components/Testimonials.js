@@ -15,7 +15,7 @@ import {
 const DURATION = 8000; // 8s
 const FADE_MS = 700;
 
-export default function Testimonials({ titleStyles, items = [] }) {
+export default function Testimonials({ className, titleStyles, items = [] }) {
   const [index, setIndex] = useState(0);
   const wrapperRef = useRef(null);
   const contentRefs = useRef([]); // will point at the inner content divs
@@ -53,8 +53,8 @@ export default function Testimonials({ titleStyles, items = [] }) {
   };
 
   return (
-    <section className="p-[20px] lg:p-[40px]">
-      <div className="l-container l-container--testimonials relative rounded-[16px] bg-white px-[50px] pb-[40px]">
+    <section className={className}>
+      <div className="l-container l-container--testimonials relative rounded-[16px] bg-white pb-[40px] md:px-[50px]">
         {/* ─── Wrapper that animates height ─────────────────────────────── */}
         <div
           ref={wrapperRef}
@@ -111,7 +111,7 @@ export default function Testimonials({ titleStyles, items = [] }) {
                           <p
                             className={clsx(
                               titleStyles ??
-                                'mb-[40px] text-[21px] md:text-[38px]',
+                                'mb-[40px] text-[21px] lg:text-[38px]',
                             )}
                           >
                             {children}
