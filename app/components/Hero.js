@@ -19,7 +19,7 @@ const Hero = ({
       className={clsx(
         'hero relative w-full',
         media
-          ? 'sm:h-[820px] lg:h-dvh lg:max-h-[822px]'
+          ? 'min-h-[50vh] lg:h-dvh lg:max-h-[822px]'
           : 'pt-[120px] lg:pt-[200px]',
         textColor === 'white' && media ? 'text-white' : 'text-black',
       )}
@@ -48,7 +48,7 @@ const Hero = ({
       )}
 
       {centerImage && (
-        <div className="hero-center-image pointer-events-none absolute bottom-0 z-[0] hidden h-full w-full items-end sm:flex">
+        <div className="hero-center-image pointer-events-none absolute bottom-0 z-[0] hidden h-full w-full items-end lg:flex">
           <ContentfulImage
             className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
             src={centerImage.url}
@@ -60,8 +60,8 @@ const Hero = ({
       )}
       <div
         className={clsx(
-          'l-container relative z-0 flex flex-col-reverse justify-center pb-[40px] sm:flex-row lg:items-end lg:justify-start',
-          media ? 'sm:h-[820px] lg:h-dvh lg:max-h-[822px]' : '',
+          'l-container relative z-0 flex flex-col-reverse justify-center pb-[40px] lg:flex-row lg:items-end lg:justify-start',
+          media ? 'min-h-[50vh] lg:h-dvh lg:max-h-[822px]' : '',
         )}
       >
         <div
@@ -69,38 +69,40 @@ const Hero = ({
             'w-full lg:mt-0',
             pathname === '/' &&
               media &&
-              'mt-[160px] max-w-[460px] sm:mt-[140px]',
+              'mt-[160px] lg:mt-[140px] lg:max-w-[460px]',
             pathname !== '/' && media && 'mt-[auto] max-w-[400px]',
             !media && 'mt-[120px] max-w-none',
           )}
         >
-          <PageTitle
-            className={clsx(
-              'text-[27px]',
-              media && 'lg:text-[38px]',
-              media && titleSize !== 'Small (38px)' && 'lg:text-[48px]',
-              media ? 'capitalize' : 'text-[66px] lg:max-w-[702px]',
-            )}
-            title={title}
-          />
-          <p
-            className={clsx(
-              'pt-[30px] font-light opacity-[.8]',
-              !media && 'text-[24px]',
-            )}
-          >
-            {subtitle}
-          </p>
+          <div className="mx-auto max-w-[325px] sm:max-w-[460px] lg:mx-0">
+            <PageTitle
+              className={clsx(
+                'text-[27px]',
+                media && 'lg:text-[38px]',
+                media && titleSize !== 'Small (38px)' && 'lg:text-[48px]',
+                media ? 'capitalize' : 'text-[66px] lg:max-w-[702px]',
+              )}
+              title={title}
+            />
+            <p
+              className={clsx(
+                'pt-[30px] font-light opacity-[.8]',
+                !media && 'text-[24px]',
+              )}
+            >
+              {subtitle}
+            </p>
 
-          {!media && (
-            <div
-              className="my-[40px] h-[13px] bg-gradient-primary"
-              style={{ '--tw-gradient-angle': '270deg' }}
-            ></div>
-          )}
+            {!media && (
+              <div
+                className="my-[40px] h-[13px] bg-gradient-primary"
+                style={{ '--tw-gradient-angle': '270deg' }}
+              ></div>
+            )}
+          </div>
 
           {centerImage && (
-            <div className="hero-center-image--mobile pointer-events-none z-[0] mt-[60px] h-full w-full sm:hidden">
+            <div className="hero-center-image--mobile pointer-events-none z-[0] mt-[60px] h-full w-full lg:hidden">
               <ContentfulImage
                 className="mx-auto mt-auto h-auto w-full"
                 src={centerImage.url}

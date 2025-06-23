@@ -53,8 +53,8 @@ export default function Testimonials({ titleStyles, items = [] }) {
   };
 
   return (
-    <section className="py-[40px]">
-      <div className="l-container l-container--testimonials relative rounded-[8px] bg-white px-[50p] pb-[40px] md:rounded-[16px]">
+    <section className="p-[20px] lg:p-[40px]">
+      <div className="l-container l-container--testimonials relative rounded-[8px] bg-white px-[50px] pb-[40px] md:rounded-[16px]">
         {/* ─── Wrapper that animates height ─────────────────────────────── */}
         <div
           ref={wrapperRef}
@@ -111,7 +111,7 @@ export default function Testimonials({ titleStyles, items = [] }) {
                           <p
                             className={clsx(
                               titleStyles ??
-                                'mb-[40px] text-[21px] sm:text-[38px]',
+                                'mb-[40px] text-[21px] md:text-[38px]',
                             )}
                           >
                             {children}
