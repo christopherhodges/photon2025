@@ -350,5 +350,12 @@ input {
   background: #ffffff33;
 }
 
-.sign-up-form {
+body.page-sign-up {
+  background-image: url('/images/gradient-bg.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+
+  .l-footer {
+    background: transparent;
+  }
 }

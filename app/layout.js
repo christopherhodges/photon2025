@@ -1,4 +1,5 @@
 import AnnouncementBar from '@/app/components/AnnouncementBar';
+import BodyClass from '@/app/components/BodyClass';
 import Footer from '@/app/components/Footer';
 import HeaderFull from '@/app/components/HeaderFull';
 import '@/app/globals.scss';
@@ -67,6 +68,7 @@ export default async function RootLayout({ children }) {
       </Head>
       <html lang="en" className={clsx(acidGrotesk.className)}>
         <body className="text-[14px] lg:text-[16px]">
+          <BodyClass />
           <main className="l-main">
             <AnnouncementBar content="Announcement Bar" />
             {/*<Header menu={nav} />*/}
