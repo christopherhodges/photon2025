@@ -12,50 +12,81 @@ import {
   useState,
 } from 'react';
 
-const DURATION = 8000; // 8s
-const FADE_MS = 700;
+const DURATION = 8000; // 8 s between slides
+const FADE_MS = 700; // testimonial fade duration
 
 export default function Testimonials({ className, titleStyles, items = [] }) {
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false); // ← track hover with state
+
   const wrapperRef = useRef(null);
-  const contentRefs = useRef([]); // will point at the inner content divs
+  const contentRefs = useRef([]);
   const timerRef = useRef(null);
+  const startRef = useRef(Date.now());
+  const remainingRef = useRef(DURATION);
 
-  // ─── Auto-advance ───────────────────────────────────────────────────────
-  const restart = useCallback(() => {
-    clearTimeout(timerRef.current);
+  /* ── Timer helpers ─────────────────────────────────────────────── */
+  const clear = () => clearTimeout(timerRef.current);
+  const restart = useCallback(
+    (delay = DURATION) => {
+      clear();
+      startRef.current = Date.now();
+      remainingRef.current = delay;
 
-    timerRef.current = setTimeout(
-      () => setIndex(i => (i + 1) % items.length),
-      DURATION,
-    );
-  }, [items.length]);
+      timerRef.current = setTimeout(
+        () => setIndex(i => (i + 1) % items.length),
+        delay,
+      );
+    },
+    [items.length],
+  );
+
+  /* ── Auto-advance whenever index changes (unless paused) ───────── */
   useEffect(() => {
-    if (items.length > 1) restart();
+    if (!paused && items.length > 1) restart();
+    return clear;
+  }, [index, items.length, paused, restart]);
 
-    return () => clearTimeout(timerRef.current);
-  }, [index, items.length, restart]);
-
-  // ─── Height adjustment ──────────────────────────────────────────────────
+  /* ── Smooth wrapper height when quote lengths differ ───────────── */
   useLayoutEffect(() => {
-    const contentEl = contentRefs.current[index];
-    if (wrapperRef.current && contentEl) {
-      // set wrapper to exactly the inner content’s height
-      wrapperRef.current.style.height = `${contentEl.offsetHeight}px`;
+    const el = contentRefs.current[index];
+    if (wrapperRef.current && el) {
+      wrapperRef.current.style.height = `${el.offsetHeight}px`;
     }
   }, [index, items]);
 
-  if (!items.length) return null;
-
-  const go = i => {
-    setIndex(i);
-    restart();
+  /* ── Hover pause / resume logic ────────────────────────────────── */
+  const pause = () => {
+    if (items.length < 2) return;
+    const elapsed = Date.now() - startRef.current;
+    remainingRef.current = Math.max(DURATION - elapsed, 0);
+    setPaused(true);
+    clear();
   };
 
+  const resume = () => {
+    if (items.length < 2) return;
+    setPaused(false);
+    restart(remainingRef.current || DURATION);
+  };
+
+  /* ── Manual nav keeps timing in sync ───────────────────────────── */
+  const go = i => {
+    setIndex(i);
+    if (!paused) restart();
+  };
+
+  if (!items.length) return null;
+
+  /* ── Render ────────────────────────────────────────────────────── */
   return (
-    <section className={className}>
+    <section
+      className={clsx(className, paused && 'paused')}
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+    >
       <div className="l-container l-container--testimonials relative rounded-[16px] bg-white pb-[40px] md:px-[50px]">
-        {/* ─── Wrapper that animates height ─────────────────────────────── */}
+        {/* Height-animating wrapper */}
         <div
           ref={wrapperRef}
           className="mx-auto overflow-hidden transition-[height] duration-700 ease-in-out"
@@ -71,12 +102,12 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                 i === index ? 'opacity-100' : 'pointer-events-none opacity-0',
               )}
             >
-              {/* ─── Inner padded container that we measure ───────────── */}
+              {/* Inner content we measure for height */}
               <div
                 ref={el => (contentRefs.current[i] = el)}
                 className="flex flex-col items-center px-5 pt-[40px]"
               >
-                {/* author row */}
+                {/* ── Author row ── */}
                 <header className="mb-8 flex items-center justify-center gap-4">
                   <div className="flex flex-row-reverse items-center">
                     {t.logo && (
@@ -86,6 +117,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                         width={40}
                         height={40}
                         className="relative z-0 h-[40px] w-[40px] overflow-hidden rounded-lg object-contain"
+                        draggable={false}
                       />
                     )}
                     <ContentfulImage
@@ -94,6 +126,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                       width={56}
                       height={56}
                       className="z-1 relative h-[50px] w-[50px] rounded-full border-white object-cover ring-4 ring-white"
+                      draggable={false}
                     />
                   </div>
                   <div className="text-left">
@@ -101,7 +134,8 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                     <p className="text-sm text-gray-500">{t.jobTitle}</p>
                   </div>
                 </header>
-                {/* quote */}
+
+                {/* ── Quote ── */}
                 <blockquote className="richText mx-auto max-w-[860px] text-center leading-snug text-black">
                   <RichText
                     document={t.testimonial.json}
@@ -126,10 +160,10 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
           ))}
         </div>
 
-        {/* 2️⃣ Controls (outside the height-animating div) */}
+        {/* ── Controls ── */}
         {items.length > 1 && (
           <div className="mt-2 flex flex-col items-center gap-4">
-            {/* Next Arrow + Progress Ring */}
+            {/* Next arrow with progress ring */}
             <button
               onClick={() => go((index + 1) % items.length)}
               aria-label="Next testimonial"
@@ -146,7 +180,8 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                   strokeWidth="2"
                 />
                 <circle
-                  key={index} // restart anim on change
+                  key={index} /* restart anim each slide */
+                  className="progress-ring"
                   cx="22"
                   cy="22"
                   r="20"
@@ -157,6 +192,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                   strokeDashoffset="126"
                   style={{
                     animation: `dash ${DURATION}ms linear forwards`,
+                    animationPlayState: paused ? 'paused' : 'running',
                   }}
                 />
               </svg>
@@ -193,14 +229,14 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                         ? 'w-[24px] bg-[var(--seafoam)]'
                         : 'w-2 bg-gray-300 hover:bg-gray-400',
                     )}
-                  ></span>
+                  />
                 </button>
               ))}
             </div>
           </div>
         )}
 
-        {/* keyframes for the ring */}
+        {/* ── Keyframes + fallback paused styling ── */}
         <style jsx>{`
           @keyframes dash {
             from {
@@ -209,6 +245,10 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
             to {
               stroke-dashoffset: 0;
             }
+          }
+          /* fallback in case inline play-state isn’t applied */
+          .paused .progress-ring {
+            animation-play-state: paused;
           }
         `}</style>
       </div>

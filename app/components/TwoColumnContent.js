@@ -25,20 +25,24 @@ const TwoColumnContent = ({
         <div
           className={clsx(
             'flex flex-col justify-between gap-10 lg:flex-row lg:items-stretch',
-            textPlacement === 'Right' && 'flex-row-reverse',
+            textPlacement === 'Right' && 'lg:flex-row-reverse',
           )}
         >
           {content && (
             <>
               <div className="flex flex-col items-start gap-4 font-normal lg:w-1/2">
                 <Crumb label={crumb} borderStyles="border" />
-                <h2 className="text-[38px] leading-[105%]">{title}</h2>
+                <h2 className="text-[38px] font-normal leading-[105%]">
+                  {title}
+                </h2>
                 <RichText
                   document={content.json}
                   options={{
                     renderNode: {
                       [BLOCKS.PARAGRAPH]: (_, children) => (
-                        <p className="mb-[30px] text-[24px]">{children}</p>
+                        <p className="mb-[30px] text-[24px] leading-[28.8px]">
+                          {children}
+                        </p>
                       ),
                     },
                   }}
