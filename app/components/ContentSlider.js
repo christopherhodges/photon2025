@@ -47,7 +47,7 @@ export default function ContentSlider({ items = [] }) {
       slider.classList.add('cursor-grabbing');
     }
 
-    function onPointerMove(e) {
+    function onPointerMove() {
       if (!draggingRef.current) return;
 
       // optional live-drag preview (commented)
