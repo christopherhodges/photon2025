@@ -30,6 +30,7 @@ export default async function Page({ params }) {
         <Hero
           title={hero.title}
           titleSize={hero.titleSize}
+          mobileTitle={hero.mobileTitle}
           subtitle={hero.subtitle}
           media={hero.media}
           centerImage={hero.centerImage}

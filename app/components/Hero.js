@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 const Hero = ({
   title,
   titleSize,
+  mobileTitle,
   subtitle,
   media,
   centerImage,
@@ -18,9 +19,7 @@ const Hero = ({
     <section
       className={clsx(
         'hero relative w-full',
-        media
-          ? 'min-h-[50vh] lg:h-dvh lg:max-h-[822px]'
-          : 'pt-[120px] lg:pt-[200px]',
+        media ? 'min-h-[50vh] lg:h-[822px]' : 'pt-[120px] lg:pt-[200px]',
         textColor === 'white' && media ? 'text-white' : 'text-black',
       )}
     >
@@ -61,7 +60,7 @@ const Hero = ({
       <div
         className={clsx(
           'l-container relative z-0 flex flex-col-reverse justify-center pb-[40px] lg:flex-row lg:items-end lg:justify-start',
-          media ? 'min-h-[50vh] lg:h-dvh lg:max-h-[822px]' : '',
+          media ? 'min-h-[50vh] lg:h-[822px]' : '',
         )}
       >
         <div
@@ -74,15 +73,25 @@ const Hero = ({
             !media && 'mt-[120px] max-w-none',
           )}
         >
-          <div className="mx-auto max-w-[325px] sm:max-w-[460px] lg:mx-0">
+          <div
+            className={clsx(
+              'mx-auto lg:mx-0',
+              !media ? 'max-w-none' : 'max-w-[325px] sm:max-w-[460px]',
+            )}
+          >
             <PageTitle
               className={clsx(
                 'text-[27px]',
                 media && 'lg:text-[38px]',
                 media && titleSize !== 'Small (38px)' && 'lg:text-[48px]',
                 media ? 'capitalize' : 'text-[66px] lg:max-w-[702px]',
+                mobileTitle && 'hidden md:block',
               )}
               title={title}
+            />
+            <PageTitle
+              className="block text-[66px] md:hidden"
+              title={mobileTitle}
             />
             <p
               className={clsx(
@@ -92,14 +101,14 @@ const Hero = ({
             >
               {subtitle}
             </p>
-
-            {!media && (
-              <div
-                className="my-[40px] h-[13px] bg-gradient-primary"
-                style={{ '--tw-gradient-angle': '270deg' }}
-              ></div>
-            )}
           </div>
+
+          {!media && (
+            <div
+              className="my-[40px] h-[13px] bg-gradient-primary"
+              style={{ '--tw-gradient-angle': '270deg' }}
+            ></div>
+          )}
 
           {centerImage && (
             <div className="hero-center-image--mobile pointer-events-none z-[0] mt-[60px] h-full w-full lg:hidden">
