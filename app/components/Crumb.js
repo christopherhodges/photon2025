@@ -5,7 +5,7 @@ import clsx from 'clsx';
 const sizes = size =>
   ({
     sm: 'border px-[8px] py-[4px]',
-  })[size] || 'border-2 px-[12px]  py-[8px]';
+  })[size] || 'border-2 px-[12px] text-[14px] py-[8px]';
 
 const Crumb = ({
   label,

@@ -2,7 +2,7 @@ import Crumb from '@/app/components/Crumb';
 
 const CrumbList = ({ crumbs }) => {
   return (
-    <div className="flex flex-col gap-2 sm:flex-row">
+    <div className="flex flex-col flex-wrap items-start gap-2 sm:flex-row">
       {crumbs.map((crumb, i) => {
         return (
           <Crumb

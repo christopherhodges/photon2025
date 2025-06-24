@@ -48,7 +48,13 @@ export default async function Page({ params }) {
             <div className="flex flex-col items-center justify-between gap-[40px] lg:flex-row">
               <div className="md:w-1/2">
                 <Crumb label="Careers" borderStyles="border" />
-                <h2 className="mb-[40px] mt-[20px] text-[38px]">Open Roles</h2>
+                <h2 className="mb-[20px] mt-[20px] text-[38px]">Open Roles</h2>
+                <a href="/join-us" className="button-primary">
+                  Careers Page
+                </a>
+                <h3 className="mt-[48px] text-[24px]">
+                  Photon is fully staffed at the moment!
+                </h3>
                 <p className="mt-[16px] opacity-[.8]">
                   We’re not hiring right now, but we’re always interested in
                   connecting with great people. Join our Talent Network by
@@ -58,7 +64,7 @@ export default async function Page({ params }) {
                 <a
                   target="_blank"
                   href="https://wellfound.com/company/photon-health"
-                  className="mt-[16px] flex items-center gap-2"
+                  className="mt-[16px] flex items-center gap-2 font-normal"
                 >
                   Connect with us{' '}
                   <Image

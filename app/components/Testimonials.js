@@ -108,7 +108,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                 className="flex flex-col items-center px-5 pt-[40px]"
               >
                 {/* ── Author row ── */}
-                <header className="mb-8 flex items-center justify-center gap-4">
+                <header className="mb-8 flex flex-col items-center justify-center gap-4 md:flex-row">
                   <div className="flex flex-row-reverse items-center">
                     {t.logo && (
                       <ContentfulImage
@@ -129,7 +129,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                       draggable={false}
                     />
                   </div>
-                  <div className="text-left">
+                  <div className="text-center md:text-left">
                     <p className="font-semibold">{t.name}</p>
                     <p className="text-sm text-gray-500">{t.jobTitle}</p>
                   </div>
