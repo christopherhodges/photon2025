@@ -32,8 +32,8 @@ const TwoColumnContent = ({
             <>
               <div className="flex flex-col items-start gap-4 font-normal lg:w-1/2">
                 <Crumb label={crumb} borderStyles="border" />
-                <h2 className="text-[38px] font-normal leading-[105%]">
-                  {title}
+                <h2 className="text-[38px] font-light leading-[105%]">
+                  {title}"
                 </h2>
                 <RichText
                   document={content.json}
