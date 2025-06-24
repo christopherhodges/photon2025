@@ -3,7 +3,7 @@
   - gradient that goes behind certain buttons on hover
  */
 @mixin gradientButtonBg(
-  $radius: 8px,
+  $radius: 16px,
   $gradient: var(--gradient-primary),
   $inner-bg: #fff
 ) {

@@ -89,7 +89,7 @@ export default function HeaderFull({ menu }) {
       {/* slide-down panel */}
       <div
         className={clsx(
-          'fixed left-0 top-0 z-[9999] h-screen w-screen overflow-y-auto',
+          'mobile-slide-down-panel fixed left-0 top-0 z-[9999] h-screen w-screen overflow-y-auto',
           'bg-gradient-to-br from-[#6D6BFF] via-[#9C7CFF] to-[#C5CBFF]',
           'transition-transform duration-300',
           open ? 'translate-y-0' : '-translate-y-full',
@@ -110,6 +110,8 @@ export default function HeaderFull({ menu }) {
             {/* docs or single links left */}
             {lastPart
               .filter(item => item.__typename === 'NavLink')
+              .filter(item => item.label !== 'Sign In')
+              .filter(item => item.label !== 'Contact Sales')
               .map(link => (
                 <Fragment key={link.label}>
                   <MobileNavLink {...link} />
@@ -119,7 +121,7 @@ export default function HeaderFull({ menu }) {
         </div>
 
         {/* buttons */}
-        <div className="mx-4 mt-8 flex flex-col-reverse gap-3">
+        <div className="mx-4 mt-[20px] flex flex-col-reverse gap-3 rounded-[20px] bg-white p-6">
           {lastPart
             .filter(
               item => item.__typename === 'NavLink' && item.style !== 'default',
@@ -137,8 +139,10 @@ export default function HeaderFull({ menu }) {
         </div>
 
         {/* footer links */}
-        <div className="mx-4 mb-12 mt-12 border-t border-black pt-4 text-sm">
-          <p className="mb-2 font-medium">Follow Us</p>
+        <div className="mx-4 mb-12 mt-12 pt-4 text-sm">
+          <p className="mb-[16px] border-b border-black pb-[16px] font-medium">
+            Follow Us
+          </p>
           <ul className="space-y-1">
             <li>
               <Link href="https://instagram.com">Instagram</Link>
@@ -216,12 +220,12 @@ function MobileNavLink({ label, href, external }) {
   const pathname = usePathname();
   const active = pathname === href || pathname.startsWith(`${href}/`);
   return (
-    <li>
+    <li className="mb-[18px] last-of-type:mb-0">
       <SmartLink
         href={href}
         external={external}
         className={clsx(
-          'flex items-center gap-2 rounded-[12px] px-4 py-3 text-lg',
+          'flex items-center gap-2 rounded-[12px] text-lg font-normal',
           active && 'bg-[var(--light-gray)] font-bold',
         )}
       >
@@ -241,10 +245,10 @@ function MobileNavLink({ label, href, external }) {
 function MobileAccordion({ label, linksCollection }) {
   const [open, setOpen] = useState(false);
   return (
-    <li>
+    <li className="mb-[18px] last-of-type:mb-0">
       <button
         onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between rounded-[12px] px-4 py-3 text-lg"
+        className="flex w-full items-center justify-between rounded-[12px] text-lg font-normal"
       >
         <div className="flex items-center gap-2">
           <span className="block h-[7px] w-[7px] rounded-full border border-black" />
@@ -268,7 +272,7 @@ function MobileAccordion({ label, linksCollection }) {
       <ul
         className={clsx(
           'mt-2 space-y-2 overflow-hidden rounded-[12px] bg-[var(--light-gray)] px-4 transition-[max-height] duration-300',
-          open ? 'max-h-[500px] py-3' : 'max-h-0 py-0',
+          open ? 'mobile-dropdown-open max-h-[500px] py-3' : 'max-h-0 py-0',
         )}
       >
         {linksCollection.items.map(link => (
@@ -276,7 +280,7 @@ function MobileAccordion({ label, linksCollection }) {
             <SmartLink
               href={link.href}
               target={link.external ? '_blank' : ''}
-              className="flex items-center gap-3 rounded-[12px] px-2 py-3"
+              className="flex items-center gap-3 rounded-[12px] px-2 py-3 font-light"
             >
               <Image
                 src={link.icon.url}
@@ -286,7 +290,7 @@ function MobileAccordion({ label, linksCollection }) {
                 className="h-5 w-5"
               />
               <div className="flex flex-col text-left">
-                <span className="text-base font-medium">{link.label}</span>
+                <span className="text-base">{link.label}</span>
                 {link.shortDescription && (
                   <span className="text-xs text-gray-500">
                     {link.shortDescription}

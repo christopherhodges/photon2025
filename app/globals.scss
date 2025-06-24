@@ -93,7 +93,7 @@ h6 {
 .button-outline {
   padding: 7px 16px;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 16px;
   min-width: 100px;
   border: 2px solid transparent;
   font-weight: normal;
@@ -354,6 +354,47 @@ body.page-sign-up {
 .l-header,
 .l-header--mobile {
   transition: transform 0.25s ease;
+}
+
+.mobile-slide-down-panel {
+  .button-primary,
+  .button-outline {
+    @media screen and (max-width: 1024px) {
+      padding: 16px;
+    }
+  }
+}
+
+.mobile-dropdown-open {
+  @include gradientButtonBg();
+
+  li {
+    position: relative;
+    z-index: 100;
+
+    img {
+      background: white;
+      width: 40px;
+      height: auto;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  }
+
+  &:before,
+  &:after {
+    opacity: 1;
+    border-radius: 16px;
+  }
+
+  &:after {
+    background: #e8eaf0;
+    border-radius: 12px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+  }
 }
 
 body:not(.has-announcement),
