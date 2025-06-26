@@ -153,16 +153,18 @@ export default function ContentSlider({ items = [] }) {
               {/* overlay gradient + details (only on active) */}
               {offset === 0 && (
                 <>
-                  <ContentfulImage
-                    src={item.logo.url}
-                    alt={item.logo.title}
-                    width={item.logo.width}
-                    height={item.logo.height}
-                    className="absolute left-1/2 top-1/2 w-full max-w-[141px] -translate-x-1/2 -translate-y-1/2 sm:max-w-[412px]"
-                    sizes="(max-width: 768px) 90vw, 720px"
-                    draggable={false}
-                    priority
-                  />
+                  {item.logo && (
+                    <ContentfulImage
+                      src={item.logo.url}
+                      alt={item.logo.title}
+                      width={item.logo.width}
+                      height={item.logo.height}
+                      className="absolute left-1/2 top-1/2 w-full max-w-[141px] -translate-x-1/2 -translate-y-1/2 sm:max-w-[412px]"
+                      sizes="(max-width: 768px) 90vw, 720px"
+                      draggable={false}
+                      priority
+                    />
+                  )}
                   <div className="absolute inset-x-0 bottom-0 flex translate-y-[95%] items-center justify-between rounded-b-xl bg-white/[.1] p-[20px] text-left backdrop-blur-[5px] sm:translate-y-0 sm:p-6">
                     <p className="max-w-[104px] text-[15px] text-white sm:max-w-none sm:text-xl">
                       {item.featuredLinkTitle}
