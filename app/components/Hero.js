@@ -1,7 +1,6 @@
 'use client';
 import ContentfulImage from '@/app/components/contentful-image';
 import PageTitle from '@/app/components/PageTitle';
-import TestDriveForm from '@/app/components/TestDriveForm';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
@@ -122,7 +121,7 @@ const Hero = ({
             </div>
           )}
 
-          {pathname === '/' && (
+          {/*pathname === '/' && (
             <div className="hero-test-drive">
               <TestDriveForm
                 className="mb-[40px] mt-[30px] w-full max-w-[464px]"
@@ -133,7 +132,7 @@ const Hero = ({
                 additionalText="(This is just a demo. We promise not to send you any prescriptions.)"
               />
             </div>
-          )}
+          )*/}
         </div>
       </div>
     </section>
