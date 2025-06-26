@@ -120,19 +120,6 @@ const Hero = ({
               />
             </div>
           )}
-
-          {/*pathname === '/' && (
-            <div className="hero-test-drive">
-              <TestDriveForm
-                className="mb-[40px] mt-[30px] w-full max-w-[464px]"
-                title="Test drive the patient experience"
-                inputPlaceholder="Enter your phone number"
-                mobilePlaceholder="Phone number"
-                buttonLabel="Try it out"
-                additionalText="(This is just a demo. We promise not to send you any prescriptions.)"
-              />
-            </div>
-          )*/}
         </div>
       </div>
     </section>
