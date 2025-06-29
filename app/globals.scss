@@ -366,14 +366,19 @@ body.page-sign-up {
 .l-header--mobile {
   transition: transform 0.25s ease;
   box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.2);
+
+  .button-primary,
+  .button-outline {
+    border-radius: 8px;
+  }
 }
 
 .mobile-slide-down-panel {
   .button-primary,
   .button-outline {
+    border-radius: 8px;
     @media screen and (max-width: 1024px) {
       padding: 16px;
-      border-radius: 8px;
     }
   }
 }

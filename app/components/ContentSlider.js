@@ -160,7 +160,7 @@ export default function ContentSlider({ items = [] }) {
                       alt={item.logo.title}
                       width={item.logo.width}
                       height={item.logo.height}
-                      className="absolute left-1/2 top-1/2 w-full max-w-[141px] -translate-x-1/2 -translate-y-1/2 sm:max-w-[412px]"
+                      className="absolute left-1/2 top-1/2 w-full max-w-[75%] -translate-x-1/2 -translate-y-1/2 sm:max-w-[412px]"
                       sizes="(max-width: 768px) 90vw, 720px"
                       draggable={false}
                       priority
