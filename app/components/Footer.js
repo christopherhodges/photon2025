@@ -1,4 +1,4 @@
-import TestDriveForm from '@/app/components/TestDriveForm';
+import MailchimpForm from '@/app/components/MailchimpForm';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,13 +10,10 @@ const Footer = footer => {
     <footer className="l-footer bg-gradient-secondary text-white">
       <div className="l-container">
         <div className="py-[40px]">
-          <TestDriveForm
+          <MailchimpForm
             className="mx-auto w-full max-w-[670px] text-white"
-            title="Subscribe to our newsletter"
             inputPlaceholder="Enter your email address"
             mobilePlaceholder="Email address"
-            buttonLabel="Try it out"
-            additionalText="This is just a test script. Not real, not fillable, and definitely not reaching a pharmacy near you."
           />
         </div>
 

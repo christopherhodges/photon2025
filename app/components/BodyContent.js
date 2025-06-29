@@ -43,6 +43,7 @@ const BodyContent = ({ bodyContent }) => {
             <FeaturedContent
               key={section.sys.id}
               sectionTitle={section.title}
+              sectionSubtitle={section.subtitle}
               crumb={section.crumb}
               buttonLabel={section.buttonText}
               buttonLink={section.buttonLink}

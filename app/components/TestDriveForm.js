@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ENDPOINT = process.env.NEXT_PUBLIC_DEMO_SMS_ENDPOINT;
 const EVENTNAME = process.env.NEXT_PUBLIC_DEMO_EVENT;
@@ -17,6 +17,13 @@ const TestDriveForm = ({
 }) => {
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
+
+  const [placeholder, setPlaceholder] = useState(inputPlaceholder);
+
+  useEffect(() => {
+    const isMobile = window.matchMedia('(max-width: 639px)').matches;
+    setPlaceholder(isMobile ? mobilePlaceholder : inputPlaceholder);
+  }, [inputPlaceholder, mobilePlaceholder]);
 
   // Strip everything except digits, eg “(541) 602-9101” → “5416029101”
   const normalize = v => v.replace(/[^\d]/g, '');
@@ -58,27 +65,13 @@ const TestDriveForm = ({
           <input
             className={clsx(
               'max-h-[54px] w-full rounded-[10px] bg-white p-[20px]',
-              mobilePlaceholder ? 'hidden sm:inline-block' : '',
             )}
             value={phone}
             onChange={e => setPhone(e.target.value)}
             type="tel"
-            placeholder={inputPlaceholder}
+            placeholder={placeholder}
             disabled={status === 'loading'}
           />
-
-          {mobilePlaceholder && (
-            <input
-              className={clsx(
-                'inline-block max-h-[54px] w-full rounded-[10px] bg-white p-[20px] sm:hidden',
-              )}
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
-              type="tel"
-              placeholder={mobilePlaceholder}
-              disabled={status === 'loading'}
-            />
-          )}
 
           <button
             type="submit"
@@ -119,18 +112,3 @@ const TestDriveForm = ({
 };
 
 export default TestDriveForm;
-
-/* Example for homepage
-{pathname === '/' && (
-            <div className="hero-test-drive">
-              <TestDriveForm
-                className="mb-[40px] mt-[30px] w-full max-w-[464px]"
-                title="Test drive the patient experience"
-                inputPlaceholder="Enter your phone number"
-                mobilePlaceholder="Phone number"
-                buttonLabel="Try it out"
-                additionalText="(This is just a demo. We promise not to send you any prescriptions.)"
-              />
-            </div>
-          )}
- */

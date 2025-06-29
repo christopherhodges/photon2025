@@ -75,7 +75,7 @@ const Hero = ({
           <div
             className={clsx(
               'mx-auto lg:mx-0',
-              !media ? 'max-w-none' : 'max-w-[325px] sm:max-w-[460px]',
+              !media ? 'max-w-none' : 'max-w-[335px] sm:max-w-[460px]',
             )}
           >
             <PageTitle

@@ -1,5 +1,6 @@
 'use client';
 import SmartLink from '@/app/components/SmartLink';
+import { useBodyScrollLock } from '@/app/hooks/useBodyScrollLock';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,6 +19,7 @@ export default function HeaderFull({ menu }) {
   const { logo, itemsCollection } = menu;
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  useBodyScrollLock(open);
 
   /* ----- close the mobile menu when route changes ----- */
   useEffect(() => setOpen(false), [pathname]);
@@ -140,7 +142,7 @@ export default function HeaderFull({ menu }) {
 
         {/* footer links */}
         <div className="mx-4 mb-12 mt-12 pt-4 text-sm">
-          <p className="mb-[16px] border-b border-black pb-[16px] font-medium">
+          <p className="mb-[16px] border-b border-black pb-[16px] font-normal">
             Follow Us
           </p>
           <ul className="space-y-1">
@@ -226,7 +228,7 @@ function MobileNavLink({ label, href, external }) {
         external={external}
         className={clsx(
           'flex items-center gap-2 rounded-[12px] text-lg font-normal',
-          active && 'bg-[var(--light-gray)] font-bold',
+          active && 'bg-[var(--light-gray)] font-normal',
         )}
       >
         <span
@@ -346,8 +348,8 @@ function NavGroup({ label, linksCollection }) {
           className={clsx(
             'classes="text-sm" relative flex items-center gap-2 rounded-[20px] transition-colors',
             dropdownOpen || isActive
-              ? 'bg-[var(--light-gray)] font-bold'
-              : 'bg-transparent hover:bg-[var(--light-gray)] group-hover:font-medium',
+              ? 'bg-[var(--light-gray)] font-normal'
+              : 'bg-transparent hover:bg-[var(--light-gray)] group-hover:font-normal',
           )}
         >
           <span
@@ -425,8 +427,8 @@ function NavGroup({ label, linksCollection }) {
                   className={clsx(
                     'transition-colors',
                     pathname === link.href
-                      ? 'font-bold text-[var(--blue)]'
-                      : 'group-hover:font-bold group-hover:text-[var(--blue)]',
+                      ? 'font-normal text-[var(--blue)]'
+                      : 'group-hover:font-normal group-hover:text-[var(--blue)]',
                   )}
                 >
                   {link.label}
@@ -470,8 +472,8 @@ function NavLink({
           className={clsx(
             'relative flex items-center gap-2 rounded-[20px] text-sm transition-colors',
             isActive
-              ? 'bg-[var(--light-gray)] font-bold'
-              : 'bg-transparent group-hover:bg-[var(--light-gray)] group-hover:font-medium',
+              ? 'bg-[var(--light-gray)] font-normal'
+              : 'bg-transparent group-hover:bg-[var(--light-gray)] group-hover:font-normal',
           )}
         >
           <span

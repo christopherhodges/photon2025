@@ -3,7 +3,7 @@
 import ContentfulImage from '@/app/components/contentful-image';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function ContentSlider({ items = [] }) {
   const [index, setIndex] = useState(0);
@@ -27,13 +27,12 @@ export default function ContentSlider({ items = [] }) {
   };
 
   /** go to previous / next safely modulo length */
-  const go = dir => setIndex(i => (i + dir + len) % len);
+  const go = useCallback(dir => setIndex(i => (i + dir + len) % len), [len]);
 
   /* ---------- drag / swipe behaviour ---------- */
   useEffect(() => {
     // nothing to do with a single slide
     if (len < 2) return;
-
     const slider = sliderRef.current;
     if (!slider) return;
 
@@ -47,14 +46,14 @@ export default function ContentSlider({ items = [] }) {
       slider.classList.add('cursor-grabbing');
     }
 
-    function onPointerMove() {
-      if (!draggingRef.current) return;
-
-      // optional live-drag preview (commented)
-      // const x = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
-      // const delta = x - startXRef.current;
-      // slider.style.setProperty('--drag-x', delta + 'px');
-    }
+    // function onPointerMove() {
+    //   if (!draggingRef.current)
+    //
+    //   // optional live-drag preview (commented)
+    //   // const x = e.clientX ?? e.touches?.[0]?.clientX ?? 0;
+    //   // const delta = x - startXRef.current;
+    //   // slider.style.setProperty('--drag-x', delta + 'px');
+    // }
 
     function endDrag(e) {
       if (!draggingRef.current) return;
@@ -89,27 +88,27 @@ export default function ContentSlider({ items = [] }) {
 
     /* listeners */
     slider.addEventListener('pointerdown', onPointerDown);
-    slider.addEventListener('pointermove', onPointerMove);
+    // slider.addEventListener('pointermove', onPointerMove);
     slider.addEventListener('pointerup', endDrag);
     slider.addEventListener('pointercancel', endDrag);
     slider.addEventListener('pointerleave', endDrag);
 
     // passive touch* needed to keep scroll smooth
     slider.addEventListener('touchstart', onPointerDown, { passive: true });
-    slider.addEventListener('touchmove', onPointerMove, { passive: true });
+    // slider.addEventListener('touchmove', onPointerMove, { passive: true });
     slider.addEventListener('touchend', endDrag);
 
     return () => {
       slider.removeEventListener('pointerdown', onPointerDown);
-      slider.removeEventListener('pointermove', onPointerMove);
+      // slider.removeEventListener('pointermove', onPointerMove);
       slider.removeEventListener('pointerup', endDrag);
       slider.removeEventListener('pointercancel', endDrag);
       slider.removeEventListener('pointerleave', endDrag);
       slider.removeEventListener('touchstart', onPointerDown);
-      slider.removeEventListener('touchmove', onPointerMove);
+      // slider.removeEventListener('touchmove', onPointerMove);
       slider.removeEventListener('touchend', endDrag);
     };
-  }, [len]); // len is stable unless slide list changes
+  }, [len, go]); // len is stable unless slide list changes
 
   /* ---------- render ---------- */
   return (
@@ -117,7 +116,9 @@ export default function ContentSlider({ items = [] }) {
       {/* ----- Slides (stacked) ----- */}
       <div
         ref={sliderRef}
-        className="relative h-[402px] cursor-grab select-none overflow-hidden sm:h-[540px]"
+        className={clsx(
+          'relative h-[450px] cursor-grab select-none sm:h-[540px]',
+        )}
         style={{ perspective: '1440px' }}
       >
         {items.map((item, i) => {
@@ -166,10 +167,11 @@ export default function ContentSlider({ items = [] }) {
                     />
                   )}
                   <div className="absolute inset-x-0 bottom-0 flex translate-y-[95%] items-center justify-between rounded-b-xl bg-white/[.1] p-[20px] text-left backdrop-blur-[5px] sm:translate-y-0 sm:p-6">
-                    <p className="max-w-[104px] text-[15px] text-white sm:max-w-none sm:text-xl">
+                    <p className="max-w-[144px] text-[15px] text-white sm:max-w-none sm:text-xl">
                       {item.featuredLinkTitle}
                     </p>
                     <a
+                      target={item.externalLink ? '_blank' : ''}
                       href={item.externalLink || item.slug}
                       className="inline-flex items-center gap-2 text-sm text-white hover:underline"
                     >

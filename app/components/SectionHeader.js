@@ -1,3 +1,6 @@
+'use client';
+import { withBr } from '@/lib/withBr';
+
 const SectionHeader = ({ title, subtitle }) => {
   title = 'Do less admin.<br> Do more for your patients.';
   return (
@@ -6,10 +9,9 @@ const SectionHeader = ({ title, subtitle }) => {
         <span className="text-[22px] font-normal text-[var(--med-gray)] opacity-[.9] md:text-[24px]">
           {subtitle}
         </span>
-        <h2
-          className="mb-[60px] text-[40px] font-light md:text-[66px]"
-          dangerouslySetInnerHTML={{ __html: title }}
-        ></h2>
+        <h2 className="mb-[40px] mt-[40px] text-[40px] font-light md:text-[66px]">
+          {withBr(title)}
+        </h2>
       </div>
     </div>
   );

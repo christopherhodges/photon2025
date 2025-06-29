@@ -5,6 +5,7 @@ import Link from 'next/link';
 const FeaturedContent = ({
   crumb,
   sectionTitle,
+  sectionSubtitle,
   buttonLabel,
   buttonLink,
   items,
@@ -19,6 +20,7 @@ const FeaturedContent = ({
             label={crumb}
           />
           <h2 className="text-[38px] text-white">{sectionTitle}</h2>
+          <p className="text-white">{sectionSubtitle}</p>
           <Link
             className="button-primary button--white text-sm"
             href={buttonLink}

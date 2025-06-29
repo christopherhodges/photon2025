@@ -49,9 +49,9 @@ export default async function Page({ params }) {
               <div className="md:w-1/2">
                 <Crumb label="Careers" borderStyles="border" />
                 <h2 className="mb-[20px] mt-[20px] text-[38px]">Open Roles</h2>
-                <a href="/join-us" className="button-primary">
+                {/*<a href="/join-us" className="button-primary">
                   Careers Page
-                </a>
+                </a>*/}
                 <h3 className="mt-[48px] text-[24px]">
                   Photon is fully staffed at the moment!
                 </h3>
