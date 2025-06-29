@@ -2,7 +2,6 @@
 import { withBr } from '@/lib/withBr';
 
 const SectionHeader = ({ title, subtitle }) => {
-  title = 'Do less admin.<br> Do more for your patients.';
   return (
     <div className="section-header pt-[64px]">
       <div className="l-container">
