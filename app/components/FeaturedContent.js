@@ -1,5 +1,6 @@
 import ContentSlider from '@/app/components/ContentSlider';
 import Crumb from '@/app/components/Crumb';
+import { withBr } from '@/lib/withBr';
 import Link from 'next/link';
 
 const FeaturedContent = ({
@@ -19,7 +20,7 @@ const FeaturedContent = ({
             borderStyles="border border-white/25"
             label={crumb}
           />
-          <h2 className="text-[38px] text-white">{sectionTitle}</h2>
+          <h2 className="text-[38px] text-white">{withBr(sectionTitle)}</h2>
           <p className="text-white">{sectionSubtitle}</p>
           <Link
             className="button-primary button--white text-sm"
