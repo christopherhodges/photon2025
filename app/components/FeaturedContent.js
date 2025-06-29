@@ -1,3 +1,4 @@
+'use client';
 import ContentSlider from '@/app/components/ContentSlider';
 import Crumb from '@/app/components/Crumb';
 import { withBr } from '@/lib/withBr';

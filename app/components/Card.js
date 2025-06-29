@@ -1,3 +1,4 @@
+'use client';
 import ContentfulImage from '@/app/components/contentful-image';
 import CrumbList from '@/app/components/CrumbList';
 import { withBr } from '@/lib/withBr';
