@@ -91,7 +91,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
           ref={wrapperRef}
           className="mx-auto overflow-hidden transition-[height] duration-700 ease-in-out"
         >
-          {items.map((t, i) => (
+          {items.filter(Boolean).map((t, i) => (
             <article
               key={i}
               aria-hidden={i !== index}
@@ -110,7 +110,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                 {/* ── Author row ── */}
                 <header className="mb-8 flex flex-col items-center justify-center gap-4 md:flex-row">
                   <div className="flex flex-row-reverse items-center">
-                    {t.logo && (
+                    {t?.logo && (
                       <ContentfulImage
                         src={t.logo.url}
                         alt={`${t.name} logo`}
