@@ -1,4 +1,3 @@
-import AnnouncementBar from '@/app/components/AnnouncementBar';
 import BodyClass from '@/app/components/BodyClass';
 import Footer from '@/app/components/Footer';
 import HeaderFull from '@/app/components/HeaderFull';
@@ -91,8 +90,8 @@ export default async function RootLayout({ children }) {
           </noscript>
           <BodyClass />
           <main className="l-main">
-            <AnnouncementBar content="Announcement Bar" />
-            {/*<Header menu={nav} />*/}
+            {/*<AnnouncementBar content="Announcement Bar" />*/}
+
             <HeaderFull menu={nav} />
             {children}
           </main>
