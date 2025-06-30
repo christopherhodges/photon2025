@@ -91,73 +91,75 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
           ref={wrapperRef}
           className="mx-auto overflow-hidden transition-[height] duration-700 ease-in-out"
         >
-          {items.map((t, i) => (
-            <article
-              key={i}
-              aria-hidden={i !== index}
-              className={clsx(
-                'absolute inset-0 flex flex-col',
-                'transition-opacity',
-                `duration-${FADE_MS}`,
-                i === index ? 'opacity-100' : 'pointer-events-none opacity-0',
-              )}
-            >
-              {/* Inner content we measure for height */}
-              <div
-                ref={el => (contentRefs.current[i] = el)}
-                className="flex flex-col items-center px-5 pt-[40px]"
+          {items.map((t, i) => {
+            return (
+              <article
+                key={i}
+                aria-hidden={i !== index}
+                className={clsx(
+                  'absolute inset-0 flex flex-col',
+                  'transition-opacity',
+                  `duration-${FADE_MS}`,
+                  i === index ? 'opacity-100' : 'pointer-events-none opacity-0',
+                )}
               >
-                {/* ── Author row ── */}
-                <header className="mb-8 flex flex-col items-center justify-center gap-4 md:flex-row">
-                  <div className="flex flex-row-reverse items-center">
-                    {t?.logo && (
+                {/* Inner content we measure for height */}
+                <div
+                  ref={el => (contentRefs.current[i] = el)}
+                  className="flex flex-col items-center px-5 pt-[40px]"
+                >
+                  {/* ── Author row ── */}
+                  <header className="mb-8 flex flex-col items-center justify-center gap-4 md:flex-row">
+                    <div className="flex flex-row-reverse items-center">
+                      {t?.logo && (
+                        <ContentfulImage
+                          src={t.logo.url}
+                          alt={`${t.name} logo`}
+                          width={40}
+                          height={40}
+                          className="relative z-0 h-[40px] w-[40px] overflow-hidden rounded-lg object-contain"
+                          draggable={false}
+                        />
+                      )}
                       <ContentfulImage
-                        src={t.logo.url}
-                        alt={`${t.name} logo`}
-                        width={40}
-                        height={40}
-                        className="relative z-0 h-[40px] w-[40px] overflow-hidden rounded-lg object-contain"
+                        src={t.image.url}
+                        alt={t.name}
+                        width={56}
+                        height={56}
+                        className="z-1 relative h-[50px] w-[50px] rounded-full border-white object-cover ring-4 ring-white"
                         draggable={false}
                       />
-                    )}
-                    <ContentfulImage
-                      src={t.image.url}
-                      alt={t.name}
-                      width={56}
-                      height={56}
-                      className="z-1 relative h-[50px] w-[50px] rounded-full border-white object-cover ring-4 ring-white"
-                      draggable={false}
-                    />
-                  </div>
-                  <div className="text-center md:text-left">
-                    <p className="font-semibold">{t.name}</p>
-                    <p className="text-sm text-gray-500">{t.jobTitle}</p>
-                  </div>
-                </header>
+                    </div>
+                    <div className="text-center md:text-left">
+                      <p className="font-semibold">{t.name}</p>
+                      <p className="text-sm text-gray-500">{t.jobTitle}</p>
+                    </div>
+                  </header>
 
-                {/* ── Quote ── */}
-                <blockquote className="richText mx-auto max-w-[860px] text-center leading-snug text-black">
-                  <RichText
-                    document={t.testimonial.json}
-                    options={{
-                      renderNode: {
-                        [BLOCKS.PARAGRAPH]: (_, children) => (
-                          <p
-                            className={clsx(
-                              titleStyles ??
-                                'mb-[40px] text-[21px] lg:text-[38px]',
-                            )}
-                          >
-                            {children}
-                          </p>
-                        ),
-                      },
-                    }}
-                  />
-                </blockquote>
-              </div>
-            </article>
-          ))}
+                  {/* ── Quote ── */}
+                  <blockquote className="richText mx-auto max-w-[860px] text-center leading-snug text-black">
+                    <RichText
+                      document={t.testimonial.json}
+                      options={{
+                        renderNode: {
+                          [BLOCKS.PARAGRAPH]: (_, children) => (
+                            <p
+                              className={clsx(
+                                titleStyles ??
+                                  'mb-[40px] text-[21px] lg:text-[38px]',
+                              )}
+                            >
+                              {children}
+                            </p>
+                          ),
+                        },
+                      }}
+                    />
+                  </blockquote>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         {/* ── Controls ── */}

@@ -5,21 +5,19 @@ import { SignUpForm } from '@/app/components/SignUpForm';
 import Testimonials from '@/app/components/Testimonials';
 import { getPage } from '@/lib/contentful/pages';
 import { getTestimonialItems } from '@/lib/contentful/testimonials';
-import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 export default async function Page({ params }) {
-  const { isEnabled: preview } = await draftMode();
   params = await params;
   const { slug } = params;
-  const { page } = await getPage(slug, preview);
+  const { page } = await getPage(slug, false);
 
   if (!page) return notFound();
 
   const testimonialItems = await getTestimonialItems(
     '10hDTkGuvBM07WTHTgHIMi',
-    preview,
+    false,
   );
 
   const { hero, bodyContentCollection } = page;
