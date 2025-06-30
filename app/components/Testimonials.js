@@ -91,7 +91,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
           ref={wrapperRef}
           className="mx-auto overflow-hidden transition-[height] duration-700 ease-in-out"
         >
-          {items.filter(Boolean).map((t, i) => (
+          {items.map((t, i) => (
             <article
               key={i}
               aria-hidden={i !== index}
