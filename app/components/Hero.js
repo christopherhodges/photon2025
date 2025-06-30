@@ -36,6 +36,7 @@ const Hero = ({
       {media && media?.contentType?.includes('image') && (
         <div className="absolute left-0 top-0 z-[-1] h-full w-full">
           <ContentfulImage
+            priority
             className="h-full w-full object-cover object-bottom"
             src={media.url}
             width={media.width}
@@ -48,6 +49,7 @@ const Hero = ({
       {centerImage && (
         <div className="hero-center-image pointer-events-none absolute bottom-0 z-[0] hidden h-full w-full items-end lg:flex">
           <ContentfulImage
+            priority
             className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
             src={centerImage.url}
             width={centerImage.width}
@@ -112,6 +114,7 @@ const Hero = ({
           {centerImage && (
             <div className="hero-center-image--mobile pointer-events-none z-[0] mt-[60px] h-full w-full lg:hidden">
               <ContentfulImage
+                priority
                 className="mx-auto mt-auto h-auto w-full"
                 src={centerImage.url}
                 width={centerImage.width}
