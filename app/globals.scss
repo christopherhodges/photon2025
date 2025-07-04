@@ -147,6 +147,19 @@ h6 {
   }
 }
 
+.l-header,
+.l-header--mobile {
+  .button-outline {
+    &:before {
+      border-radius: 9px;
+    }
+
+    &:after {
+      border-radius: 8px;
+    }
+  }
+}
+
 .crumb {
   text-transform: uppercase;
   display: inline-flex;
@@ -505,22 +518,18 @@ body.page-home {
   }
 }
 
-.l-header {
-  nav {
-    > .button-outline {
-      display: none;
-    }
-  }
-}
-
-.mobile-slide-down-panel {
-  .button-outline {
-    display: none;
-  }
-}
-
 body.page-about-us {
   .logoGrid {
     background: #f1f1f1;
+  }
+}
+
+.hero p,
+.left-tall p,
+.featuredContent h2 + p,
+.open-roles h3 + p,
+.open-roles p + a {
+  @media screen and (max-width: 768px) {
+    font-size: 18px;
   }
 }

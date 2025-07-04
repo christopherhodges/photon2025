@@ -1,7 +1,9 @@
+import AnnouncementBar from '@/app/components/AnnouncementBar';
 import BodyClass from '@/app/components/BodyClass';
 import Footer from '@/app/components/Footer';
 import HeaderFull from '@/app/components/HeaderFull';
 import '@/app/globals.scss';
+import { getAnnouncementBar } from '@/lib/contentful/announcementBar';
 import { getFooter } from '@/lib/contentful/Footer';
 import { getNavigationMenu } from '@/lib/contentful/header';
 import { acidGrotesk } from '@/lib/fonts';
@@ -9,9 +11,22 @@ import clsx from 'clsx';
 import Head from 'next/head';
 import Script from 'next/script';
 
+export const metadata = {
+  icons: {
+    icon: '/images/favicon.png', // default 32×32/any-size icon
+    shortcut: '/images/favicon.png', // for Safari “pinned” shortcuts
+    apple: '/images/favicon.png', // iOS home-screen
+  },
+};
+
 export default async function RootLayout({ children }) {
   const nav = await getNavigationMenu(false);
   const footer = await getFooter(false);
+
+  const announcementBar = await getAnnouncementBar(
+    '2K0dYmbxNqxQ7HsObSFvru',
+    false,
+  );
 
   return (
     <>
@@ -90,8 +105,11 @@ export default async function RootLayout({ children }) {
           </noscript>
           <BodyClass />
           <main className="l-main">
-            {/*<AnnouncementBar content="Announcement Bar" />*/}
-
+            <AnnouncementBar
+              text={announcementBar.text}
+              link={announcementBar.link}
+              showOnSite={announcementBar.showOnSite}
+            />
             <HeaderFull menu={nav} />
             {children}
           </main>

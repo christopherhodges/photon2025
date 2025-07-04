@@ -131,7 +131,9 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                       />
                     </div>
                     <div className="text-center md:text-left">
-                      <p className="font-semibold">{t.name}</p>
+                      <p className="text-[18px] font-semibold sm:text-[16px]">
+                        {t.name}
+                      </p>
                       <p className="text-sm text-gray-500">{t.jobTitle}</p>
                     </div>
                   </header>

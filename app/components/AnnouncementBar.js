@@ -8,12 +8,25 @@ const STORAGE_KEY = 'photon–announcement-dismissed';
 const BODY_CLASS_VISIBLE = 'has-announcement';
 const BODY_CLASS_SCROLLED_PAST = 'scrolled-past-announcement';
 
-export default function AnnouncementBar({ content }) {
-  const [visible, setVisible] = useState(null);
+export default function AnnouncementBar({
+  text,
+  link,
+  showOnSite = false, // ⇦ flag from Contentful / parent
+}) {
+  const [visible, setVisible] = useState(false); // start hidden
   const barRef = useRef(null);
 
-  // Set initial visibility and class
+  /** Decide whether the bar should be visible at all */
   useEffect(() => {
+    // If this page says “don’t show”, hide and clean up
+    if (!showOnSite) {
+      setVisible(false);
+      document.body.classList.remove(BODY_CLASS_VISIBLE);
+      document.body.classList.remove(BODY_CLASS_SCROLLED_PAST);
+      return;
+    }
+
+    // Otherwise respect the “dismissed in this session?” cookie
     const dismissed = sessionStorage.getItem(STORAGE_KEY) === 'true';
     const shouldShow = !dismissed;
     setVisible(shouldShow);
@@ -28,37 +41,32 @@ export default function AnnouncementBar({ content }) {
       document.body.classList.remove(BODY_CLASS_VISIBLE);
       document.body.classList.remove(BODY_CLASS_SCROLLED_PAST);
     };
-  }, []);
+  }, [showOnSite]); // ⇦ rerun if the flag changes
 
-  // Track scroll to toggle scrolled-past-announcement class
+  /** Toggle BODY_CLASS_SCROLLED_PAST while the bar is visible */
   useEffect(() => {
     if (!visible) return;
 
-    function onScroll() {
+    const onScroll = () => {
       const barBottom = barRef.current?.getBoundingClientRect().bottom ?? 0;
       const hasScrolledPast = barBottom <= 0;
 
-      if (hasScrolledPast) {
-        document.body.classList.add(BODY_CLASS_SCROLLED_PAST);
-      } else {
-        document.body.classList.remove(BODY_CLASS_SCROLLED_PAST);
-      }
-    }
+      document.body.classList.toggle(BODY_CLASS_SCROLLED_PAST, hasScrolledPast);
+    };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // check immediately in case user is already scrolled
-
+    onScroll(); // run once immediately
     return () => window.removeEventListener('scroll', onScroll);
   }, [visible]);
 
-  function handleClose() {
+  const handleClose = () => {
     setVisible(false);
     sessionStorage.setItem(STORAGE_KEY, 'true');
     document.body.classList.remove(BODY_CLASS_VISIBLE);
     document.body.classList.remove(BODY_CLASS_SCROLLED_PAST);
-  }
+  };
 
-  if (visible === null || !visible) return null;
+  if (!visible) return null; // Nothing to paint
 
   return (
     <div
@@ -66,13 +74,14 @@ export default function AnnouncementBar({ content }) {
       className="announcement-bar left-0 top-0 z-[1000] flex w-full justify-center bg-black py-[11px] hover:bg-[#001740]"
     >
       <a
-        href="/announcement"
+        target="_blank"
+        href={link}
         className={clsx(
           'group inline-flex items-center justify-center gap-4 text-sm uppercase text-white',
           pressura.className,
         )}
       >
-        {content}
+        {text}
         <span className="text-[var(--seafoam)] group-hover:underline">
           Read&nbsp;More&nbsp;<i>→</i>
         </span>

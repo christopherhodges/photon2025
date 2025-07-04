@@ -11,10 +11,13 @@ import { notFound } from 'next/navigation';
 const SITE = 'Photon Health';
 
 export async function generateMetadata({ params }) {
-  const { page } = await getPage(params.slug); // { title }
+  const { page } = await getPage(params.slug);
+
+  const title = page.metaTitle ? page.metaTitle : page.title;
 
   return {
-    title: page.title ? `${SITE} | ${page.title}` : SITE,
+    title: title ? `${title} | ${SITE}` : SITE,
+    description: page.metaDescription,
     metadataBase: new URL('https://photon.health'),
     openGraph: {
       images: [
