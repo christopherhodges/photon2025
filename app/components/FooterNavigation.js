@@ -24,7 +24,7 @@ export default function FooterNavigation({ footer, className }) {
       {columns.map((col, idx) => (
         <div key={idx} className="space-y-8 text-sm">
           {col.map(group => (
-            <div key={group.label}>
+            <div key={group.sys.id}>
               <p className="mb-[10px] border-b border-black/20 pb-[10px] text-sm font-[500]">
                 {group.label}
               </p>

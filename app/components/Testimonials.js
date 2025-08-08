@@ -94,7 +94,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
           {items.map((t, i) => {
             return (
               <article
-                key={i}
+                key={t.sys.id}
                 aria-hidden={i !== index}
                 className={clsx(
                   'absolute inset-0 flex flex-col',

@@ -12,15 +12,23 @@ const Hero = ({
   media,
   centerImage,
   textColor,
+  bgColor,
+  imageAlignment,
 }) => {
   const pathname = usePathname();
+
+  const alignment = imageAlignment?.toLowerCase() ?? 'Right';
+
   return (
     <section
       className={clsx(
         'hero relative w-full',
         media ? 'min-h-[50vh] lg:h-[822px]' : 'pt-[120px] lg:pt-[200px]',
         textColor === 'white' && media ? 'text-white' : 'text-black',
+        bgColor && `min-h-[50vh]`,
+        alignment,
       )}
+      style={{ backgroundColor: bgColor }}
     >
       {media?.contentType?.includes('video') && (
         <div className="video absolute left-1/2 z-[-1] h-full w-full -translate-x-1/2">
@@ -46,32 +54,38 @@ const Hero = ({
         </div>
       )}
 
-      {centerImage && (
-        <div className="hero-center-image pointer-events-none absolute bottom-0 z-[0] hidden h-full w-full items-end lg:flex">
-          <ContentfulImage
-            priority
-            className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
-            src={centerImage.url}
-            width={centerImage.width}
-            height={centerImage.height}
-            alt={title}
-          />
-        </div>
-      )}
       <div
         className={clsx(
-          'l-container relative z-0 flex flex-col-reverse justify-center pb-[40px] lg:flex-row lg:items-end lg:justify-start',
+          'l-container relative z-0 flex flex-col-reverse pb-[40px] lg:flex-row lg:items-end',
           media ? 'min-h-[50vh] lg:h-[822px]' : '',
+          bgColor ? 'justify-between' : 'justify-center lg:justify-start',
         )}
       >
+        {centerImage && (
+          <div
+            className={clsx(
+              'hero-center-image pointer-events-none absolute bottom-0 z-[0] hidden h-full w-full items-end lg:flex',
+            )}
+          >
+            <ContentfulImage
+              priority
+              className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
+              src={centerImage.url}
+              width={centerImage.width}
+              height={centerImage.height}
+              alt={title}
+            />
+          </div>
+        )}
         <div
           className={clsx(
-            'w-full lg:mt-0',
+            'hero__content w-full lg:mt-0',
             pathname === '/' &&
               media &&
               'mt-[160px] lg:mt-[140px] lg:max-w-[460px]',
             pathname !== '/' && media && 'mt-[auto] max-w-[400px] pb-[50px]',
             !media && 'mt-[120px] max-w-none',
+            bgColor && 'max-w-[618px]',
           )}
         >
           <div

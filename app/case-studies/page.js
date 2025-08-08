@@ -23,12 +23,13 @@ export default async function CaseStudiesIndex() {
       title: p.featuredLinkTitle || p.title,
       crumbs: p.crumbListCollection?.items || [],
       isCaseStudy: true,
+      key: p.sys.id,
       imageTop: true,
       image: {
         url: p.coverImage.url,
         width: p.coverImage.width,
         height: p.coverImage.height,
-        alt: p.coverImage.title || p.title,
+        title: p.coverImage.title || p.title,
       },
       url: `/case-studies/${p.slug}`,
     };

@@ -32,6 +32,7 @@ export default function BlogFilterList({ initialPosts }) {
   const cards = visiblePosts.map(p => {
     return {
       title: p.title,
+      key: p.sys.id,
       description: p.excerpt,
       categories: p.categories,
       imageTop: true,

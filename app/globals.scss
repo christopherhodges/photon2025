@@ -196,6 +196,16 @@ h6 {
   flex-shrink: 0;
 }
 
+.l-header {
+  > a img {
+    @media screen and (min-width: 1024px) and (max-width: 1130px) {
+      width: 90px;
+    }
+    @media screen and (min-width: 1280px) and (max-width: 1300px) {
+      width: 120px;
+    }
+  }
+}
 .navDropdown {
   > .nav-link {
     @include gradientButtonBg($radius: 20px);
@@ -216,6 +226,10 @@ nav.navigation {
   > a {
     @include gradientButtonBg($radius: 20px);
 
+    @media screen and (min-width: 1024px) and (max-width: 1130px) {
+      padding: 4px 13px;
+    }
+
     &:hover {
       &:after {
         background-color: var(--light-gray);
@@ -232,6 +246,15 @@ nav.navigation {
       }
     }
   }
+
+  + nav {
+    .button-primary,
+    .button-outline {
+      @media screen and (min-width: 1024px) and (max-width: 1130px) {
+        padding: 4px 13px;
+      }
+    }
+  }
 }
 
 .nav-link {
@@ -241,6 +264,9 @@ nav.navigation {
 
   > span {
     padding: 7px 16px;
+    @media screen and (min-width: 1024px) and (max-width: 1130px) {
+      padding: 4px 13px;
+    }
   }
 }
 
@@ -621,6 +647,39 @@ body.page-about-us {
   .crumb:not(:first-child) {
     background: #e8eaf0;
     color: black;
+  }
+}
+
+.hero.right {
+  min-height: 800px;
+  display: flex;
+
+  .l-container {
+    position: relative;
+  }
+
+  .hero__content {
+    max-width: 650px;
+
+    h1:first-child {
+      font-size: 48px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+
+  .hero-center-image {
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    img {
+      margin: 0 0 40px;
+      padding-right: 80px;
+      width: auto;
+      height: 594px;
+    }
   }
 }
 

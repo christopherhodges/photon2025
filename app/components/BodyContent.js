@@ -7,6 +7,8 @@ import SectionHeader from '@/app/components/SectionHeader';
 import Testimonials from '@/app/components/Testimonials';
 import ThreeColumnContent from '@/app/components/ThreeColumnContent';
 import TwoColumnContent from '@/app/components/TwoColumnContent';
+import { shuffleString } from '@/lib/utils/shuffleString';
+import { Fragment } from 'react';
 
 const BodyContent = ({ bodyContent }) => {
   return (
@@ -17,7 +19,7 @@ const BodyContent = ({ bodyContent }) => {
           return (
             <LogoGrid
               className="bg-[var(--light-gray)]"
-              key={section.sys.id}
+              key={shuffleString(section.sys.id)}
               title={section.sectionTitle}
               logos={logos}
             />
@@ -25,7 +27,7 @@ const BodyContent = ({ bodyContent }) => {
         } else if (section.__typename === 'ComponentSectionHeading') {
           return (
             <SectionHeader
-              key={section.sys.id}
+              key={shuffleString(section.sys.id)}
               title={section.title}
               subtitle={section.subtitle}
             />
@@ -33,7 +35,7 @@ const BodyContent = ({ bodyContent }) => {
         } else if (section.__typename === 'ComponentCardGrid') {
           return (
             <CardGrid
-              key={section.sys.id}
+              key={shuffleString(section.sys.id)}
               layout="left-tall"
               cards={section.cardCollection.items}
             />
@@ -41,7 +43,7 @@ const BodyContent = ({ bodyContent }) => {
         } else if (section.__typename === 'ComponentCaseStudiesSlider') {
           return (
             <FeaturedContent
-              key={section.sys.id}
+              key={shuffleString(section.sys.id)}
               sectionTitle={section.title}
               sectionSubtitle={section.subtitle}
               crumb={section.crumb}
@@ -54,14 +56,14 @@ const BodyContent = ({ bodyContent }) => {
           return (
             <Testimonials
               className="mx-auto max-w-[1440px] p-[20px] lg:p-[40px]"
-              key={section.sys.id}
+              key={shuffleString(section.sys.id)}
               items={section.testimonialsCollection.items}
             />
           );
         } else if (section.__typename === 'ComponentFeaturedPost') {
           return (
             <FeaturedArticles
-              key={section.sys.id}
+              key={shuffleString(section.sys.id)}
               sectionTitle={section.title}
               crumb={section.crumb}
               items={section.postsCollection.items}
@@ -70,7 +72,7 @@ const BodyContent = ({ bodyContent }) => {
         } else if (section.__typename === 'Component2Columns') {
           return (
             <TwoColumnContent
-              key={section.sys.id}
+              key={shuffleString(section.sys.id)}
               crumb={section.crumb}
               title={section.title}
               content={section.content}
@@ -81,10 +83,10 @@ const BodyContent = ({ bodyContent }) => {
           );
         } else if (section.__typename === 'Component3Columns') {
           return (
-            <>
+            <Fragment key={`${section.sys.id}-${section.sys.id}`}>
               {section.columns === 2 && (
                 <CardGrid
-                  key={section.sys.id}
+                  key={shuffleString(section.sys.id)}
                   layout="two-up"
                   cards={section.cardsCollection.items}
                 />
@@ -92,19 +94,19 @@ const BodyContent = ({ bodyContent }) => {
 
               {section.columns !== 2 && (
                 <ThreeColumnContent
-                  key={section.sys.id}
+                  key={shuffleString(section.sys.id)}
                   crumb={section.mainCrumb}
                   cards={section.cardsCollection.items}
                 />
               )}
-            </>
+            </Fragment>
           );
         } else if (section.__typename === 'ComponentBasicContent') {
           return (
-            <div key={section.sys.id} className="basic-content">
+            <div key={shuffleString(section.sys.id)} className="basic-content">
               <div className="l-container">
                 <RichText
-                  key={section.sys.id}
+                  key={shuffleString(section.sys.id)}
                   document={section.content.json}
                 />
               </div>

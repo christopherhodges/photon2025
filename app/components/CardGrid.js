@@ -1,5 +1,6 @@
 'use client';
 import Card from '@/app/components/Card';
+import { shuffleString } from '@/lib/utils/shuffleString';
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -44,14 +45,18 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
   };
 
   const { grid, item } = presets[layout] || presets['three-up'];
+
   return (
     <div className="cardGrid mb-[40px]">
       <div className="l-container">
         <div className={clsx(grid)}>
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence
+            key={shuffleString('lskdjflskdjfsldkfj')}
+            mode="popLayout"
+          >
             {cards.map((card, i) => (
               <motion.div
-                key={card.href} // stable key
+                key={shuffleString('asdflkjwoeifj') + '-animate'} // stable key
                 layout // smooth re-flow
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -60,7 +65,7 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
                 className={item(i)}
               >
                 <Card
-                  key={i}
+                  key={card.key + '-card'} // stable key
                   className={item(i)}
                   title={card.title}
                   description={card.description}

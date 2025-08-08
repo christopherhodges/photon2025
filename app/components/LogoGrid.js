@@ -1,5 +1,6 @@
 import ContentfulImage from '@/app/components/contentful-image';
 import Crumb from '@/app/components/Crumb';
+import { shuffleString } from '@/lib/utils/shuffleString';
 import clsx from 'clsx';
 
 const LogoGrid = ({ className, title, logos }) => {
@@ -18,10 +19,10 @@ const LogoGrid = ({ className, title, logos }) => {
       {loopLogos.length && (
         <div className="relative mt-[24px] overflow-hidden">
           <ul className="flex w-max animate-marquee items-center">
-            {loopLogos?.map((logo, i) => {
+            {loopLogos?.map(logo => {
               return (
                 <li
-                  key={`${logo.title}-${logo.url}-${i}`}
+                  key={shuffleString(logo.sys.id)}
                   className="mr-[128px] flex-none"
                 >
                   <ContentfulImage

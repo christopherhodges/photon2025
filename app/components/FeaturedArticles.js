@@ -18,9 +18,13 @@ const FeaturedArticles = ({ sectionTitle, crumb, items }) => {
         ></h2>
 
         <div className="flex flex-col gap-8 md:flex-row">
-          {items.map((post, i) => {
+          {items.map(post => {
             return (
-              <a target="_blank" key={i} href={post.externalLink}>
+              <a
+                target="_blank"
+                key={post.sys.id}
+                href={post.externalLink ?? post.slug}
+              >
                 <ContentfulImage
                   src={post.coverImage.url}
                   width={post.coverImage.width}

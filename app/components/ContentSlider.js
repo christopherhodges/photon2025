@@ -128,10 +128,9 @@ export default function ContentSlider({ items = [] }) {
           const scale = offset === 0 ? 1 : 0.75;
           const translateX = offset * 70;
           const rotate = offset === 0 ? 0 : offset < 0 ? 38 : -38;
-
           return (
             <div
-              key={i}
+              key={item.sys.id}
               onClick={() => setIndex(i)}
               className="absolute left-1/2 top-1/2 h-[calc(100vw-20px)] max-h-[402px] w-[calc(100vw-40px)] max-w-[720px] outline-none sm:max-h-[540px]"
               style={{
@@ -143,7 +142,7 @@ export default function ContentSlider({ items = [] }) {
             >
               <ContentfulImage
                 src={item.coverImage.url}
-                alt={item.featuredLinkTitle}
+                alt={item.coverImage.title}
                 draggable={false}
                 fill
                 className="rounded-xl object-cover"

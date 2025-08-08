@@ -59,6 +59,8 @@ export default async function Page({ params }) {
           media={hero.media}
           centerImage={hero.centerImage}
           textColor={hero.textColor}
+          bgColor={hero.backgroundColorPicker?.value}
+          imageAlignment={hero.imageAlignment}
         />
       )}
 
