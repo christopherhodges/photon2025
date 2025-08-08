@@ -77,9 +77,13 @@ const Card = ({
         {!isCaseStudy && (
           <h3 className="text-[24px] font-normal">{withBr(title)}</h3>
         )}
-        <p className={clsx('mt-[10px] leading-6 text-[#121212] opacity-[.8]')}>
-          {description}
-        </p>
+        {description && (
+          <p
+            className={clsx('mt-[10px] leading-6 text-[#121212] opacity-[.8]')}
+          >
+            {description}
+          </p>
+        )}
       </div>
       <div className={clsx(imageTop && 'sm:h-[280px]')}>
         <ContentfulImage
