@@ -18,6 +18,7 @@ const Card = ({
   image,
   imageTop = false,
   imageFill = false,
+  maxImageHeight,
   isCaseStudy,
   url,
 }) => {
@@ -91,10 +92,9 @@ const Card = ({
       <div
         className={clsx(
           'relative',
-          imageFill
-            ? 'min-h-[180px] grow'
-            : `h-[${image.height}px max-h-[300px]`,
+          imageFill ? 'min-h-[180px] grow' : `h-[${image.height}px]`,
         )}
+        style={{ maxHeight: maxImageHeight ? maxImageHeight : '300px' }}
       >
         <ContentfulImage
           className={clsx(

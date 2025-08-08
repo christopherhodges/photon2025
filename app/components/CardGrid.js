@@ -54,31 +54,44 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
             key={shuffleString('lskdjflskdjfsldkfj')}
             mode="popLayout"
           >
-            {cards.map((card, i) => (
-              <motion.div
-                key={shuffleString('asdflkjwoeifj') + '-animate'} // stable key
-                layout // smooth re-flow
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.92 }}
-                transition={{ duration: 0.25, ease: 'easeInOut' }}
-                className={item(i)}
-              >
-                <Card
-                  imageFill={layout === 'left-tall' || !card.imageTop}
-                  key={card.key + '-card'} // stable key
-                  title={card.title}
-                  description={card.description}
-                  crumbs={card.crumbs ?? []}
-                  categories={card.categories ?? []}
-                  image={card.image}
-                  date={card.date}
-                  isCaseStudy={card.isCaseStudy ?? false}
-                  imageTop={card.imageTop}
-                  url={card.url}
-                />
-              </motion.div>
-            ))}
+            {cards.map((card, i) => {
+              let maxImageHeight;
+              if (layout === 'left-tall' && i !== 0) {
+                maxImageHeight = i === 'none'; // tall left vs right cards
+              } else if (layout === 'three-up') {
+                maxImageHeight = '250px';
+              } else if (layout === 'two-up' && cards.length > 4) {
+                maxImageHeight = '320px';
+              } else {
+                maxImageHeight = 'none'; // no max
+              }
+              return (
+                <motion.div
+                  key={shuffleString('asdflkjwoeifj') + '-animate'} // stable key
+                  layout // smooth re-flow
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.25, ease: 'easeInOut' }}
+                  className={item(i)}
+                >
+                  <Card
+                    imageFill={layout === 'left-tall' || !card.imageTop}
+                    key={card.key + '-card'} // stable key
+                    title={card.title}
+                    description={card.description}
+                    crumbs={card.crumbs ?? []}
+                    categories={card.categories ?? []}
+                    image={card.image}
+                    date={card.date}
+                    isCaseStudy={card.isCaseStudy ?? false}
+                    imageTop={card.imageTop}
+                    maxImageHeight={maxImageHeight}
+                    url={card.url}
+                  />
+                </motion.div>
+              );
+            })}
           </AnimatePresence>
         </div>
       </div>
