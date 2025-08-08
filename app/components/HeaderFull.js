@@ -282,7 +282,7 @@ function MobileAccordion({ label, linksCollection }) {
           <li key={link.label}>
             <SmartLink
               href={link.href}
-              target={link.external ? '_blank' : ''}
+              external={link.external ? '_blank' : ''}
               className="flex items-center gap-3 rounded-[12px] px-2 py-3 font-light"
             >
               {link.icon && (
@@ -408,7 +408,7 @@ function NavGroup({ label, linksCollection, href }) {
             <SmartLink
               key={link.label}
               href={link.href}
-              target={link.external ? '_blank' : ''}
+              external={link.external ? '_blank' : ''}
               onClick={() => setDropdownOpen(false)}
               className={clsx(
                 'radius-[20px] group flex w-1/2 items-center gap-4 rounded-[20px] border p-[9px]',

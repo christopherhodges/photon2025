@@ -388,6 +388,12 @@ input {
 //  background: #ffffff33;
 //}
 
+.test-drive-form {
+  .button-primary.button--black {
+    border-radius: 8px;
+  }
+}
+
 body.page-sign-up {
   background-image: url('/images/gradient-bg.jpg');
   background-size: cover;
