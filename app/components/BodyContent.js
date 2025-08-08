@@ -80,12 +80,25 @@ const BodyContent = ({ bodyContent }) => {
             />
           );
         } else if (section.__typename === 'Component3Columns') {
+          console.log(section);
           return (
-            <ThreeColumnContent
-              key={section.sys.id}
-              crumb={section.mainCrumb}
-              cards={section.cardsCollection.items}
-            />
+            <>
+              {section.columns === 2 && (
+                <CardGrid
+                  key={section.sys.id}
+                  layout="two-up"
+                  cards={section.cardsCollection.items}
+                />
+              )}
+
+              {section.columns !== 2 && (
+                <ThreeColumnContent
+                  key={section.sys.id}
+                  crumb={section.mainCrumb}
+                  cards={section.cardsCollection.items}
+                />
+              )}
+            </>
           );
         } else if (section.__typename === 'ComponentBasicContent') {
           return (
