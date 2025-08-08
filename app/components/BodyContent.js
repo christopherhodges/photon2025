@@ -80,7 +80,6 @@ const BodyContent = ({ bodyContent }) => {
             />
           );
         } else if (section.__typename === 'Component3Columns') {
-          console.log(section);
           return (
             <>
               {section.columns === 2 && (
