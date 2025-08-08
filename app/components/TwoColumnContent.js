@@ -24,7 +24,7 @@ const TwoColumnContent = ({
       <div className="l-container">
         <div
           className={clsx(
-            'flex flex-col justify-between gap-10 lg:flex-row lg:items-stretch',
+            'flex flex-col items-stretch justify-between gap-10 lg:flex-row lg:items-stretch',
             textPlacement === 'Right' && 'lg:flex-row-reverse',
           )}
         >
@@ -56,6 +56,7 @@ const TwoColumnContent = ({
           {img1 && (
             <div className="overflow-hidden rounded-lg lg:w-1/2">
               <ContentfulImage
+                className={!img2 && 'h-full'}
                 src={img1.url}
                 width={img1.width}
                 height={img1.height}
