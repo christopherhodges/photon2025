@@ -17,7 +17,7 @@ export const metadata = {
 export default async function CaseStudiesIndex() {
   const caseStudies = await getAllCaseStudies();
   const featuredCaseStudies = await getFeaturedCaseStudies();
-  console.log('hello');
+
   const cards = caseStudies.map(p => {
     return {
       title: p.featuredLinkTitle || p.title,

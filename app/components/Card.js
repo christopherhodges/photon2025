@@ -31,6 +31,7 @@ const Card = ({
         'card block bg-white',
         url && 'transition-shadow hover:shadow-md',
         imageTop && 'flex flex-col-reverse justify-end',
+        isCaseStudy && 'card--case-study',
       )}
     >
       <div

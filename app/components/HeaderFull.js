@@ -11,8 +11,8 @@ const linkClass = style =>
   ({
     default:
       'relative flex items-center gap-2 rounded-[20px] px-4 py-2 transition-colors hover:bg-[var(--light-gray)]',
-    primary: 'button-primary text-sm',
-    outline: 'button-outline text-sm',
+    primary: 'button-primary text-[11px] xl:text-sm',
+    outline: 'button-outline text-[11px] xl:text-sm',
   })[style] || 'text-gray-700 hover:text-gray-900';
 
 export default function HeaderFull({ menu }) {
@@ -168,7 +168,7 @@ export default function HeaderFull({ menu }) {
               height={logo.height}
               alt={logo.description || menu.title}
               priority
-              className="h-auto w-[170px]"
+              className="h-auto md:w-[90px] lg:w-[120px] xl:w-[170px]"
             />
           )}
           <span className="sr-only">{menu.title}</span>
@@ -177,7 +177,7 @@ export default function HeaderFull({ menu }) {
         {/* ------------------------------------------------------------------
             Desktop nav
         ------------------------------------------------------------------ */}
-        <nav className="navigation flex items-center gap-3">
+        <nav className="navigation flex items-center gap-1.5 xl:gap-3">
           {firstPart.map(entry =>
             entry.__typename === 'NavLink' ? (
               <NavLink
@@ -195,7 +195,7 @@ export default function HeaderFull({ menu }) {
         </nav>
 
         {lastPart.length > 0 && (
-          <nav className="flex items-center gap-3">
+          <nav className="flex items-center gap-1.5 xl:gap-3">
             {lastPart.map((entry, i) =>
               entry.__typename === 'NavLink' ? (
                 <Fragment key={entry.label}>
@@ -297,7 +297,7 @@ function MobileAccordion({ label, linksCollection }) {
               <div className="flex flex-col text-left">
                 <span className="text-base">{link.label}</span>
                 {link.shortDescription && (
-                  <span className="text-xs text-gray-500">
+                  <span className="text-[11px] text-gray-500">
                     {link.shortDescription}
                   </span>
                 )}
@@ -362,7 +362,7 @@ function NavGroup({ label, linksCollection, href }) {
       >
         <span
           className={clsx(
-            'classes="text-sm" relative flex items-center gap-2 rounded-[20px] transition-colors',
+            'relative flex items-center gap-2 rounded-[20px] text-[11px] transition-colors xl:text-sm',
             dropdownOpen || isActive
               ? 'bg-[var(--light-gray)] font-normal'
               : 'bg-transparent hover:bg-[var(--light-gray)] group-hover:font-normal',
@@ -452,7 +452,7 @@ function NavGroup({ label, linksCollection, href }) {
                   {link.label}
                 </span>
                 {link.shortDescription && (
-                  <span className="text-xs text-[var(--gray)]">
+                  <span className="text-[11px] text-[var(--gray)]">
                     {link.shortDescription}
                   </span>
                 )}
@@ -493,7 +493,7 @@ function NavLink({
       {type === 'default' && (
         <span
           className={clsx(
-            'relative flex items-center gap-2 rounded-[20px] text-sm transition-colors',
+            'relative flex items-center gap-2 rounded-[20px] text-[11px] transition-colors xl:text-sm',
             isActive
               ? 'bg-[var(--light-gray)] font-normal'
               : 'bg-transparent group-hover:bg-[var(--light-gray)] group-hover:font-normal',
@@ -509,11 +509,15 @@ function NavLink({
         </span>
       )}
       {type !== 'default' && (
-        <span className={showIcon ? 'flex items-center gap-2' : ''}>
+        <span
+          className={
+            showIcon ? 'flex items-center gap-2 text-[11px] xl:text-sm' : ''
+          }
+        >
           {label}
           {showIcon && (
             <Image
-              className="invert"
+              className="hidden invert xl:block"
               width={10}
               height={11}
               src="/icons/arrow-right-up.svg"

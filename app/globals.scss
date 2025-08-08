@@ -610,6 +610,14 @@ body.page-about-us {
   margin-bottom: 64px;
 }
 
+// Case Study Specific
+.card--case-study {
+  .crumb:not(:first-child) {
+    background: #e8eaf0;
+    color: black;
+  }
+}
+
 // Animations
 @keyframes pulse {
   0%,

@@ -4,7 +4,7 @@ import MailchimpForm from '@/app/components/MailchimpForm';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Footer = ({ footer, menu }) => {
+const Footer = ({ footer }) => {
   // accept either shape: { footer: {...} } or just {...}
   const footerItems = footer?.footer ?? footer ?? null;
   const footerLinks = footerItems?.linksCollection?.items ?? [];
@@ -21,9 +21,9 @@ const Footer = ({ footer, menu }) => {
   return (
     <footer className="l-footer bg-gradient-secondary relative pt-[40px] text-white">
       <div className="l-container relative z-10">
-        <div className="bg-gradient-tertiary flex rounded-[16px] px-[24px] py-[40px] text-black">
-          <div className="w-full max-w-[385px] md:w-1/3">
-            <h2 className="max-w-[185px] text-[38px] font-light">
+        <div className="bg-gradient-tertiary flex flex-wrap rounded-[16px] px-[24px] py-[40px] text-black">
+          <div className="mb-4 w-full md:mb-0 md:w-1/3 md:max-w-[385px]">
+            <h2 className="text-[38px] font-light md:max-w-[185px]">
               Schedule A Demo
             </h2>
             <MailchimpForm
@@ -32,8 +32,8 @@ const Footer = ({ footer, menu }) => {
             />
           </div>
 
-          <div className="hidden w-0 md:block md:w-2/3 md:pl-10">
-            <FooterNavigation menu={menu} />
+          <div className="w-full md:w-2/3 md:pl-10">
+            <FooterNavigation footer={footerItems} />
           </div>
         </div>
 

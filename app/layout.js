@@ -60,7 +60,7 @@ export default async function RootLayout({ children }) {
             <HeaderFull menu={menu} />
             {children}
           </main>
-          <Footer menu={footer.footerMainNavCollection.items} footer={footer} />
+          <Footer footer={footer} />
         </body>
       </html>
     </>
