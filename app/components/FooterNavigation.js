@@ -34,7 +34,7 @@ export default function FooterNavigation({ menu, className }) {
                 <SmartLink
                   href={link.href}
                   external={link.external}
-                  className="inline-flex items-center gap-2 hover:underline"
+                  className="group inline-flex items-center gap-2 hover:underline"
                 >
                   <div className="h-[7px] w-[7px] rounded-full border border-black group-hover:bg-black"></div>
                   <span>{link.label}</span>
