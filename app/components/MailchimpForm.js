@@ -1,7 +1,6 @@
 'use client';
 
 import clsx from 'clsx';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 /**
@@ -9,7 +8,7 @@ import { useEffect, useState } from 'react';
  *
  * ⓘ  How it works
  * ─────────────────────────────────────────────────────────
- * • Submits directly to the generated Mailchimp “post” URL
+ * • Submits directly to the generated Mailchimp “blog” URL
  *   (no serverless route or API key needed).
  * • Uses HTML5 email validation; no jQuery Validate dependency.
  * • Shows a basic success / error banner based on the fetch result.
@@ -72,13 +71,11 @@ export default function MailchimpForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className={clsx('test-drive-form rounded-[10px] p-[20px]', className)}
+      className={clsx('test-drive-form', className)}
     >
-      <h4 className="text-sm">Subscribe to our newsletter</h4>
-
       <div className="relative mt-[18px] flex items-center gap-8">
         <label className="w-full sm:flex-1">
-          <span className="sr-only">Email address</span>
+          <span className="sr-only">Email email</span>
           <input
             type="email"
             name="EMAIL"
@@ -107,13 +104,13 @@ export default function MailchimpForm({
             status === 'loading' && 'cursor-not-allowed opacity-60',
           )}
         >
-          {submitting ? '…' : 'Subscribe'}
-          <Image
+          {submitting ? '…' : 'Try it out'}
+          {/*<Image
             width={10}
             height={11}
             src="/icons/arrow-right-up.svg"
             alt="right arrow up"
-          />
+          />*/}
         </button>
       </div>
 

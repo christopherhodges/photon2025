@@ -5,8 +5,7 @@ module.exports = {
     return [
       {
         // exclude _next, api, etc. so they don’t collide
-        source:
-          '/:slug((?!api|_next|robots\\.txt|sitemap\\.xml|favicon\\.ico).+)',
+        source: '/:slug([^/]+)',
         destination: '/page/:slug',
       },
     ];

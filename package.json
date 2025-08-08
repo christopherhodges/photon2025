@@ -12,7 +12,7 @@
     "lint-fix": "next lint --fix",
     "setup": "node ./lib/setup.js",
     "migrate:init": "ctf-migrate init",
-    "migrate:content-model": "ctf-migrate up -a",
+    "migrate:content-model": "ctf-migrate up -e dev -a",
     "gc:generate": "graphql-codegen -r dotenv --config codegen.js",
     "gc:watch": "graphql-codegen --watch -r dotenv --config codegen.js"
   },
@@ -30,6 +30,7 @@
     "contentful": "^11.6.0",
     "contentful-import": "^9.0.4",
     "date-fns": "2.30.0",
+    "framer-motion": "^12.23.12",
     "gqlmin": "^0.2.2",
     "graphql": "^15.10.1",
     "graphql-tag": "^2.12.6",

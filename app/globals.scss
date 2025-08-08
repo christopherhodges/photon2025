@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: var(--font-acid-grotesk), sans-serif;
+  --font-pressura: Pressura, sans-serif;
   --ls-acid-grotesk: 0.02em;
   --seafoam: #0bd0de;
   --blue: #472ff7;
@@ -27,6 +27,7 @@
     #001740 0%,
     #003ca6 100%
   );
+  --gradient-tertiary: linear-gradient(180deg, #ffffff 0%, #d9d8d8 100%);
 }
 
 .__className_f73386,
@@ -51,6 +52,11 @@ body {
   display: flex;
   flex-direction: column;
   font-weight: 300;
+  font-family: var(--font-acid-grotesk), sans-serif;
+}
+
+.pressura {
+  font-family: var(--font-pressura), sans-serif;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -98,6 +104,10 @@ h6 {
 
 .bg-gradient-secondary--reversed {
   background: var(--gradient-secondary-reversed);
+}
+
+.bg-gradient-tertiary {
+  background: var(--gradient-tertiary);
 }
 
 .button-primary,
@@ -189,6 +199,28 @@ h6 {
 .navDropdown {
   > .nav-link {
     @include gradientButtonBg($radius: 20px);
+
+    &.active,
+    &.current {
+      &:before {
+        opacity: 1;
+      }
+      &:after {
+        background-color: var(--light-gray);
+      }
+    }
+  }
+}
+
+nav.navigation {
+  > a {
+    @include gradientButtonBg($radius: 20px);
+
+    &:hover {
+      &:after {
+        background-color: var(--light-gray);
+      }
+    }
 
     &.active,
     &.current {
@@ -359,11 +391,15 @@ input {
   }
 }
 
-.test-drive-form {
-  backdrop-filter: blur(104px);
-  border: 1px solid #ffffff66;
-  background: #ffffff33;
+.l-container.l-container--sm {
+  max-width: 980px;
 }
+
+//.test-drive-form {
+//  backdrop-filter: blur(104px);
+//  border: 1px solid #ffffff66;
+//  background: #ffffff33;
+//}
 
 body.page-sign-up {
   background-image: url('/images/gradient-bg.jpg');
@@ -532,4 +568,57 @@ body.page-about-us {
   @media screen and (max-width: 768px) {
     font-size: 18px;
   }
+}
+
+.basic-content .richText {
+  line-height: 2;
+
+  h2 {
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.5;
+
+    b {
+      font-weight: 300;
+    }
+
+    + * {
+      margin-top: 32px;
+    }
+  }
+
+  h3 {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.4;
+
+    b {
+      font-weight: 400;
+    }
+
+    + * {
+      margin-top: 32px;
+    }
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  a {
+    text-decoration: underline;
+    color: var(--blue);
+
+    u {
+      text-decoration: none;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.single-entry {
+  margin-bottom: 64px;
 }

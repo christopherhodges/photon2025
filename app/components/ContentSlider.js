@@ -172,7 +172,7 @@ export default function ContentSlider({ items = [] }) {
                     </p>
                     <a
                       target={item.externalLink ? '_blank' : ''}
-                      href={item.externalLink || item.slug}
+                      href={item.externalLink || '/case-studies/' + item.slug}
                       className="inline-flex items-center gap-2 text-sm text-white hover:underline"
                     >
                       Case&nbsp;Study

@@ -1,49 +1,73 @@
+// app/components/Footer.js
+import FooterNavigation from '@/app/components/FooterNavigation';
 import MailchimpForm from '@/app/components/MailchimpForm';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Footer = footer => {
-  const footerItems = footer.footer;
-  const footerLinks = footerItems.linksCollection.items;
+const Footer = ({ footer, menu }) => {
+  // accept either shape: { footer: {...} } or just {...}
+  const footerItems = footer?.footer ?? footer ?? null;
+  const footerLinks = footerItems?.linksCollection?.items ?? [];
+
+  if (!footerItems) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(
+        'Footer: no footer data passed. Did you change getFooter()?',
+      );
+    }
+    return null; // or render a skeleton
+  }
 
   return (
-    <footer className="l-footer bg-gradient-secondary text-white">
-      <div className="l-container">
-        <div className="py-[40px]">
-          <MailchimpForm
-            className="mx-auto w-full max-w-[670px] text-white"
-            inputPlaceholder="Enter your email address"
-            mobilePlaceholder="Email address"
-          />
+    <footer className="l-footer bg-gradient-secondary relative pt-[40px] text-white">
+      <div className="l-container relative z-10">
+        <div className="bg-gradient-tertiary flex rounded-[16px] px-[24px] py-[40px] text-black">
+          <div className="w-full max-w-[385px] md:w-1/3">
+            <h2 className="max-w-[185px] text-[38px] font-light">
+              Schedule A Demo
+            </h2>
+            <MailchimpForm
+              className="mx-auto w-full text-white"
+              inputPlaceholder="Enter email"
+            />
+          </div>
+
+          <div className="hidden w-0 md:block md:w-2/3 md:pl-10">
+            <FooterNavigation menu={menu} />
+          </div>
         </div>
 
-        <Link href="/">
+        <Link href="/" className="block">
           <Image
             className="h-auto w-full sm:mt-[80px]"
-            src={footerItems.logo.url}
-            alt={footerItems.title}
-            width={footerItems.logo.width}
-            height={footerItems.logo.height}
+            src={footerItems.logo?.url || '/images/footer-placeholder.png'}
+            alt={footerItems.title || 'Photon Health'}
+            width={footerItems.logo?.width || 1600}
+            height={footerItems.logo?.height || 400}
           />
         </Link>
+
         <div className="flex flex-col items-center justify-between py-[40px] text-sm sm:flex-row">
           <ul className="flex items-center gap-[24px]">
-            {footerLinks.map(link => {
-              return (
-                <li key={link.label}>
-                  <Link
-                    className="underline hover:no-underline"
-                    href={link.href}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              );
-            })}
+            {footerLinks.map(link => (
+              <li key={link.label}>
+                <Link className="underline hover:no-underline" href={link.href}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
           <p className="mt-[20px] sm:mt-0">{footerItems.copyright}</p>
         </div>
       </div>
+
+      <Image
+        className="absolute bottom-0 left-1/2 z-0 h-auto w-full -translate-x-1/2"
+        width="900"
+        height="900"
+        src="/images/footer-noise.png"
+        alt=""
+      />
     </footer>
   );
 };

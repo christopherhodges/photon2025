@@ -4,11 +4,10 @@ import Footer from '@/app/components/Footer';
 import HeaderFull from '@/app/components/HeaderFull';
 import '@/app/globals.scss';
 import { getAnnouncementBar } from '@/lib/contentful/announcementBar';
-import { getFooter } from '@/lib/contentful/Footer';
+import { getFooter } from '@/lib/contentful/footer';
 import { getNavigationMenu } from '@/lib/contentful/header';
 import { acidGrotesk } from '@/lib/fonts';
 import clsx from 'clsx';
-import Head from 'next/head';
 import Script from 'next/script';
 
 export const metadata = {
@@ -20,8 +19,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const nav = await getNavigationMenu(false);
-  const footer = await getFooter(false);
+  const [menu, footer] = await Promise.all([getNavigationMenu(), getFooter()]);
 
   const announcementBar = await getAnnouncementBar(
     '2K0dYmbxNqxQ7HsObSFvru',
@@ -30,57 +28,6 @@ export default async function RootLayout({ children }) {
 
   return (
     <>
-      <Head>
-        <link
-          rel="preload"
-          href="/fonts/FFFAcidGrotesk-Light.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/FFFAcidGrotesk-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/FFFAcidGrotesk-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/FFFAcidGrotesk-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/FFFAcidGrotesk-Medium.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/FFFAcidGrotesk-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/GT-Pressura-LC-Mono-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      </Head>
       <Script
         id="gtm-loader"
         strategy="afterInteractive"
@@ -110,10 +57,10 @@ export default async function RootLayout({ children }) {
               link={announcementBar.link}
               showOnSite={announcementBar.showOnSite}
             />
-            <HeaderFull menu={nav} />
+            <HeaderFull menu={menu} />
             {children}
           </main>
-          <Footer footer={footer} />
+          <Footer menu={menu} footer={footer} />
         </body>
       </html>
     </>

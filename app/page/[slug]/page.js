@@ -11,7 +11,10 @@ import { notFound } from 'next/navigation';
 const SITE = 'Photon Health';
 
 export async function generateMetadata({ params }) {
-  const { page } = await getPage(params.slug);
+  const { slug } = await params;
+  const { page } = await getPage(slug);
+
+  if (!page) return {};
 
   const title = page.metaTitle ? page.metaTitle : page.title;
 

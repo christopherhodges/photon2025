@@ -1,5 +1,7 @@
+'use client';
 import Card from '@/app/components/Card';
 import clsx from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const CardGrid = ({ cards, layout, gap = 8 }) => {
   const presets = {
@@ -13,6 +15,13 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
             ? 'row-span-2' // big tall card
             : 'col-start-2', // others in col 2
         ),
+    },
+
+    /** 2 columns, equal size */
+    'two-up': {
+      grid: `grid lg:grid-cols-2 gap-${gap}`,
+      item: () =>
+        'lg:rounded-[16px] rounded-[16px] h-full flex flex-col text-sm bg-white overflow-hidden',
     },
 
     /** Simple 3-up, equal size */
@@ -39,18 +48,33 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
     <div className="cardGrid mb-[40px]">
       <div className="l-container">
         <div className={clsx(grid)}>
-          {cards.map((card, i) => {
-            return (
-              <Card
-                key={i}
+          <AnimatePresence mode="popLayout">
+            {cards.map((card, i) => (
+              <motion.div
+                key={card.href} // stable key
+                layout // smooth re-flow
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.92 }}
+                transition={{ duration: 0.25, ease: 'easeInOut' }}
                 className={item(i)}
-                title={card.title}
-                description={card.description}
-                crumbs={card.crumbsCollection.items}
-                image={card.image}
-              />
-            );
-          })}
+              >
+                <Card
+                  key={i}
+                  className={item(i)}
+                  title={card.title}
+                  description={card.description}
+                  crumbs={card.crumbs ?? []}
+                  categories={card.categories ?? []}
+                  image={card.image}
+                  date={card.date}
+                  isCaseStudy={card.isCaseStudy ?? false}
+                  imageTop={card.imageTop}
+                  url={card.url}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </div>

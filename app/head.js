@@ -1,0 +1,42 @@
+export default function Head() {
+  return (
+    <>
+      {/* preload each weight once */}
+      <link
+        rel="preload"
+        href="/fonts/FFFAcidGrotesk-Light.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/fonts/FFFAcidGrotesk-Medium.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/fonts/FFFAcidGrotesk-Bold.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/fonts/FFFAcidGrotesk-Regular.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/fonts/GT-Pressura-LC-Mono-Regular.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+    </>
+  );
+}

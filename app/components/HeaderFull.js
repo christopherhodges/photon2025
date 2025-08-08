@@ -177,12 +177,13 @@ export default function HeaderFull({ menu }) {
         {/* ------------------------------------------------------------------
             Desktop nav
         ------------------------------------------------------------------ */}
-        <nav className="flex items-center gap-3">
+        <nav className="navigation flex items-center gap-3">
           {firstPart.map(entry =>
             entry.__typename === 'NavLink' ? (
               <NavLink
                 external={entry.external}
                 type="default"
+                href={entry.slug}
                 classes="text-sm"
                 key={entry.label}
                 {...entry}
@@ -284,13 +285,15 @@ function MobileAccordion({ label, linksCollection }) {
               target={link.external ? '_blank' : ''}
               className="flex items-center gap-3 rounded-[12px] px-2 py-3 font-light"
             >
-              <Image
-                src={link.icon.url}
-                alt={link.label}
-                width={20}
-                height={20}
-                className="h-5 w-5"
-              />
+              {link.icon && (
+                <Image
+                  src={link.icon.url}
+                  alt={link.label}
+                  width={20}
+                  height={20}
+                  className="h-5 w-5"
+                />
+              )}
               <div className="flex flex-col text-left">
                 <span className="text-base">{link.label}</span>
                 {link.shortDescription && (
@@ -411,16 +414,18 @@ function NavGroup({ label, linksCollection }) {
                     : 'bg-[var(--light-gray)] group-hover:bg-[var(--blue)]',
                 )}
               >
-                <Image
-                  src={link.icon.url}
-                  alt={link.label}
-                  width={link.icon.width}
-                  height={link.icon.height}
-                  className={clsx(
-                    'transiton-all',
-                    pathname === link.href ? 'invert' : 'group-hover:invert',
-                  )}
-                />
+                {link.icon && (
+                  <Image
+                    src={link.icon.url}
+                    alt={link.label}
+                    width={link.icon.width}
+                    height={link.icon.height}
+                    className={clsx(
+                      'transiton-all',
+                      pathname === link.href ? 'invert' : 'group-hover:invert',
+                    )}
+                  />
+                )}
               </div>
               <div className="group flex flex-col">
                 <span
@@ -463,7 +468,12 @@ function NavLink({
     <SmartLink
       external={external}
       href={href}
-      className={clsx(classes, 'group', 'link-' + pathname)}
+      className={clsx(
+        classes,
+        'group',
+        'link-' + pathname,
+        isActive && 'current active',
+      )}
       target="_blank"
       onClick={onClick}
     >
