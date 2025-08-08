@@ -47,7 +47,7 @@ const Hero = ({
             className={clsx(
               'absolute',
               pathname === '/marketplace'
-                ? 'l-1/2 bottom-0 h-[85%] w-full max-w-[1440px] overflow-hidden rounded-[16px] px-[40px]'
+                ? 'bottom-0 left-1/2 h-[85%] w-full max-w-[1440px] -translate-x-1/2 px-[40px]'
                 : 'left-0 top-0 z-[-1] h-full w-full',
             )}
           >
