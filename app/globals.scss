@@ -289,19 +289,6 @@ input {
   color: black;
 }
 
-// Animations
-@keyframes pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 4px 2px #0bd0de11;
-    opacity: 0.7;
-  }
-  50% {
-    box-shadow: 0 0 8px 4px #0bd0de66;
-    opacity: 1;
-  }
-}
-
 // Rich Text
 .l-header + .basic-content {
   .l-container {
@@ -621,4 +608,17 @@ body.page-about-us {
 
 .single-entry {
   margin-bottom: 64px;
+}
+
+// Animations
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 4px 2px #0bd0de11;
+    opacity: 0.7;
+  }
+  50% {
+    box-shadow: 0 0 8px 4px #0bd0de66;
+    opacity: 1;
+  }
 }

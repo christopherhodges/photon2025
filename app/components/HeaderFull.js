@@ -313,17 +313,30 @@ function MobileAccordion({ label, linksCollection }) {
 /* ------------------------------------------------------------------ */
 /*  DESKTOP dropdown (“Company” etc.)                                 */
 /* ------------------------------------------------------------------ */
-function NavGroup({ label, linksCollection }) {
+function NavGroup({ label, linksCollection, href }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const wrapperRef = useRef(null);
   const buttonRef = useRef(null);
   const pathname = usePathname();
-  const isActive = pathname === '/about-us' || pathname === '/join-us';
+
+  // Build the set of internal hrefs we consider "active" for this group
+  const activeHrefs = (linksCollection?.items ?? [])
+    .map(l => l?.href)
+    .concat(href) // include the group's own href if present
+    .filter(Boolean)
+    .filter(h => h.startsWith('/')); // ignore external links
+
+  const isPathMatch = (path, h) => {
+    if (h === '/') return path === '/'; // don't match everything
+    return path === h || path.startsWith(`${h}/`); // match subroutes
+  };
+
+  const isActive = activeHrefs.some(h => isPathMatch(pathname, h));
 
   useEffect(() => {
     function handleClickOutside(e) {
       if (
-        open &&
+        dropdownOpen &&
         wrapperRef.current &&
         !wrapperRef.current.contains(e.target) &&
         buttonRef.current &&
@@ -358,9 +371,9 @@ function NavGroup({ label, linksCollection }) {
           <span
             className={clsx(
               'block h-[7px] w-[7px] rounded-full border border-transparent transition-colors group-hover:border-black',
-              dropdownOpen && 'bg-black',
+              (dropdownOpen || isActive) && 'bg-black',
             )}
-          ></span>
+          />
           {label}
           <svg
             className={clsx(
@@ -391,25 +404,23 @@ function NavGroup({ label, linksCollection }) {
         )}
       >
         <div className="mx-auto flex w-full max-w-[938px] items-center justify-center gap-8 py-[16px]">
-          {linksCollection.items.map(link => (
+          {(linksCollection?.items ?? []).map(link => (
             <SmartLink
-              className={clsx(
-                'radius-[20px] group flex w-1/2 items-center gap-4 rounded-[20px] border p-[9px]',
-                pathname === link.href
-                  ? 'border-[var(--blue)]'
-                  : 'border-transparent hover:border-[var(--blue)]',
-              )}
               key={link.label}
               href={link.href}
               target={link.external ? '_blank' : ''}
-              onClick={() => {
-                setDropdownOpen(false);
-              }}
+              onClick={() => setDropdownOpen(false)}
+              className={clsx(
+                'radius-[20px] group flex w-1/2 items-center gap-4 rounded-[20px] border p-[9px]',
+                isPathMatch(pathname, link.href)
+                  ? 'border-[var(--blue)]'
+                  : 'border-transparent hover:border-[var(--blue)]',
+              )}
             >
               <div
                 className={clsx(
                   'transiton-colors flex h-[60px] w-[60px] items-center justify-center rounded-[20px]',
-                  pathname === link.href
+                  isPathMatch(pathname, link.href)
                     ? 'bg-[var(--blue)]'
                     : 'bg-[var(--light-gray)] group-hover:bg-[var(--blue)]',
                 )}
@@ -422,7 +433,9 @@ function NavGroup({ label, linksCollection }) {
                     height={link.icon.height}
                     className={clsx(
                       'transiton-all',
-                      pathname === link.href ? 'invert' : 'group-hover:invert',
+                      isPathMatch(pathname, link.href)
+                        ? 'invert'
+                        : 'group-hover:invert',
                     )}
                   />
                 )}
@@ -431,7 +444,7 @@ function NavGroup({ label, linksCollection }) {
                 <span
                   className={clsx(
                     'transition-colors',
-                    pathname === link.href
+                    isPathMatch(pathname, link.href)
                       ? 'font-normal text-[var(--blue)]'
                       : 'group-hover:font-normal group-hover:text-[var(--blue)]',
                   )}
