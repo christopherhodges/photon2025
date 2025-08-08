@@ -683,6 +683,16 @@ body.page-about-us {
   }
 }
 
+.page-marketplace {
+  .hero.right {
+    .hero-center-image {
+      img {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
 // Animations
 @keyframes pulse {
   0%,

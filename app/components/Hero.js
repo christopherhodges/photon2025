@@ -20,116 +20,67 @@ const Hero = ({
   const alignment = imageAlignment?.toLowerCase() ?? 'Right';
 
   return (
-    <section
-      className={clsx(
-        'hero relative w-full',
-        media ? 'min-h-[50vh] lg:h-[822px]' : 'pt-[120px] lg:pt-[200px]',
-        textColor === 'white' && media ? 'text-white' : 'text-black',
-        bgColor && `min-h-[50vh]`,
-        alignment,
-      )}
-      style={{ backgroundColor: bgColor }}
-    >
-      {media?.contentType?.includes('video') && (
-        <div className="video absolute left-1/2 z-[-1] h-full w-full -translate-x-1/2">
-          <video
-            className="h-full w-full object-cover"
-            src={media.url}
-            autoPlay
-            playsInline
-            muted
-          />
-        </div>
-      )}
-      {media && media?.contentType?.includes('image') && (
-        <div className="absolute left-0 top-0 z-[-1] h-full w-full">
-          <ContentfulImage
-            priority
-            className="h-full w-full object-cover object-bottom"
-            src={media.url}
-            width={media.width}
-            height={media.height}
-            alt={title}
-          />
-        </div>
-      )}
-
-      <div
+    <>
+      <section
         className={clsx(
-          'l-container relative z-0 flex flex-col-reverse pb-[40px] lg:flex-row lg:items-end',
-          media ? 'min-h-[50vh] lg:h-[822px]' : '',
-          bgColor ? 'justify-between' : 'justify-center lg:justify-start',
+          'hero relative w-full',
+          media ? 'min-h-[50vh] lg:h-[822px]' : 'pt-[120px] lg:pt-[200px]',
+          textColor === 'white' && media ? 'text-white' : 'text-black',
+          bgColor && `min-h-[50vh]`,
+          alignment,
         )}
+        style={{ backgroundColor: bgColor }}
       >
-        {centerImage && (
+        {media?.contentType?.includes('video') && (
+          <div className="video absolute left-1/2 z-[-1] h-full w-full -translate-x-1/2">
+            <video
+              className="h-full w-full object-cover"
+              src={media.url}
+              autoPlay
+              playsInline
+              muted
+            />
+          </div>
+        )}
+        {media && media?.contentType?.includes('image') && (
           <div
             className={clsx(
-              'hero-center-image pointer-events-none absolute bottom-0 z-[0] hidden h-full w-full items-end lg:flex',
+              'absolute',
+              pathname === '/marketplace'
+                ? 'l-1/2 bottom-0 h-[85%] w-full max-w-[1440px] overflow-hidden rounded-[16px] px-[40px]'
+                : 'left-0 top-0 z-[-1] h-full w-full',
             )}
           >
             <ContentfulImage
               priority
-              className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
-              src={centerImage.url}
-              width={centerImage.width}
-              height={centerImage.height}
+              className={clsx(
+                'h-full w-full object-cover object-bottom',
+                pathname === '/marketplace' && 'rounded-2xl',
+              )}
+              src={media.url}
+              width={media.width}
+              height={media.height}
               alt={title}
             />
           </div>
         )}
+
         <div
           className={clsx(
-            'hero__content w-full lg:mt-0',
-            pathname === '/' &&
-              media &&
-              'mt-[160px] lg:mt-[140px] lg:max-w-[460px]',
-            pathname !== '/' && media && 'mt-[auto] max-w-[400px] pb-[50px]',
-            !media && 'mt-[120px] max-w-none',
-            bgColor && 'max-w-[618px]',
+            'l-container relative z-0 flex flex-col-reverse pb-[40px] lg:flex-row lg:items-end',
+            media ? 'min-h-[50vh] lg:h-[822px]' : '',
+            bgColor ? 'justify-between' : 'justify-center lg:justify-start',
           )}
         >
-          <div
-            className={clsx(
-              'mx-auto lg:mx-0',
-              !media ? 'max-w-none' : 'max-w-[335px] sm:max-w-[460px]',
-            )}
-          >
-            <PageTitle
+          {centerImage && (
+            <div
               className={clsx(
-                'text-[27px]',
-                media && 'lg:text-[38px]',
-                media && titleSize !== 'Small (38px)' && 'lg:text-[48px]',
-                media ? 'capitalize' : 'text-[66px] lg:max-w-[702px]',
-                mobileTitle && 'hidden md:block',
-              )}
-              title={title}
-            />
-            <PageTitle
-              className="block text-[66px] md:hidden"
-              title={mobileTitle}
-            />
-            <p
-              className={clsx(
-                'pt-[30px] font-light opacity-[.8]',
-                !media && 'text-[24px]',
+                'hero-center-image pointer-events-none absolute bottom-0 z-[0] hidden h-full w-full items-end lg:flex',
               )}
             >
-              {subtitle}
-            </p>
-          </div>
-
-          {!media && (
-            <div
-              className="mb-24px mt-[40px] h-[13px] bg-gradient-primary"
-              style={{ '--tw-gradient-angle': '270deg' }}
-            ></div>
-          )}
-
-          {centerImage && (
-            <div className="hero-center-image--mobile pointer-events-none z-[0] mt-[60px] h-full w-full lg:hidden">
               <ContentfulImage
                 priority
-                className="mx-auto mt-auto h-auto w-full"
+                className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
                 src={centerImage.url}
                 width={centerImage.width}
                 height={centerImage.height}
@@ -137,9 +88,79 @@ const Hero = ({
               />
             </div>
           )}
+          <div
+            className={clsx(
+              'hero__content w-full lg:mt-0',
+              pathname === '/' &&
+                media &&
+                'mt-[160px] lg:mt-[140px] lg:max-w-[460px]',
+              pathname !== '/' && media && 'mt-[auto] max-w-[400px] pb-[50px]',
+              !media && 'mt-[120px] max-w-none',
+              bgColor && 'max-w-[618px]',
+              pathname === '/marketplace' && 'pl-[40px]',
+            )}
+          >
+            <div
+              className={clsx(
+                'mx-auto lg:mx-0',
+                !media ? 'max-w-none' : 'max-w-[335px] sm:max-w-[460px]',
+              )}
+            >
+              <PageTitle
+                className={clsx(
+                  'text-[27px]',
+                  media && 'lg:text-[38px]',
+                  media && titleSize !== 'Small (38px)' && 'lg:text-[48px]',
+                  media ? 'capitalize' : 'text-[66px] lg:max-w-[702px]',
+                  mobileTitle && 'hidden md:block',
+                )}
+                title={title}
+              />
+              <PageTitle
+                className="block text-[66px] md:hidden"
+                title={mobileTitle}
+              />
+              <p
+                className={clsx(
+                  'pt-[30px] font-light opacity-[.8]',
+                  !media && 'text-[24px]',
+                )}
+              >
+                {subtitle}
+              </p>
+            </div>
+
+            {!media && !bgColor && (
+              <div
+                className="mb-24px mt-[40px] h-[13px] bg-gradient-primary"
+                style={{ '--tw-gradient-angle': '270deg' }}
+              ></div>
+            )}
+
+            {centerImage && (
+              <div className="hero-center-image--mobile pointer-events-none z-[0] mt-[60px] h-full w-full lg:hidden">
+                <ContentfulImage
+                  priority
+                  className="mx-auto mt-auto h-auto w-full"
+                  src={centerImage.url}
+                  width={centerImage.width}
+                  height={centerImage.height}
+                  alt={title}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      {pathname === '/marketplace' && (
+        <div className="l-container">
+          <div
+            className="mb-24px mt-[40px] h-[13px] bg-gradient-primary"
+            style={{ '--tw-gradient-angle': '270deg' }}
+          ></div>
+        </div>
+      )}
+    </>
   );
 };
 
