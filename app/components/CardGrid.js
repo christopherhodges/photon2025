@@ -65,7 +65,7 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
                 className={item(i)}
               >
                 <Card
-                  imageFill={layout === 'left-tall'}
+                  imageFill={layout === 'left-tall' || !card.imageTop}
                   key={card.key + '-card'} // stable key
                   title={card.title}
                   description={card.description}

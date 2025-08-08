@@ -91,7 +91,9 @@ const Card = ({
       <div
         className={clsx(
           'relative',
-          imageFill ? 'min-h-[180px] grow' : 'h-[250px]',
+          imageFill
+            ? 'min-h-[180px] grow'
+            : `h-[${image.height}px max-h-[300px]`,
         )}
       >
         <ContentfulImage
