@@ -8,10 +8,10 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
   const presets = {
     /** 2 cols × 2 rows. Card 0 spans both rows in col 1. */
     'left-tall': {
-      grid: `left-tall lg:grid lg:grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 lg:gap-8`,
+      grid: `left-tall lg:grid lg:grid-cols-2 lg:grid-rows-2 lg:[grid-template-rows:1fr_1fr] lg:gap-8`,
       item: i =>
         clsx(
-          'lg:rounded-[16px] rounded-[16px] bg-white mb-8 lg:mb-0 overflow-hidden',
+          'lg:rounded-[16px] rounded-[16px] bg-white mb-8 lg:mb-0 overflow-hidden h-full',
           i === 0
             ? 'row-span-2' // big tall card
             : 'col-start-2', // others in col 2
@@ -65,8 +65,8 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
                 className={item(i)}
               >
                 <Card
+                  imageFill={layout === 'left-tall'}
                   key={card.key + '-card'} // stable key
-                  className={item(i)}
                   title={card.title}
                   description={card.description}
                   crumbs={card.crumbs ?? []}

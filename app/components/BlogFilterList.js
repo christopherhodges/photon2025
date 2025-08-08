@@ -40,7 +40,7 @@ export default function BlogFilterList({ initialPosts }) {
         url: p.coverImage.url,
         width: p.coverImage.width,
         height: p.coverImage.height,
-        alt: p.coverImage.title || p.title,
+        title: p.coverImage.title || p.title,
       },
       date: p.date,
       url: `/blog/${p.slug}`,

@@ -293,23 +293,45 @@ nav.navigation {
   padding-top: 0;
 }
 
-// Cards
-.left-tall {
-  .row-span-2 {
-    img {
-      @media screen and (min-width: 1024px) {
-        height: 80%;
-      }
-    }
-  }
-  .col-start-2 {
-    img {
-      @media screen and (min-width: 1024px) {
-        height: 60%;
+.two-column-content {
+  ol {
+    li {
+      background: #f1f1f1;
+      border-radius: 12px;
+      padding: 35px 24px;
+      list-style-type: decimal;
+      display: list-item;
+      list-style-position: inside;
+      font-weight: 400;
+      font-size: 24px;
+      margin-bottom: 10px;
+
+      p {
+        margin: 0;
+        padding: 0;
+        display: inline;
       }
     }
   }
 }
+
+// Cards
+//.left-tall {
+//  .row-span-2 {
+//    img {
+//      @media screen and (min-width: 1024px) {
+//        height: 80%;
+//      }
+//    }
+//  }
+//  .col-start-2 {
+//    img {
+//      @media screen and (min-width: 1024px) {
+//        height: 60%;
+//      }
+//    }
+//  }
+//}
 
 input {
   color: black;

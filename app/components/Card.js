@@ -17,6 +17,7 @@ const Card = ({
   description,
   image,
   imageTop = false,
+  imageFill = false,
   isCaseStudy,
   url,
 }) => {
@@ -29,7 +30,8 @@ const Card = ({
       className={clsx(
         className,
         'card block bg-white',
-        url && 'transition-shadow hover:shadow-md',
+
+        imageFill && 'flex h-full flex-col',
         imageTop && 'flex flex-col-reverse justify-end',
         isCaseStudy && 'card--case-study',
       )}
@@ -48,7 +50,7 @@ const Card = ({
         )}
 
         {(date || categories.length !== 0) && (
-          <div className="mb-[24px] flex items-center gap-4">
+          <div className="mb-[24px] flex flex-wrap items-center gap-4">
             {categories.length !== 0 && (
               <CategoryList categories={categories} />
             )}
@@ -70,7 +72,7 @@ const Card = ({
                 width={10}
                 height={11}
                 src="/icons/arrow-right-up.svg"
-                alt=""
+                alt="arrow-right"
               />
             </span>
           </div>
@@ -86,7 +88,12 @@ const Card = ({
           </p>
         )}
       </div>
-      <div className={clsx(imageTop && 'sm:h-[280px]')}>
+      <div
+        className={clsx(
+          'relative',
+          imageFill ? 'min-h-[180px] grow' : 'h-[250px]',
+        )}
+      >
         <ContentfulImage
           className={clsx(
             'h-full w-full sm:min-h-[250px] sm:object-cover',
