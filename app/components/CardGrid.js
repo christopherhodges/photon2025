@@ -58,8 +58,8 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
               let maxImageHeight;
               if (layout === 'left-tall' && i !== 0) {
                 maxImageHeight = i === 'none'; // tall left vs right cards
-              } else if (layout === 'three-up' && !card.imageTop) {
-                maxImageHeight = '250px';
+              } else if (layout === 'three-up' && card.imageTop) {
+                maxImageHeight = '290px';
               } else if (layout === 'two-up' && cards.length > 4) {
                 maxImageHeight = '320px';
               } else {

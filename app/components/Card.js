@@ -94,7 +94,7 @@ const Card = ({
           'relative',
           imageFill ? 'min-h-[180px] grow' : `h-[${image.height}px]`,
         )}
-        style={{ maxHeight: maxImageHeight ? maxImageHeight : '300px' }}
+        style={{ height: maxImageHeight ? maxImageHeight : '300px' }}
       >
         <ContentfulImage
           className={clsx(
