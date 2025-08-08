@@ -56,7 +56,7 @@ const TwoColumnContent = ({
           {img1 && (
             <div className="overflow-hidden rounded-lg lg:w-1/2">
               <ContentfulImage
-                className={!img2 && 'h-full'}
+                className={!img2 ? 'h-full' : ''}
                 src={img1.url}
                 width={img1.width}
                 height={img1.height}

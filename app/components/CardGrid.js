@@ -58,12 +58,22 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
               let maxImageHeight;
               if (layout === 'left-tall' && i !== 0) {
                 maxImageHeight = i === 'none'; // tall left vs right cards
-              } else if (layout === 'three-up') {
+              } else if (layout === 'three-up' && !card.imageTop) {
                 maxImageHeight = '250px';
               } else if (layout === 'two-up' && cards.length > 4) {
                 maxImageHeight = '320px';
               } else {
                 maxImageHeight = 'none'; // no max
+              }
+
+              let imageFill;
+              if (layout === 'left-tall') {
+                imageFill = true;
+              } else if (layout === 'three-up' && !card.imageTop) {
+                imageFill = true;
+                maxImageHeight = 'none';
+              } else {
+                imageFill = false;
               }
               return (
                 <motion.div
@@ -76,7 +86,7 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
                   className={item(i)}
                 >
                   <Card
-                    imageFill={layout === 'left-tall' || !card.imageTop}
+                    imageFill={imageFill}
                     key={card.key + '-card'} // stable key
                     title={card.title}
                     description={card.description}

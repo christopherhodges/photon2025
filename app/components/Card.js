@@ -98,7 +98,7 @@ const Card = ({
       >
         <ContentfulImage
           className={clsx(
-            'h-full w-full sm:min-h-[250px] sm:object-cover',
+            'h-full w-full sm:object-cover',
             !imageTop && 'mt-auto',
           )}
           src={image.url}
