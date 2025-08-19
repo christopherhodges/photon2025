@@ -1,3 +1,4 @@
+import AuthoredBy from '@/app/components/AuthoredBy';
 import ContentfulImage from '@/app/components/contentful-image';
 import CrumbList from '@/app/components/CrumbList';
 import RichText from '@/app/components/RichText';
@@ -52,6 +53,11 @@ export default async function CaseStudy({ params }) {
           )}
           <h1 className="text-[38px]">{page.title}</h1>
           <p className="text-[24px] text-[var(--med-gray)]">{page.subtitle}</p>
+          <AuthoredBy
+            name={page.author}
+            image={page.authorImage}
+            date={page.date}
+          />
           <ContentfulImage
             className="rounded-[16px]"
             src={page.coverImage.url}
