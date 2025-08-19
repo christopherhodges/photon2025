@@ -1,6 +1,6 @@
 import Crumb from '@/app/components/Crumb';
 
-const CrumbList = ({ crumbs }) => {
+const CrumbList = ({ crumbs, borderStyles }) => {
   return (
     <div className="flex flex-col flex-wrap items-start gap-2 sm:flex-row">
       {crumbs.map((crumb, i) => {
@@ -11,9 +11,11 @@ const CrumbList = ({ crumbs }) => {
             icon={crumb.crumbIcon}
             label={crumb.crumbTitle}
             borderStyles={
-              crumb.crumbIcon || i !== 0
-                ? 'border border-transparent'
-                : 'border border-black'
+              borderStyles
+                ? borderStyles
+                : crumb.crumbIcon || i !== 0
+                  ? 'border border-transparent'
+                  : 'border border-black'
             }
           />
         );

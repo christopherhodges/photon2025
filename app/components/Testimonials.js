@@ -1,8 +1,7 @@
 'use client';
 
-import ContentfulImage from '@/app/components/contentful-image';
-import RichText from '@/app/components/RichText';
-import { BLOCKS } from '@contentful/rich-text-types';
+import { Spinner } from '@/app/components/Spinner';
+import { Testimonial } from '@/app/components/Testimonial';
 import clsx from 'clsx';
 import {
   useCallback,
@@ -18,7 +17,7 @@ const FADE_MS = 700; // testimonial fade duration
 export default function Testimonials({ className, titleStyles, items = [] }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false); // ← track hover with state
-
+  const [ready, setReady] = useState(false);
   const wrapperRef = useRef(null);
   const contentRefs = useRef([]);
   const timerRef = useRef(null);
@@ -53,7 +52,8 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
     if (wrapperRef.current && el) {
       wrapperRef.current.style.height = `${el.offsetHeight}px`;
     }
-  }, [index, items]);
+    if (!ready) setReady(true); // first layout pass → ready
+  }, [index, items, ready]);
 
   /* ── Hover pause / resume logic ────────────────────────────────── */
   const pause = () => {
@@ -76,6 +76,19 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
     if (!paused) restart();
   };
 
+  if (!ready) {
+    return (
+      <section
+        className={clsx(
+          className,
+          'flex h-[400px] flex-col items-center justify-center',
+        )}
+      >
+        <Spinner />
+      </section>
+    );
+  }
+
   if (!items.length) return null;
 
   /* ── Render ────────────────────────────────────────────────────── */
@@ -94,7 +107,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
           {items.map((t, i) => {
             return (
               <article
-                key={t.key}
+                key={t.sys.id}
                 aria-hidden={i !== index}
                 className={clsx(
                   'absolute inset-0 flex flex-col',
@@ -108,56 +121,14 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                   ref={el => (contentRefs.current[i] = el)}
                   className="flex flex-col items-center px-5 pt-[40px]"
                 >
-                  {/* ── Author row ── */}
-                  <header className="mb-8 flex flex-col items-center justify-center gap-4 md:flex-row">
-                    <div className="flex flex-row-reverse items-center">
-                      {t?.logo && (
-                        <ContentfulImage
-                          src={t.logo.url}
-                          alt={`${t.name} logo`}
-                          width={40}
-                          height={40}
-                          className="relative z-0 h-[40px] w-[40px] overflow-hidden rounded-lg object-contain"
-                          draggable={false}
-                        />
-                      )}
-                      <ContentfulImage
-                        src={t.image.url}
-                        alt={t.name}
-                        width={56}
-                        height={56}
-                        className="z-1 relative h-[50px] w-[50px] rounded-full border-white object-cover ring-4 ring-white"
-                        draggable={false}
-                      />
-                    </div>
-                    <div className="text-center md:text-left">
-                      <p className="text-[18px] font-semibold sm:text-[16px]">
-                        {t.name}
-                      </p>
-                      <p className="text-sm text-gray-500">{t.jobTitle}</p>
-                    </div>
-                  </header>
-
-                  {/* ── Quote ── */}
-                  <blockquote className="richText mx-auto max-w-[860px] text-center leading-snug text-black">
-                    <RichText
-                      document={t.testimonial.json}
-                      options={{
-                        renderNode: {
-                          [BLOCKS.PARAGRAPH]: (_, children) => (
-                            <p
-                              className={clsx(
-                                titleStyles ??
-                                  'mb-[40px] text-[21px] lg:text-[38px]',
-                              )}
-                            >
-                              {children}
-                            </p>
-                          ),
-                        },
-                      }}
-                    />
-                  </blockquote>
+                  <Testimonial
+                    testimonial={t.testimonial.json}
+                    author_name={t.name}
+                    author_image={t.image.url}
+                    author_title={t.jobTitle}
+                    logo={t.logo.url}
+                    titleStyles={titleStyles}
+                  />
                 </div>
               </article>
             );

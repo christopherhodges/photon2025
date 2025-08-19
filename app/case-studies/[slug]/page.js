@@ -1,6 +1,7 @@
 import ContentfulImage from '@/app/components/contentful-image';
 import CrumbList from '@/app/components/CrumbList';
 import RichText from '@/app/components/RichText';
+import Testimonials from '@/app/components/Testimonials';
 import { getCaseStudy } from '@/lib/contentful/caseStudies';
 import { notFound } from 'next/navigation';
 
@@ -40,22 +41,39 @@ export default async function CaseStudy({ params }) {
   if (!page) return notFound();
 
   return (
-    <div className="single-entry l-container l-container--sm pt-[133px]">
-      <header className="mb-[40px] flex flex-col gap-[40px]">
-        {crumbs.length !== 0 && <CrumbList crumbs={crumbs} />}
-        <h1 className="text-[38px]">{page.title}</h1>
-        <p className="text-[24px] text-[var(--med-gray)]">{page.subtitle}</p>
-        <ContentfulImage
-          className="rounded-[16px]"
-          src={page.coverImage.url}
-          alt={page.coverImage.title}
-          width={page.coverImage.width}
-          height={page.coverImage.height}
+    <div className="single-entry">
+      <div className="l-container l-container--sm pt-[133px]">
+        <header className="mb-[40px] flex flex-col gap-[40px]">
+          {crumbs.length !== 0 && (
+            <CrumbList
+              borderStyles="first:border-[#DBDBDB] first:border-2 bg-[#E8EAF0] first:bg-transparent"
+              crumbs={crumbs}
+            />
+          )}
+          <h1 className="text-[38px]">{page.title}</h1>
+          <p className="text-[24px] text-[var(--med-gray)]">{page.subtitle}</p>
+          <ContentfulImage
+            className="rounded-[16px]"
+            src={page.coverImage.url}
+            alt={page.coverImage.title}
+            width={page.coverImage.width}
+            height={page.coverImage.height}
+          />
+        </header>
+      </div>
+      {page.featuredTestimonial && (
+        <Testimonials
+          className="my-[40px]"
+          items={[page.featuredTestimonial]}
         />
-      </header>
+      )}
       <div className="basic-content">
         <div className="l-container">
-          <RichText key={page.sys.id} document={page.content.json} />
+          <RichText
+            key={page.sys.id}
+            document={page.content.json}
+            links={page.content.links}
+          />
         </div>
       </div>
     </div>
