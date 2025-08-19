@@ -63,7 +63,7 @@ export default async function CaseStudy({ params }) {
       </div>
       {page.featuredTestimonial && (
         <Testimonials
-          className="my-[40px]"
+          className="mx-auto max-w-[1440px] p-[20px] lg:p-[40px]"
           items={[page.featuredTestimonial]}
         />
       )}
