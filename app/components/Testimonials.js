@@ -124,9 +124,9 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
                   <Testimonial
                     testimonial={t.testimonial.json}
                     author_name={t.name}
-                    author_image={t.image.url}
+                    author_image={t?.image?.url}
                     author_title={t.jobTitle}
-                    logo={t.logo.url}
+                    logo={t.logo?.url}
                     titleStyles={titleStyles}
                   />
                 </div>
