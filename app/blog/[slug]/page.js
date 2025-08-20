@@ -55,7 +55,11 @@ export default async function Post({ params }) {
       </header>
       <div className="basic-content">
         <div className="l-container">
-          <RichText key={page.sys.id} document={page.content.json} />
+          <RichText
+            key={page.sys.id}
+            document={page.content.json}
+            links={page.content.links}
+          />
         </div>
       </div>
     </div>

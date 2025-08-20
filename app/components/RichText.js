@@ -1,20 +1,12 @@
 'use client';
 
+import ContentfulImage from '@/app/components/contentful-image';
 import RichTextSectionHeader from '@/app/components/RichTextSectionHeader';
 import { RichTextTestimonial } from '@/app/components/RichTextTestimonial';
 import VideoPlayer from '@/app/components/VideoPlayer';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
 
-/**
- * Generic Contentful Rich-Text renderer.
- *
- * Props ──────────────────────────────────────────────
- * • document  – the `json` field from Contentful
- * • links     – the accompanying `links` object (for embeds)
- * • options   – optional overrides (same shape as rich-text-renderer)
- * • className – utility classes for the wrapper <div>
- */
 export default function RichText({
   document,
   links,
@@ -23,21 +15,27 @@ export default function RichText({
 }) {
   if (!document) return null;
 
-  /** Build O(1) lookup maps for embedded entries & assets */
+  /* ────────────────────────────
+     Fast lookup tables
+  ──────────────────────────── */
   const entryMap = new Map(
     [...(links?.entries?.block ?? []), ...(links?.entries?.inline ?? [])].map(
-      entry => [entry.sys.id, entry],
+      e => [e.sys.id, e],
     ),
   );
 
-  /** Helper that turns an embedded-entry node into React */
+  const assetMap = new Map(
+    [...(links?.assets?.block ?? [])].map(a => [a.sys.id, a]),
+  );
+
+  /* ────────────────────────────
+     Entries → React
+  ──────────────────────────── */
   const renderEmbeddedEntry = node => {
     const entry = entryMap.get(node.data.target.sys.id);
     if (!entry) return null;
 
-    // Handle testimonials (tolerate renamed typenames)
-    const testimonialTypeNames = new Set(['Testimonial']);
-    if (testimonialTypeNames.has(entry.__typename)) {
+    if (entry.__typename === 'Testimonial') {
       return (
         <RichTextTestimonial
           testimonial={entry.testimonial.json}
@@ -59,25 +57,49 @@ export default function RichText({
       );
     }
 
-    // Unknown embed → render nothing (or return a fallback component here)
-    return null;
+    return null; // unknown entry type
   };
 
-  /** Base render behaviour shared across the site */
+  /* ────────────────────────────
+     Assets → React
+  ──────────────────────────── */
+  const renderEmbeddedAsset = node => {
+    const asset = assetMap.get(node.data.target.sys.id);
+    if (!asset) return null;
+
+    // if you only want images:
+    if (!/^image\//.test(asset.contentType ?? '')) return null;
+
+    return (
+      <div className="richText__image overflow-hidden rounded-2xl">
+        <ContentfulImage
+          src={asset.url}
+          width={asset.width}
+          height={asset.height}
+          alt={asset.description || asset.title || ''}
+          className="mx-auto my-8"
+        />
+      </div>
+    );
+  };
+
+  /* ────────────────────────────
+     Base render options
+  ──────────────────────────── */
   const baseRenderOptions = {
-    // Turn literal line-breaks into <br />
     renderText: text =>
-      text
-        .split('\n')
-        .flatMap((seg, i) => (i === 0 ? seg : [<br key={i} />, seg])),
+      text.split('\n').flatMap((s, i) => (i === 0 ? s : [<br key={i} />, s])),
 
     renderNode: {
       [BLOCKS.EMBEDDED_ENTRY]: renderEmbeddedEntry,
       [INLINES.EMBEDDED_ENTRY]: renderEmbeddedEntry,
+      [BLOCKS.EMBEDDED_ASSET]: renderEmbeddedAsset, // assets are block-only
     },
   };
 
-  /** Deep-merge caller-supplied overrides */
+  /* ────────────────────────────
+     Merge caller overrides & render
+  ──────────────────────────── */
   const mergedOptions = {
     ...baseRenderOptions,
     ...options,

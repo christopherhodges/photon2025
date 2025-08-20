@@ -348,6 +348,17 @@ input {
     margin-bottom: 32px;
   }
 }
+
+.richText__image {
+  margin-bottom: 32px;
+  img {
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
 .l-header + .basic-content {
   .l-container {
     max-width: 680px;
