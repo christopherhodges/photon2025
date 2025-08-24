@@ -103,6 +103,7 @@ export default async function Page({ params }) {
                 </a>
               </div>
               <div className="testimonials--small w-full max-w-full lg:w-[770px]">
+                {console.log(testimonialItems)}
                 <Testimonials
                   titleStyles="mb-[20px] leading-1 md:m-0 md:m-[40px] text-[21px] md:text-[32px]"
                   items={testimonialItems}
