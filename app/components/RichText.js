@@ -36,7 +36,6 @@ export default function RichText({
     if (!entry) return null;
 
     if (entry.__typename === 'Testimonial') {
-      console.log(entry);
       return (
         <RichTextTestimonial
           showAuthor={entry.showName === null ? true : entry.showName}
