@@ -32,7 +32,7 @@ const Footer = ({
             <h2 className="mb-[20px] text-[38px] font-light leading-[2]">
               {testDriveTitle}
             </h2>
-            <a href="/contact" className="button-primary">
+            <a href="/sign-up" className="button-primary">
               Schedule a Demo
             </a>
           </div>
