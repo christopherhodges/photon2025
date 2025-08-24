@@ -48,28 +48,30 @@ export const RichTextTestimonial = ({
           }}
         />
         <div className="mt-2 flex items-center gap-4">
-          <div className="flex flex-row-reverse items-center">
-            {logo && (
-              <ContentfulImage
-                src={logo.url}
-                alt={`${authorName} logo`}
-                width={40}
-                height={40}
-                className="relative z-0 h-[40px] w-[40px] overflow-hidden rounded-lg object-contain"
-                draggable={false}
-              />
-            )}
-            {authorImage && (
-              <ContentfulImage
-                src={authorImage.url}
-                alt={authorName}
-                width={40}
-                height={40}
-                className="z-1 relative h-[40px] w-[40px] rounded-full border-white object-cover ring-2 ring-white"
-                draggable={false}
-              />
-            )}
-          </div>
+          {(logo || authorImage) && (
+            <div className="flex flex-row-reverse items-center">
+              {logo && (
+                <ContentfulImage
+                  src={logo.url}
+                  alt={`${authorName} logo`}
+                  width={40}
+                  height={40}
+                  className="relative z-0 h-[40px] w-[40px] overflow-hidden rounded-lg object-contain"
+                  draggable={false}
+                />
+              )}
+              {authorImage && (
+                <ContentfulImage
+                  src={authorImage.url}
+                  alt={authorName}
+                  width={40}
+                  height={40}
+                  className="z-1 relative h-[40px] w-[40px] rounded-full border-white object-cover ring-2 ring-white"
+                  draggable={false}
+                />
+              )}
+            </div>
+          )}
 
           {showAuthor && (
             <div className="leading-snug">

@@ -36,9 +36,10 @@ export default function RichText({
     if (!entry) return null;
 
     if (entry.__typename === 'Testimonial') {
+      console.log(entry);
       return (
         <RichTextTestimonial
-          showAuthor={entry.showName}
+          showAuthor={entry.showName === null ? true : entry.showName}
           testimonial={entry.testimonial.json}
           authorName={entry.name}
           authorImage={entry.image}
