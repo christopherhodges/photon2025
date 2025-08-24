@@ -67,16 +67,23 @@ export default function RichText({
     const asset = assetMap.get(node.data.target.sys.id);
     if (!asset) return null;
 
-    // if you only want images:
-    if (!/^image\//.test(asset.contentType ?? '')) return null;
+    const { url, width, height, description, title, contentType } = asset;
+
+    /* ── Video files ─────────────────────────────── */
+    if (/^video\//.test(contentType ?? '')) {
+      return <VideoPlayer url={url} />;
+    }
+
+    /* ── Images (early-exit if it’s not an image) ── */
+    if (!/^image\//.test(contentType ?? '')) return null;
 
     return (
       <div className="richText__image overflow-hidden rounded-2xl">
         <ContentfulImage
-          src={asset.url}
-          width={asset.width}
-          height={asset.height}
-          alt={asset.description || asset.title || ''}
+          src={url}
+          width={width}
+          height={height}
+          alt={description || title || ''}
           className="mx-auto my-8"
         />
       </div>

@@ -1,6 +1,8 @@
+import AuthoredBy from '@/app/components/AuthoredBy';
 import ContentfulImage from '@/app/components/contentful-image';
 import CrumbList from '@/app/components/CrumbList';
 import RichText from '@/app/components/RichText';
+import Testimonials from '@/app/components/Testimonials';
 import { getPost } from '@/lib/contentful/posts';
 import { notFound } from 'next/navigation';
 
@@ -40,19 +42,37 @@ export default async function Post({ params }) {
   if (!page) return notFound();
 
   return (
-    <div className="single-entry l-container l-container--sm pt-[133px]">
-      <header className="mb-[40px] flex flex-col gap-[40px]">
-        {crumbs.length !== 0 && <CrumbList crumbs={crumbs} />}
-        <h1 className="text-[38px]">{page.title}</h1>
-        <p className="text-[24px] text-[var(--med-gray)]">{page.subtitle}</p>
-        <ContentfulImage
-          className="rounded-[16px]"
-          src={page.coverImage.url}
-          alt={page.coverImage.title}
-          width={page.coverImage.width}
-          height={page.coverImage.height}
+    <div className="single-entry">
+      <div className="l-container l-container--sm pt-[133px]">
+        <header className="mb-[40px] flex flex-col gap-[40px]">
+          {crumbs.length !== 0 && (
+            <CrumbList
+              borderStyles="first:border-[#DBDBDB] first:border-2 bg-[#E8EAF0] first:bg-transparent"
+              crumbs={crumbs}
+            />
+          )}
+          <h1 className="text-[38px]">{page.title}</h1>
+          <p className="text-[24px] text-[var(--med-gray)]">{page.subtitle}</p>
+          <AuthoredBy
+            name={page.author}
+            image={page.authorImage}
+            date={page.date}
+          />
+          <ContentfulImage
+            className="rounded-[16px]"
+            src={page.coverImage.url}
+            alt={page.coverImage.title}
+            width={page.coverImage.width}
+            height={page.coverImage.height}
+          />
+        </header>
+      </div>
+      {page.featuredTestimonial && (
+        <Testimonials
+          className="mx-auto max-w-[1440px] p-[20px] lg:p-[40px]"
+          items={[page.featuredTestimonial]}
         />
-      </header>
+      )}
       <div className="basic-content">
         <div className="l-container">
           <RichText

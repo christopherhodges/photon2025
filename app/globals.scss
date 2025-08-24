@@ -679,6 +679,22 @@ body.page-about-us {
       text-decoration: none;
     }
   }
+
+  ul,
+  ol {
+    margin-left: 25px;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+    ol {
+      list-style: upper-alpha;
+    }
+  }
 }
 
 // Case Study Specific
@@ -759,7 +775,8 @@ body.page-about-us {
 }
 
 // White Backgrounds for Content
-body[class*=' page-case-studies'] {
+body[class*=' page-case-studies'],
+body[class*=' page-blog'] {
   .basic-content {
     position: relative;
     padding-top: 64px;

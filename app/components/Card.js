@@ -69,6 +69,7 @@ const Card = ({
             <span className="flex gap-2">
               <div className="whitespace-nowrap text-xs">Case Study</div>
               <Image
+                loading="lazy"
                 className="invert"
                 width={10}
                 height={11}
