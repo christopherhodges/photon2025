@@ -35,6 +35,14 @@ export default function MailchimpForm({
     'https://health.us17.list-manage.com/subscribe/post?u=bae2c222f61f9ae32dd037b70&id=b522708f22&f_id=0023c2e1f0';
   const HONEYPOT = 'b_bae2c222f61f9ae32dd037b70_b522708f22';
 
+  /* Clear banner after 10 s */
+  useEffect(() => {
+    if (!status) return; // nothing to clear
+
+    const timer = setTimeout(() => setStatus(null), 7_000);
+    return () => clearTimeout(timer); // cleanup if component unmounts
+  }, [status]);
+
   async function handleSubmit(e) {
     e.preventDefault();
     const form = e.currentTarget;
@@ -116,13 +124,25 @@ export default function MailchimpForm({
 
       {/* Feedback banner */}
       {status === 'success' && (
-        <p className="mt-2 rounded-lg bg-[var(--seafoam)] bg-opacity-90 px-3 py-1.5 text-xs">
+        <p
+          className={clsx(
+            'mt-2 rounded-lg bg-[var(--seafoam)] bg-opacity-90 px-3 py-1.5 text-xs',
+            'transition-opacity duration-500', // ≤— fade over 0.5 s
+            status && 'opacity-100', // fully opaque while visible
+          )}
+        >
           Thanks! Please check your inbox to confirm your subscription.
         </p>
       )}
 
       {status === 'error' && (
-        <p className="mt-2 rounded-lg bg-[#ED6B5B90] px-3 py-1.5 text-xs">
+        <p
+          className={clsx(
+            'mt-2 rounded-lg bg-[#ED6B5B90] px-3 py-1.5 text-xs',
+            'transition-opacity duration-500',
+            status && 'opacity-100',
+          )}
+        >
           Something went wrong. Please try again.
         </p>
       )}

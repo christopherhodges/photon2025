@@ -107,7 +107,7 @@ const Hero = ({
             <div
               className={clsx(
                 'mx-auto lg:mx-0',
-                !media ? 'max-w-none' : 'max-w-[335px] sm:max-w-[460px]',
+                !media ? 'max-w-none' : 'max-w-[335px] sm:max-w-[690px]',
               )}
             >
               {crumb && (
@@ -119,10 +119,12 @@ const Hero = ({
               )}
               <PageTitle
                 className={clsx(
-                  'text-[27px]',
-                  media && 'lg:text-[38px]',
-                  media && titleSize !== 'Small (38px)' && 'lg:text-[48px]',
-                  !media && 'text-[66px] lg:max-w-[702px]',
+                  titleSize === 'Small (38px)'
+                    ? 'lg:text-[38px]'
+                    : !media && !centerImage
+                      ? 'lg:text-[66px]'
+                      : 'lg:text-[48px]',
+                  media && 'lg:max-w-[702px]',
                   mobileTitle && 'hidden md:block',
                 )}
                 title={title}

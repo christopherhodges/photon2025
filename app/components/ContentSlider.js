@@ -129,10 +129,12 @@ export default function ContentSlider({ items = [] }) {
           const translateX = offset * 70;
           const rotate = offset === 0 ? 0 : offset < 0 ? 38 : -38;
           return (
-            <div
+            <a
+              target={item.externalLink ? '_blank' : ''}
+              href={item.externalLink || '/case-studies/' + item.slug}
               key={item.sys.id}
               onClick={() => setIndex(i)}
-              className="absolute left-1/2 top-1/2 h-[calc(100vw-20px)] max-h-[402px] w-[calc(100vw-40px)] max-w-[720px] outline-none sm:max-h-[540px]"
+              className="featured-case-study group absolute left-1/2 top-1/2 h-[calc(100vw-20px)] max-h-[402px] w-[calc(100vw-40px)] max-w-[720px] outline-none sm:max-h-[540px]"
               style={{
                 transform: `translate(calc(-50% + ${translateX}%), -50%) scale(${scale}) rotateY(${rotate}deg)`,
                 transition: 'transform 400ms cubic-bezier(.4,0,.2,1)',
@@ -171,11 +173,7 @@ export default function ContentSlider({ items = [] }) {
                         {item.featuredLinkTitle}
                       </p>
                     )}
-                    <a
-                      target={item.externalLink ? '_blank' : ''}
-                      href={item.externalLink || '/case-studies/' + item.slug}
-                      className="inline-flex items-center gap-2 text-sm text-white hover:underline"
-                    >
+                    <span className="inline-flex items-center gap-2 text-sm text-white group-hover:underline">
                       Case&nbsp;Study
                       <Image
                         width={12}
@@ -184,11 +182,11 @@ export default function ContentSlider({ items = [] }) {
                         className="h-[12px] w-[12px]"
                         alt="Arrow Right up"
                       />
-                    </a>
+                    </span>
                   </div>
                 </>
               )}
-            </div>
+            </a>
           );
         })}
       </div>

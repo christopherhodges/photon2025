@@ -47,7 +47,7 @@ const Card = ({
       >
         {crumbs.length !== 0 && (
           <div className="mb-[40px]">
-            <CrumbList crumbs={crumbs} />
+            <CrumbList borderStyles="border-[#DBDBDB]" crumbs={crumbs} />
           </div>
         )}
 
@@ -104,7 +104,7 @@ const Card = ({
       </div>
       <div
         className={clsx(
-          'relative',
+          'card__image-wrapper relative',
           imageFill ? 'min-h-[180px] grow' : `h-[${image.height}px]`,
         )}
         style={{ height: maxImageHeight ? maxImageHeight : '300px' }}
