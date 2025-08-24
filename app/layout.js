@@ -1,10 +1,8 @@
 import AnnouncementBar from '@/app/components/AnnouncementBar';
 import BodyClass from '@/app/components/BodyClass';
-import Footer from '@/app/components/Footer';
 import HeaderFull from '@/app/components/HeaderFull';
 import '@/app/globals.scss';
 import { getAnnouncementBar } from '@/lib/contentful/announcementBar';
-import { getFooter } from '@/lib/contentful/footer';
 import { getNavigationMenu } from '@/lib/contentful/header';
 import { acidGrotesk } from '@/lib/fonts';
 import clsx from 'clsx';
@@ -19,7 +17,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const [menu, footer] = await Promise.all([getNavigationMenu(), getFooter()]);
+  const [menu] = await Promise.all([getNavigationMenu()]);
 
   const announcementBar = await getAnnouncementBar(
     '2K0dYmbxNqxQ7HsObSFvru',
@@ -51,16 +49,14 @@ export default async function RootLayout({ children }) {
             ></iframe>
           </noscript>
           <BodyClass />
-          <main className="l-main">
-            <AnnouncementBar
-              text={announcementBar.text}
-              link={announcementBar.link}
-              showOnSite={announcementBar.showOnSite}
-            />
-            <HeaderFull menu={menu} />
-            {children}
-          </main>
-          <Footer footer={footer} />
+
+          <AnnouncementBar
+            text={announcementBar.text}
+            link={announcementBar.link}
+            showOnSite={announcementBar.showOnSite}
+          />
+          <HeaderFull menu={menu} />
+          {children}
         </body>
       </html>
     </>

@@ -1,9 +1,11 @@
 import CardGrid from '@/app/components/CardGrid';
 import ContentSlider from '@/app/components/ContentSlider';
+import Footer from '@/app/components/Footer';
 import {
   getAllCaseStudies,
   getFeaturedCaseStudies,
 } from '@/lib/contentful/caseStudies';
+import { getFooter } from '@/lib/contentful/footer';
 
 const SITE = 'Photon Health';
 
@@ -17,6 +19,7 @@ export const metadata = {
 export default async function CaseStudiesIndex() {
   const caseStudies = await getAllCaseStudies();
   const featuredCaseStudies = await getFeaturedCaseStudies();
+  const [footer] = await Promise.all([getFooter()]);
 
   const cards = caseStudies.map(p => {
     return {
@@ -36,14 +39,19 @@ export default async function CaseStudiesIndex() {
   });
   return (
     <>
-      <div className="mb-[40px] bg-[var(--dark-blue)] pb-[60px] pt-[133px] text-white">
-        <h1 className="text-center text-[38px] font-light">Photon in action</h1>
-        {featuredCaseStudies.length > 0 && (
-          <ContentSlider items={featuredCaseStudies} />
-        )}
-      </div>
+      <main className="l-main">
+        <div className="mb-[40px] bg-[var(--dark-blue)] pb-[60px] pt-[133px] text-white">
+          <h1 className="text-center text-[38px] font-light">
+            Photon in action
+          </h1>
+          {featuredCaseStudies.length > 0 && (
+            <ContentSlider items={featuredCaseStudies} />
+          )}
+        </div>
 
-      <CardGrid cards={cards} layout="two-up" />
+        <CardGrid cards={cards} layout="two-up" />
+      </main>
+      <Footer footer={footer} />
     </>
   );
 }

@@ -1,7 +1,9 @@
 import { draftMode } from 'next/headers';
 
 import BodyContent from '@/app/components/BodyContent';
+import Footer from '@/app/components/Footer';
 import Hero from '@/app/components/Hero';
+import { getFooter } from '@/lib/contentful/footer';
 import { getPage } from '@/lib/contentful/pages';
 import { notFound } from 'next/navigation';
 
@@ -29,24 +31,28 @@ export async function generateMetadata({ params }) {
 export default async function Page() {
   const { isEnabled } = await draftMode();
   const { page } = await getPage('/', isEnabled);
+  const [footer] = await Promise.all([getFooter()]);
   if (!page) return notFound();
 
   const { hero, bodyContentCollection } = page;
 
   return (
     <>
-      {hero && (
-        <Hero
-          title={hero.title}
-          titleSize={hero.titleSize}
-          subtitle={hero.subtitle}
-          media={hero.media}
-          centerImage={hero.centerImage}
-          textColor={hero.textColor}
-        />
-      )}
+      <main className="l-main">
+        {hero && (
+          <Hero
+            title={hero.title}
+            titleSize={hero.titleSize}
+            subtitle={hero.subtitle}
+            media={hero.media}
+            centerImage={hero.centerImage}
+            textColor={hero.textColor}
+          />
+        )}
 
-      <BodyContent bodyContent={bodyContentCollection} />
+        <BodyContent bodyContent={bodyContentCollection} />
+      </main>
+      <Footer footer={footer} />
     </>
   );
 }

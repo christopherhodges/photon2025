@@ -1,5 +1,7 @@
 import BlogFilterList from '@/app/components/BlogFilterList';
+import Footer from '@/app/components/Footer';
 import Hero from '@/app/components/Hero';
+import { getFooter } from '@/lib/contentful/footer';
 import { getAllPosts } from '@/lib/contentful/posts';
 
 const SITE = 'Photon Health';
@@ -12,12 +14,16 @@ export const metadata = {
 
 export default async function BlogIndex() {
   const posts = await getAllPosts();
+  const [footer] = await Promise.all([getFooter()]);
 
   return (
     <>
-      <Hero title="Photon Blogs" />
+      <main className="l-main">
+        <Hero title="Photon Blogs" />
 
-      <BlogFilterList initialPosts={posts} />
+        <BlogFilterList initialPosts={posts} />
+      </main>
+      <Footer footer={footer} />
     </>
   );
 }

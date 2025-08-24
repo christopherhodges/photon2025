@@ -1,10 +1,15 @@
 // app/components/Footer.js
+import Crumb from '@/app/components/Crumb';
 import FooterNavigation from '@/app/components/FooterNavigation';
 import MailchimpForm from '@/app/components/MailchimpForm';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Footer = ({ footer }) => {
+const Footer = ({
+  footer,
+  showTestDriveSection = false,
+  testDriveTitle = 'Close the loop on prescription care.',
+}) => {
   // accept either shape: { footer: {...} } or just {...}
   const footerItems = footer?.footer ?? footer ?? null;
   const footerLinks = footerItems?.linksCollection?.items ?? [];
@@ -20,6 +25,19 @@ const Footer = ({ footer }) => {
 
   return (
     <footer className="l-footer bg-gradient-secondary relative pt-[40px] text-white">
+      {showTestDriveSection && (
+        <div className="l-container relative">
+          <div className="mb-[40px] rounded-2xl bg-[var(--dark-blue)] py-[40px] text-center">
+            <Crumb textColor="text-[var(--seafoam)]" label="Test Drive" />
+            <h2 className="mb-[20px] text-[38px] font-light leading-[2]">
+              {testDriveTitle}
+            </h2>
+            <a href="/contact" className="button-primary">
+              Schedule a Demo
+            </a>
+          </div>
+        </div>
+      )}
       <div className="l-container relative z-10">
         <div className="bg-gradient-tertiary flex flex-wrap rounded-[16px] px-[24px] py-[40px] text-black">
           <div className="mb-4 w-full md:mb-0 md:w-1/3 md:max-w-[385px]">
