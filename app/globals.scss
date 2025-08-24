@@ -191,6 +191,7 @@ h6 {
 // sticky footer
 .l-main {
   flex: 1 0 auto;
+  overflow-x: hidden;
 }
 .l-footer {
   flex-shrink: 0;
@@ -304,7 +305,7 @@ nav.navigation {
       list-style-type: decimal;
       display: list-item;
       list-style-position: inside;
-      font-weight: 400;
+      font-weight: 300;
       margin-bottom: 10px;
       font-size: 20px;
 
@@ -346,6 +347,11 @@ input {
     border-radius: 16px;
     overflow: hidden;
     margin-bottom: 32px;
+  }
+
+  hr {
+    border-color: #dbdbdb;
+    margin-bottom: 24px;
   }
 }
 
@@ -622,6 +628,12 @@ body.page-about-us {
   }
 }
 
+.page-health-systems {
+  .hero.right .hero__content {
+    max-width: 690px;
+  }
+}
+
 .hero p,
 .left-tall p,
 .featuredContent h2 + p,
@@ -632,6 +644,11 @@ body.page-about-us {
   }
 }
 
+.featuredContent {
+  .button-primary {
+    border-radius: 8px;
+  }
+}
 .basic-content .richText {
   line-height: 2;
 
@@ -702,6 +719,18 @@ body.page-about-us {
   .crumb:not(:first-child) {
     background: #e8eaf0;
     color: black;
+  }
+}
+
+body.page-case-studies,
+body.page-blog {
+  .card {
+    &:hover {
+      h3,
+      h3 + span {
+        color: var(--blue);
+      }
+    }
   }
 }
 

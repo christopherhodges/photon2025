@@ -166,9 +166,11 @@ export default function ContentSlider({ items = [] }) {
                     />
                   )}
                   <div className="absolute inset-x-0 bottom-0 flex translate-y-[95%] items-center justify-between rounded-b-xl bg-white/[.1] p-[20px] text-left backdrop-blur-[5px] sm:translate-y-0 sm:p-6">
-                    <p className="max-w-[144px] text-[15px] text-white sm:max-w-none sm:text-xl">
-                      {item.featuredLinkTitle}
-                    </p>
+                    {item.featuredLinkTitle && (
+                      <p className="max-w-[144px] text-[15px] text-white sm:max-w-none sm:text-xl">
+                        {item.featuredLinkTitle}
+                      </p>
+                    )}
                     <a
                       target={item.externalLink ? '_blank' : ''}
                       href={item.externalLink || '/case-studies/' + item.slug}

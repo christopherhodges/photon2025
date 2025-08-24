@@ -22,9 +22,9 @@ const FeaturedContent = ({
             label={crumb}
           />
           <h2 className="text-[38px] text-white">{withBr(sectionTitle)}</h2>
-          <p className="text-white">{sectionSubtitle}</p>
+          {sectionSubtitle && <p className="text-white">{sectionSubtitle}</p>}
           <Link
-            className="button-primary button--white text-sm"
+            className="button-primary button--white rounded-[8px] text-sm"
             href={buttonLink}
           >
             {buttonLabel}
