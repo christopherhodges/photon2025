@@ -41,8 +41,8 @@ const Footer = ({
       <div className="l-container relative z-10">
         <div className="bg-gradient-tertiary flex flex-wrap rounded-[16px] px-[24px] py-[40px] text-black">
           <div className="mb-4 w-full md:mb-0 md:w-1/3 md:max-w-[385px]">
-            <h2 className="text-[38px] font-light md:max-w-[185px]">
-              Schedule A Demo
+            <h2 className="text-[38px] font-light">
+              Subscribe to our&nbsp;newsletter
             </h2>
             <MailchimpForm
               className="mx-auto w-full text-white"

@@ -19,11 +19,15 @@ const FeaturedArticles = ({ sectionTitle, crumb, items }) => {
 
         <div className="flex flex-col gap-8 md:flex-row">
           {items.map(post => {
+            const href =
+              post.__typename === 'Post'
+                ? `/blog/${post.slug}`
+                : `/case-studies/${post.slug}`;
             return (
               <a
-                target="_blank"
+                target={post.externalLink ? '_blank' : ''}
                 key={post.sys.id}
-                href={post.externalLink ?? post.slug}
+                href={post.externalLink ?? href}
               >
                 <ContentfulImage
                   src={post.coverImage.url}

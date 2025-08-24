@@ -104,7 +104,7 @@ export default function MailchimpForm({
             status === 'loading' && 'cursor-not-allowed opacity-60',
           )}
         >
-          {submitting ? '…' : 'Try it out'}
+          {submitting ? '…' : 'Subscribe'}
           {/*<Image
             width={10}
             height={11}

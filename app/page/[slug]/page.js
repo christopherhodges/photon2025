@@ -60,6 +60,9 @@ export default async function Page({ params }) {
             titleSize={hero.titleSize}
             mobileTitle={hero.mobileTitle}
             subtitle={hero.subtitle}
+            crumb={hero.crumb}
+            buttonText={hero.buttonText}
+            buttonLink={hero.buttonLink}
             media={hero.media}
             centerImage={hero.centerImage}
             textColor={hero.textColor}

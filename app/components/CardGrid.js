@@ -75,6 +75,8 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
               } else {
                 imageFill = false;
               }
+              const card_crumbs =
+                card.crumbsCollection?.items ?? card.crumbs ?? [];
               return (
                 <motion.div
                   key={shuffleString('asdflkjwoeifj') + '-animate'} // stable key
@@ -90,9 +92,11 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
                     key={card.key + '-card'} // stable key
                     title={card.title}
                     description={card.description}
-                    crumbs={card.crumbs ?? []}
+                    crumbs={card_crumbs}
                     categories={card.categories ?? []}
                     image={card.image}
+                    buttonText={card.buttonText}
+                    buttonLink={card.buttonLink}
                     date={card.date}
                     isCaseStudy={card.isCaseStudy ?? false}
                     imageTop={card.imageTop}

@@ -1,5 +1,6 @@
 'use client';
 import ContentfulImage from '@/app/components/contentful-image';
+import Crumb from '@/app/components/Crumb';
 import PageTitle from '@/app/components/PageTitle';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
@@ -11,6 +12,9 @@ const Hero = ({
   subtitle,
   media,
   centerImage,
+  crumb,
+  buttonText,
+  buttonLink,
   textColor,
   bgColor,
   imageAlignment,
@@ -97,7 +101,7 @@ const Hero = ({
               pathname !== '/' && media && 'mt-[auto] max-w-[400px] pb-[50px]',
               !media && 'mt-[120px] max-w-none',
               bgColor && 'max-w-[618px]',
-              pathname === '/marketplace' && 'pl-[40px]',
+              pathname === '/marketplace' && 'lg:pl-[40px]',
             )}
           >
             <div
@@ -106,12 +110,19 @@ const Hero = ({
                 !media ? 'max-w-none' : 'max-w-[335px] sm:max-w-[460px]',
               )}
             >
+              {crumb && (
+                <Crumb
+                  size="sm"
+                  borderStyles="border border-black mb-[40px]"
+                  label={crumb}
+                />
+              )}
               <PageTitle
                 className={clsx(
                   'text-[27px]',
                   media && 'lg:text-[38px]',
                   media && titleSize !== 'Small (38px)' && 'lg:text-[48px]',
-                  media ? 'capitalize' : 'text-[66px] lg:max-w-[702px]',
+                  !media && 'text-[66px] lg:max-w-[702px]',
                   mobileTitle && 'hidden md:block',
                 )}
                 title={title}
@@ -128,6 +139,14 @@ const Hero = ({
               >
                 {subtitle}
               </p>
+              {buttonText && buttonLink && (
+                <a
+                  href={buttonLink}
+                  className="button-primary button--black mt-[20px] inline-block"
+                >
+                  {buttonText}
+                </a>
+              )}
             </div>
 
             {!media && !bgColor && (

@@ -15,6 +15,8 @@ const Card = ({
   date,
   title,
   description,
+  buttonText = 'View More',
+  buttonLink,
   image,
   imageTop = false,
   imageFill = false,
@@ -88,6 +90,14 @@ const Card = ({
           >
             {description}
           </p>
+        )}
+        {buttonText && buttonLink && (
+          <a
+            href={buttonLink}
+            className="button-primary button--black mt-[20px] inline-block"
+          >
+            {buttonText}
+          </a>
         )}
       </div>
       <div

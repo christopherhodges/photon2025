@@ -753,6 +753,7 @@ body.page-about-us {
 .single-entry {
   .basic-content {
     color: #181919;
+    font-size: 18px;
 
     h2 {
       b {
@@ -764,12 +765,20 @@ body.page-about-us {
       line-height: 1.2;
     }
     p {
-      font-size: 16px;
       line-height: 1.5;
       font-weight: 300;
+      font-size: 18px;
     }
     .l-container {
       max-width: 744px;
+    }
+  }
+  /* Featured testimonial */
+  .l-container--testimonials {
+    .flex.flex-col {
+      flex-direction: column-reverse;
+      justify-content: center;
+      padding: 0;
     }
   }
 }
