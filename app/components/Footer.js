@@ -27,9 +27,9 @@ const Footer = ({
     <footer className="l-footer bg-gradient-secondary relative pt-[40px] text-white">
       {showTestDriveSection && (
         <div className="l-container l-footer__test-drive relative">
-          <div className="mb-[40px] rounded-2xl bg-[var(--dark-blue)] py-[40px] text-center">
+          <div className="mb-[40px] rounded-2xl bg-[var(--dark-blue)] px-[20px] py-[40px] text-center">
             <Crumb textColor="text-[var(--seafoam)]" label="Test Drive" />
-            <h2 className="mb-[20px] text-[38px] font-light leading-[2]">
+            <h2 className="mb-[30px] mt-[20px] text-[24px] font-light leading-[1] lg:mb-[20px] lg:mt-0 lg:text-[38px] lg:leading-[2]">
               {testDriveTitle}
             </h2>
             <a href="/sign-up" className="button-primary">
@@ -57,7 +57,7 @@ const Footer = ({
 
         <Link href="/" className="block">
           <Image
-            className="h-auto w-full sm:mt-[80px]"
+            className="mt-[40px] h-auto w-full lg:mt-[80px]"
             src={footerItems.logo?.url || '/images/footer-placeholder.png'}
             alt={footerItems.title || 'Photon Health'}
             width={footerItems.logo?.width || 1600}
