@@ -117,7 +117,7 @@ export default function ContentSlider({ items = [] }) {
       <div
         ref={sliderRef}
         className={clsx(
-          'relative h-[450px] cursor-grab select-none sm:h-[540px]',
+          'relative h-[262px] cursor-grab select-none sm:h-[540px] lg:h-[450px]',
         )}
         style={{ perspective: '1440px' }}
       >
@@ -134,7 +134,7 @@ export default function ContentSlider({ items = [] }) {
               href={item.externalLink || '/case-studies/' + item.slug}
               key={item.sys.id}
               onClick={() => setIndex(i)}
-              className="featured-case-study group absolute left-1/2 top-1/2 h-[calc(100vw-20px)] max-h-[402px] w-[calc(100vw-40px)] max-w-[720px] outline-none sm:max-h-[540px]"
+              className="featured-case-study group absolute left-1/2 top-1/2 h-[calc(100vw-20px)] max-h-[262px] w-[calc(100vw-40px)] max-w-[720px] outline-none sm:max-h-[540px] lg:max-h-[402px]"
               style={{
                 transform: `translate(calc(-50% + ${translateX}%), -50%) scale(${scale}) rotateY(${rotate}deg)`,
                 transition: 'transform 400ms cubic-bezier(.4,0,.2,1)',
@@ -192,7 +192,7 @@ export default function ContentSlider({ items = [] }) {
       </div>
 
       {/* ----- Dot nav ----- */}
-      <div className="mt-[80px] flex justify-center gap-2 sm:mt-4">
+      <div className="mt-[40px] flex justify-center gap-2 sm:mt-4">
         {items.map((_, i) => (
           <button
             key={i}
