@@ -111,7 +111,7 @@ export default function HeaderFull({ menu }) {
               item.__typename === 'NavLink' ? (
                 <MobileNavLink key={item.label} {...item} />
               ) : (
-                <MobileAccordion key={item.label} {...item} />
+                <MobileAccordion key={item.label} {...item} drawerOpen={open} />
               ),
             )}
 
@@ -251,8 +251,12 @@ function MobileNavLink({ label, href, external }) {
 }
 
 /* accordion for “Company” on mobile */
-function MobileAccordion({ label, linksCollection }) {
+function MobileAccordion({ label, linksCollection, drawerOpen }) {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!drawerOpen) setOpen(false);
+  }, [drawerOpen]);
   return (
     <li className="mb-[18px] last-of-type:mb-0">
       <button
