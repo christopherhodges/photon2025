@@ -22,7 +22,13 @@ export default function HeaderFull({ menu }) {
   useBodyScrollLock(open);
 
   /* ----- close the mobile menu when route changes ----- */
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    setOpen(false);
+
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    });
+  }, [pathname]);
 
   /* split nav items like before */
   const mainItems = itemsCollection?.items ?? [];

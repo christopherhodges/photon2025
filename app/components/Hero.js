@@ -71,8 +71,8 @@ const Hero = ({
 
         <div
           className={clsx(
-            'l-container relative z-0 flex flex-col-reverse pb-[40px] lg:flex-row lg:items-end',
-            media ? 'min-h-[50vh] lg:h-[822px]' : '',
+            'l-container l-container--hero__content relative z-0 flex flex-col-reverse pb-[40px] lg:flex-row lg:items-end',
+            media && 'h-[570px] min-h-[50vh] lg:h-[822px]',
             bgColor ? 'justify-between' : 'justify-center lg:justify-start',
           )}
         >
@@ -102,7 +102,7 @@ const Hero = ({
               !media && 'mt-[120px] max-w-none',
               bgColor && 'max-w-[618px]',
               pathname === '/marketplace' &&
-                'px-[20px] pt-[140px] lg:pl-[40px] lg:pr-0 lg:pt-0',
+                'px-[20px] lg:pl-[40px] lg:pr-0 lg:pt-0',
             )}
           >
             <div

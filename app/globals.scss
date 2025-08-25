@@ -824,10 +824,18 @@ body.page-blog {
   }
 }
 
-.page-marketplace {
+body.page-marketplace {
+  .l-container--hero__content {
+    @media screen and (max-width: 1024px) {
+      justify-content: flex-end;
+      padding-bottom: 0;
+      height: auto;
+    }
+  }
   .hero__content {
     @media screen and (max-width: 1024px) {
       padding-bottom: 0;
+      padding-top: 140px;
 
       > div:first-child {
         max-width: 335px;
