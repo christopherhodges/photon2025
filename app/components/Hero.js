@@ -72,7 +72,8 @@ const Hero = ({
         <div
           className={clsx(
             'l-container l-container--hero__content relative z-0 flex flex-col-reverse pb-[40px] lg:flex-row lg:items-end',
-            media && 'h-[570px] min-h-[50vh] lg:h-[822px]',
+            media && 'min-h-[50vh] lg:h-[822px]',
+            pathname !== '/' && media && 'h-[570px]',
             bgColor ? 'justify-between' : 'justify-center lg:justify-start',
           )}
         >
@@ -99,7 +100,7 @@ const Hero = ({
                 media &&
                 'mt-[160px] lg:mt-[140px] lg:max-w-[460px]',
               pathname !== '/' && media && 'mt-[auto] max-w-[400px] pb-[50px]',
-              !media && 'mt-[120px] max-w-none',
+              !media && 'max-w-none lg:mt-[120px]',
               bgColor && 'max-w-[618px]',
               pathname === '/marketplace' &&
                 'px-[20px] lg:pl-[40px] lg:pr-0 lg:pt-0',
@@ -123,7 +124,7 @@ const Hero = ({
                   titleSize === 'Small (38px)'
                     ? 'lg:text-[38px]'
                     : !media && !centerImage
-                      ? 'lg:text-[66px]'
+                      ? 'text-[66px]'
                       : 'text-[32px] lg:text-[48px]',
                   media && 'lg:max-w-[702px]',
                   mobileTitle && 'hidden md:block',
@@ -154,7 +155,7 @@ const Hero = ({
 
             {!media && !bgColor && (
               <div
-                className="mb-24px mt-[40px] h-[13px] bg-gradient-primary"
+                className="mb-[40px] mt-[40px] h-[13px] bg-gradient-primary"
                 style={{ '--tw-gradient-angle': '270deg' }}
               ></div>
             )}

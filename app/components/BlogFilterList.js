@@ -50,7 +50,7 @@ export default function BlogFilterList({ initialPosts }) {
   return (
     <>
       <section className="l-container">
-        <div className="pressura mb-[8px] uppercase tracking-wide">
+        <div className="pressura mb-[8px] mt-[40px] uppercase tracking-wide">
           Filter by:
         </div>
 
