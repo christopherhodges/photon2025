@@ -41,12 +41,12 @@ const Card = ({
       <div
         className={clsx(
           imageTop && !isCaseStudy && 'px-[24px] pb-[44px] pt-[32px]',
-          imageTop && isCaseStudy && 'px-[24px] py-[32px]',
+          imageTop && isCaseStudy && 'px-[10px] py-[32px] md:px-[24px]',
           !imageTop && !isCaseStudy && 'p-[24px]',
         )}
       >
         {crumbs.length !== 0 && (
-          <div className="mb-[40px]">
+          <div className={clsx('mb-[40px]', isCaseStudy && 'hidden md:block')}>
             <CrumbList borderStyles="border-[#DBDBDB]" crumbs={crumbs} />
           </div>
         )}
@@ -65,10 +65,14 @@ const Card = ({
         )}
 
         {isCaseStudy && (
-          <div className="flex items-center justify-between">
-            <h3 className="text-[24px] font-normal">{withBr(title)}</h3>
-            <span className="flex items-center gap-2">
-              <div className="whitespace-nowrap text-xs">Case Study</div>
+          <div className="flex items-start justify-between md:items-center">
+            <h3 className="text-[16px] md:text-[24px] md:font-normal">
+              {withBr(title)}
+            </h3>
+            <span className="mt-[5px] flex items-center gap-2 md:mt-0">
+              <div className="hidden whitespace-nowrap text-xs md:block">
+                Case Study
+              </div>
               <svg
                 width="11"
                 height="12"
