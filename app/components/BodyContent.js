@@ -36,7 +36,11 @@ const BodyContent = ({ bodyContent }) => {
           return (
             <CardGrid
               key={shuffleString(section.sys.id)}
-              layout="left-tall"
+              layout={
+                section.cardCollection.items?.length === 4
+                  ? 'zig-zag'
+                  : 'left-tall'
+              }
               cards={section.cardCollection.items}
             />
           );

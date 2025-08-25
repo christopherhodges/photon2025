@@ -42,6 +42,30 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
           i === 3 && 'col-start-1', // last card bottom-left
         ),
     },
+    'zig-zag': {
+      /* two columns; let rows size to their own content */
+      grid:
+        `zigzag lg:grid lg:grid-cols-2 ` +
+        `lg:[grid-auto-rows:auto] lg:gap-${gap}`,
+
+      /* place each item explicitly */
+      item: i =>
+        clsx(
+          'rounded-[16px] lg:rounded-[16px] mb-[20px] md:mb-0 bg-white overflow-hidden h-full',
+
+          // 0 ─ tall, top-left
+          i === 0 && 'lg:col-start-1 lg:row-start-1 lg:row-span-2',
+
+          // 1 ─ small, top-right
+          i === 1 && 'lg:col-start-2 lg:row-start-1',
+
+          // 2 ─ small, bottom-left
+          i === 2 && 'lg:col-start-1 lg:row-start-3',
+
+          // 3 ─ tall, bottom-right
+          i === 3 && 'lg:col-start-2 lg:row-start-2 lg:row-span-2',
+        ),
+    },
   };
 
   const { grid, item } = presets[layout] || presets['three-up'];
@@ -55,25 +79,21 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
             mode="popLayout"
           >
             {cards.map((card, i) => {
-              let maxImageHeight;
-              if (layout === 'left-tall' && i !== 0) {
-                maxImageHeight = i === 'none'; // tall left vs right cards
+              let maxImageHeight = 'none';
+              if ((layout === 'left-tall' || layout === 'zig-zag') && i !== 0) {
+                maxImageHeight = 'none';
               } else if (layout === 'three-up' && card.imageTop) {
                 maxImageHeight = '290px';
               } else if (layout === 'two-up' && cards.length > 4) {
                 maxImageHeight = '320px';
-              } else {
-                maxImageHeight = 'none'; // no max
               }
 
-              let imageFill;
-              if (layout === 'left-tall') {
+              let imageFill = false;
+              if (layout === 'left-tall' || layout === 'zig-zag') {
                 imageFill = true;
               } else if (layout === 'three-up' && !card.imageTop) {
                 imageFill = true;
                 maxImageHeight = 'none';
-              } else {
-                imageFill = false;
               }
               const card_crumbs =
                 card.crumbsCollection?.items ?? card.crumbs ?? [];
@@ -88,6 +108,10 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
                   className={item(i)}
                 >
                   <Card
+                    className={clsx(
+                      (layout !== 'zig-zag' || layout !== 'left-tall') &&
+                        'flex h-full flex-col justify-between',
+                    )}
                     imageFill={imageFill}
                     key={card.key + '-card'} // stable key
                     title={card.title}
