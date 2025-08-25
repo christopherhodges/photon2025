@@ -51,7 +51,7 @@ const Hero = ({
             className={clsx(
               'absolute',
               pathname === '/marketplace'
-                ? 'bottom-0 left-1/2 h-[85%] w-full max-w-[1440px] -translate-x-1/2 px-[40px]'
+                ? 'bottom-0 left-1/2 h-[85%] w-full max-w-[1440px] -translate-x-1/2 px-[20px] lg:px-[40px]'
                 : 'left-0 top-0 z-[-1] h-full w-full',
             )}
           >
@@ -101,12 +101,13 @@ const Hero = ({
               pathname !== '/' && media && 'mt-[auto] max-w-[400px] pb-[50px]',
               !media && 'mt-[120px] max-w-none',
               bgColor && 'max-w-[618px]',
-              pathname === '/marketplace' && 'lg:pl-[40px]',
+              pathname === '/marketplace' &&
+                'px-[20px] pt-[140px] lg:pl-[40px] lg:pr-0 lg:pt-0',
             )}
           >
             <div
               className={clsx(
-                'mx-auto lg:mx-0',
+                'mx-auto mt-[40px] lg:mx-0 lg:mt-0',
                 !media ? 'max-w-none' : 'max-w-[335px] sm:max-w-[690px]',
               )}
             >
@@ -123,7 +124,7 @@ const Hero = ({
                     ? 'lg:text-[38px]'
                     : !media && !centerImage
                       ? 'lg:text-[66px]'
-                      : 'lg:text-[48px]',
+                      : 'text-[32px] lg:text-[48px]',
                   media && 'lg:max-w-[702px]',
                   mobileTitle && 'hidden md:block',
                 )}

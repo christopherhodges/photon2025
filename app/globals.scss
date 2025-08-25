@@ -819,6 +819,15 @@ body.page-blog {
 }
 
 .page-marketplace {
+  .hero__content {
+    @media screen and (max-width: 1024px) {
+      padding-bottom: 0;
+
+      > div:first-child {
+        max-width: 335px;
+      }
+    }
+  }
   .hero.right {
     .hero-center-image {
       img {
