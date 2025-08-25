@@ -51,16 +51,19 @@ const Card = ({
           </div>
         )}
 
-        {(date || categories.length !== 0) && (
-          <div className="mb-[24px] flex flex-wrap items-center gap-4">
+        {categories.length !== 0 && (
+          <div className="mb-[24px]">
             {categories.length !== 0 && (
-              <CategoryList categories={categories} />
+              <CategoryList categories={categories} date={date} />
             )}
-            {date && (
-              <div className="pressura uppercase text-[var(--med-gray)]">
-                {formatDate(date)}
-              </div>
-            )}
+          </div>
+        )}
+
+        {date && categories.length === 0 && (
+          <div className="mb-[24px]">
+            <div className="pressura text-[12px] uppercase text-[var(--med-gray)] md:text-[14px]">
+              {formatDate(date)}
+            </div>
           </div>
         )}
 
