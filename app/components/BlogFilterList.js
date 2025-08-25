@@ -54,7 +54,7 @@ export default function BlogFilterList({ initialPosts }) {
           Filter by:
         </div>
 
-        <div className="mb-[40px] flex flex-wrap items-center gap-2 text-sm">
+        <div className="no-scrollbar mb-[40px] flex items-center gap-2 overflow-x-auto whitespace-nowrap text-sm md:flex-wrap">
           {allCats.map(cat => {
             const active = selected.includes(cat);
             return (
@@ -62,16 +62,17 @@ export default function BlogFilterList({ initialPosts }) {
                 key={cat}
                 onClick={() => toggleCat(cat)}
                 className={
-                  'pressura group flex items-center gap-2 rounded-full bg-white px-3 py-1 uppercase transition hover:bg-white hover:text-black ' +
+                  'pressura group flex flex-shrink-0 items-center gap-2 rounded-full ' +
+                  'bg-white px-3 py-1 uppercase transition hover:bg-white hover:text-black' +
                   (active ? ' text-black' : ' text-[#707070]')
                 }
               >
-                <div
+                <span
                   className={clsx(
                     'h-[7px] w-[7px] rounded-full border group-hover:border-black group-hover:bg-black',
                     active ? 'border-black bg-black' : 'border-[#707070]',
                   )}
-                ></div>
+                />
                 {cat}
               </button>
             );
