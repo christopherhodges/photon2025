@@ -26,7 +26,7 @@ const Footer = ({
   return (
     <footer className="l-footer bg-gradient-secondary relative pt-[40px] text-white">
       {showTestDriveSection && (
-        <div className="l-container relative">
+        <div className="l-container l-footer__test-drive relative">
           <div className="mb-[40px] rounded-2xl bg-[var(--dark-blue)] py-[40px] text-center">
             <Crumb textColor="text-[var(--seafoam)]" label="Test Drive" />
             <h2 className="mb-[20px] text-[38px] font-light leading-[2]">

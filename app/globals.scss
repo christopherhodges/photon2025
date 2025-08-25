@@ -197,6 +197,12 @@ h6 {
   flex-shrink: 0;
 }
 
+.l-footer__test-drive {
+  .button-primary {
+    border-radius: 8px;
+  }
+}
+
 .l-header {
   > a img {
     @media screen and (min-width: 1024px) and (max-width: 1130px) {
