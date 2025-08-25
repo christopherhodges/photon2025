@@ -45,7 +45,7 @@ export const Testimonial = ({
       </header>
 
       {/* ── Quote ── */}
-      <blockquote className="richText mx-auto max-w-[860px] text-center leading-snug text-black">
+      <blockquote className="richText mx-auto max-w-[860px] px-[10px] text-center leading-snug text-black">
         <RichText
           document={testimonial}
           options={{
