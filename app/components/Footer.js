@@ -5,11 +5,7 @@ import MailchimpForm from '@/app/components/MailchimpForm';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Footer = ({
-  footer,
-  showTestDriveSection = false,
-  testDriveTitle = 'Close the loop on prescription care.',
-}) => {
+const Footer = ({ footer, showTestDriveSection = false, testDriveTitle }) => {
   // accept either shape: { footer: {...} } or just {...}
   const footerItems = footer?.footer ?? footer ?? null;
   const footerLinks = footerItems?.linksCollection?.items ?? [];
@@ -25,11 +21,11 @@ const Footer = ({
 
   return (
     <footer className="l-footer bg-gradient-secondary relative pt-[40px] text-white">
-      {showTestDriveSection && (
+      {showTestDriveSection && testDriveTitle && (
         <div className="l-container l-footer__test-drive relative">
           <div className="mb-[40px] rounded-2xl bg-[var(--dark-blue)] px-[20px] py-[40px] text-center">
             <Crumb textColor="text-[var(--seafoam)]" label="Test Drive" />
-            <h2 className="mb-[30px] mt-[20px] text-[24px] font-light leading-[1] lg:mb-[20px] lg:mt-0 lg:text-[38px] lg:leading-[2]">
+            <h2 className="mb-[30px] mt-[20px] text-[24px] font-light leading-[1] lg:mb-[20px] lg:mt-[10px] lg:text-[38px] lg:leading-[2]">
               {testDriveTitle}
             </h2>
             <a href="/sign-up" className="button-primary">

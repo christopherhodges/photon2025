@@ -36,7 +36,7 @@ const FeaturedArticles = ({ sectionTitle, crumb, items }) => {
                   className="rounded-[16px]"
                   alt={post.coverImage.title}
                 />
-                <div className="mt-[24px] flex justify-between md:items-center">
+                <div className="mt-[24px] flex items-start justify-between">
                   <h3 className="max-w-[291px] text-[32px] font-light text-white md:max-w-none">
                     {post.title}
                   </h3>

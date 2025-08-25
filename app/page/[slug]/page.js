@@ -49,7 +49,7 @@ export default async function Page({ params }) {
     false,
   );
 
-  const { hero, bodyContentCollection } = page;
+  const { hero, bodyContentCollection, testDriveTitle } = page;
 
   return (
     <>
@@ -122,7 +122,11 @@ export default async function Page({ params }) {
           </div>
         )}
       </main>
-      <Footer showTestDriveSection footer={footer} />
+      <Footer
+        showTestDriveSection
+        testDriveTitle={testDriveTitle}
+        footer={footer}
+      />
     </>
   );
 }
