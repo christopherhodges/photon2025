@@ -16,8 +16,6 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const { page } = await getPage(slug);
 
-  console.log('hello');
-
   if (!page) return {};
 
   const title = page.metaTitle ? page.metaTitle : page.title;
