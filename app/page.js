@@ -39,7 +39,6 @@ export default async function Page() {
   return (
     <>
       <main className="l-main">
-        <div className="hidden">hi</div>
         {hero && (
           <Hero
             title={hero.title}

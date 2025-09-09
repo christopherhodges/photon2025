@@ -84,17 +84,22 @@ export default async function Page({ params }) {
                   <h2 className="mb-[20px] mt-[20px] text-[38px]">
                     Open Roles
                   </h2>
-                  {/*<a href="/join-us" className="button-primary">
-                  Careers Page
-                </a>*/}
+                  <a
+                    target="_blank"
+                    href="https://wellfound.com/company/photon-health/jobs"
+                    className="button-primary radius-sm"
+                  >
+                    View Open Roles
+                  </a>
                   <h3 className="mt-[48px] text-[24px]">
-                    Photon is fully staffed at the moment!
+                    We're hiring across the company
                   </h3>
                   <p className="mt-[16px] opacity-[.8]">
-                    We’re not hiring right now, but we’re always interested in
-                    connecting with great people. Join our Talent Network by
-                    sharing your details, and we’ll reach out if something opens
-                    up that’s a good fit.
+                    Join us in reshaping the future of pharmacy by giving
+                    patients real ownership over their prescriptions. If you’re
+                    excited to tackle complex healthcare challenges with a
+                    fast-growing Brooklyn-based team, we’d love for you to
+                    apply.
                   </p>
                   <a
                     target="_blank"
