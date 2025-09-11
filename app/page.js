@@ -1,10 +1,9 @@
-import { draftMode } from 'next/headers';
-
 import BodyContent from '@/app/components/BodyContent';
 import Footer from '@/app/components/Footer';
 import Hero from '@/app/components/Hero';
 import { getFooter } from '@/lib/contentful/footer';
 import { getPage } from '@/lib/contentful/pages';
+import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 const SITE = 'Photon Health';

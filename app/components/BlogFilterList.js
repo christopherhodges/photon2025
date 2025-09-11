@@ -41,6 +41,7 @@ export default function BlogFilterList({ initialPosts }) {
         width: p.coverImage.width,
         height: p.coverImage.height,
         title: p.coverImage.title || p.title,
+        blurDataURL: p.image.blurDataURL,
       },
       date: p.date,
       url: `/blog/${p.slug}`,

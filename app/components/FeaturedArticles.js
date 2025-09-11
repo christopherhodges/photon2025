@@ -1,6 +1,6 @@
 'use client';
+import ContentfulImage from '@/app/components/ContentfulImage';
 import Crumb from '@/app/components/Crumb';
-import ContentfulImage from '@/app/components/contentful-image';
 import Image from 'next/image';
 
 const FeaturedArticles = ({ sectionTitle, crumb, items }) => {

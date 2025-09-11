@@ -1,5 +1,5 @@
 'use client';
-import ContentfulImage from '@/app/components/contentful-image';
+import ContentfulImage from '@/app/components/ContentfulImage';
 import Crumb from '@/app/components/Crumb';
 import RichText from '@/app/components/RichText';
 import { BLOCKS } from '@contentful/rich-text-types';

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export default function LoadingOverlay({
   gifSrc = '/images/Photon-Loading-Animation.gif',
@@ -25,7 +25,7 @@ export default function LoadingOverlay({
     return id;
   };
 
-  const finish = () => {
+  const finish = useCallback(() => {
     if (!active.current) return;
     const root = document.documentElement;
     root.style.overflow = prevOverflow.current;
@@ -35,7 +35,7 @@ export default function LoadingOverlay({
       /* empty */
     }
     setRender(false);
-  };
+  }, [active, sessionKey, oncePerSession]);
 
   useEffect(() => {
     // Skip if we've already shown it this session.
@@ -87,7 +87,7 @@ export default function LoadingOverlay({
       timers.current = [];
       root.style.overflow = prevOverflow.current;
     };
-  }, [minDuration, oncePerSession, sessionKey, fadeMs, maxWaitMs]);
+  }, [minDuration, oncePerSession, sessionKey, fadeMs, maxWaitMs, finish]);
 
   if (!render) return null;
 

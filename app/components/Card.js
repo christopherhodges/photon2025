@@ -1,5 +1,4 @@
-'use client';
-import ContentfulImage from '@/app/components/contentful-image';
+import ContentfulImage from '@/app/components/ContentfulImage';
 import CrumbList from '@/app/components/CrumbList';
 import CategoryList from '@/app/components/FilterList';
 import { formatDate } from '@/lib/formatDate';
@@ -7,10 +6,10 @@ import { withBr } from '@/lib/withBr';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-const Card = ({
+export default function Card({
   className,
-  crumbs,
-  categories,
+  crumbs = [],
+  categories = [],
   date,
   title,
   description,
@@ -22,7 +21,7 @@ const Card = ({
   maxImageHeight,
   isCaseStudy,
   url,
-}) => {
+}) {
   const Wrapper = url ? Link : 'div';
   const wrapperProps = url ? { href: url } : {};
 
@@ -32,7 +31,6 @@ const Card = ({
       className={clsx(
         className,
         'card block bg-white',
-
         imageFill && 'flex h-full flex-col',
         imageTop && 'flex flex-col-reverse justify-end',
         isCaseStudy && 'card--case-study',
@@ -53,9 +51,7 @@ const Card = ({
 
         {categories.length !== 0 && (
           <div className="mb-[24px]">
-            {categories.length !== 0 && (
-              <CategoryList categories={categories} date={date} />
-            )}
+            <CategoryList categories={categories} date={date} />
           </div>
         )}
 
@@ -67,7 +63,7 @@ const Card = ({
           </div>
         )}
 
-        {isCaseStudy && (
+        {isCaseStudy ? (
           <div className="flex items-start justify-between md:items-center">
             <h3 className="text-[16px] md:text-[24px] md:font-normal">
               {withBr(title)}
@@ -89,17 +85,16 @@ const Card = ({
               </svg>
             </span>
           </div>
-        )}
-        {!isCaseStudy && (
+        ) : (
           <h3 className="text-[24px] font-normal">{withBr(title)}</h3>
         )}
+
         {description && (
-          <p
-            className={clsx('mt-[10px] leading-6 text-[#121212] opacity-[.8]')}
-          >
+          <p className="mt-[10px] leading-6 text-[#121212] opacity-[.8]">
             {description}
           </p>
         )}
+
         {buttonText && buttonLink && (
           <a
             href={buttonLink}
@@ -109,25 +104,30 @@ const Card = ({
           </a>
         )}
       </div>
+
       <div
         className={clsx(
           'card__image-wrapper relative',
           imageFill
             ? 'h-[290px] grow md:h-[55vw] lg:h-[18vw] xl:h-[290px]'
-            : `h-[${image.height}px] max-h-[200px] md:max-h-none`,
+            : 'max-h-[200px] md:max-h-none',
         )}
-        style={{ height: maxImageHeight ? maxImageHeight : '300px' }}
+        style={{ height: maxImageHeight ?? '300px' }}
       >
-        <ContentfulImage
-          className={clsx('h-full w-full object-cover', !imageTop && 'mt-auto')}
-          src={image.url}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
-          alt={image.title}
-        />
+        {image?.url && (
+          <ContentfulImage
+            className={clsx(
+              'h-full w-full object-cover',
+              !imageTop && 'mt-auto',
+            )}
+            src={image.url}
+            alt={image.title || title || ''}
+            blurDataURL={image.blurDataURL}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
+          />
+        )}
       </div>
     </Wrapper>
   );
-};
-
-export default Card;
+}

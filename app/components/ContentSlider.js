@@ -1,6 +1,6 @@
 'use client';
 
-import ContentfulImage from '@/app/components/contentful-image';
+import ContentfulImage from '@/app/components/ContentfulImage';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -145,6 +145,7 @@ export default function ContentSlider({ items = [] }) {
               <ContentfulImage
                 src={item.coverImage.url}
                 alt={item.coverImage.title}
+                blurDataURL={item.coverImage.blurDataURL ?? null}
                 draggable={false}
                 fill
                 className="rounded-xl object-cover"

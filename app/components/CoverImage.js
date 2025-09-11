@@ -1,19 +1,11 @@
 import Link from 'next/link';
-import ContentfulImage from './contentful-image';
+import ContentfulImage from './ContentfulImage';
 
-function cn(...classes: any[]) {
+function cn(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function CoverImage({
-  title,
-  url,
-  slug,
-}: {
-  title: string;
-  url: string;
-  slug?: string;
-}) {
+export default function CoverImage(title, url, slug) {
   const image = (
     <ContentfulImage
       alt={`Cover Image for ${title}`}

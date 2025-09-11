@@ -1,23 +1,9 @@
 import Link from 'next/link';
-import Avatar from './avatar';
-import CoverImage from './cover-image';
+import Avatar from './Avatar';
+import CoverImage from './CoverImage';
 import DateComponent from './date';
 
-function PostPreview({
-  title,
-  coverImage,
-  date,
-  excerpt,
-  author,
-  slug,
-}: {
-  title: string;
-  coverImage: any;
-  date: string;
-  excerpt: string;
-  author: any;
-  slug: string;
-}) {
+function PostPreview(title, coverImage, date, excerpt, author, slug) {
   return (
     <div>
       <div className="mb-5">
@@ -37,7 +23,7 @@ function PostPreview({
   );
 }
 
-export default function MoreStories({ morePosts }: { morePosts: any[] }) {
+export default function MoreStories(morePosts) {
   return (
     <section>
       <h2 className="mb-8 text-6xl font-bold leading-tight tracking-tighter md:text-7xl">

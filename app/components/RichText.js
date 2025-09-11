@@ -1,6 +1,6 @@
 'use client';
 
-import ContentfulImage from '@/app/components/contentful-image';
+import ContentfulImage from '@/app/components/ContentfulImage';
 import RichTextSectionHeader from '@/app/components/RichTextSectionHeader';
 import { RichTextTestimonial } from '@/app/components/RichTextTestimonial';
 import VideoPlayer from '@/app/components/VideoPlayer';

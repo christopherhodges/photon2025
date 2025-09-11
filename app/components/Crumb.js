@@ -1,4 +1,4 @@
-import ContentfulImage from '@/app/components/contentful-image';
+import ContentfulImage from '@/app/components/ContentfulImage';
 import { pressura } from '@/lib/fonts';
 import clsx from 'clsx';
 

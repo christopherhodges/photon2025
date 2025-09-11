@@ -1,4 +1,4 @@
-import ContentfulImage from '@/app/components/contentful-image';
+import ContentfulImage from '@/app/components/ContentfulImage';
 import Crumb from '@/app/components/Crumb';
 import { shuffleString } from '@/lib/utils/shuffleString';
 import clsx from 'clsx';

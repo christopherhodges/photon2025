@@ -6,6 +6,7 @@ import {
   getFeaturedCaseStudies,
 } from '@/lib/contentful/caseStudies';
 import { getFooter } from '@/lib/contentful/footer';
+import { getBlurDataURL } from '@/lib/contentfulBlur';
 
 const SITE = 'Photon Health';
 
@@ -16,12 +17,43 @@ export const metadata = {
   description: 'Photon Health case studies',
 };
 
+async function addBlurToCards(cards = []) {
+  return Promise.all(
+    cards.map(async c => {
+      const image = c.image ?? c.coverImage ?? null;
+      let blurDataURL = null;
+
+      // Skip SVGs for blur placeholders
+      if (image?.url && !/\.svg$/i.test(image.url)) {
+        try {
+          blurDataURL = await getBlurDataURL(image.url, {
+            w: 24,
+            q: 20,
+            fm: 'jpg',
+          });
+        } catch {
+          // ignore; fall back to no blur
+        }
+      }
+
+      return {
+        ...c,
+        image: image ? { ...image, blurDataURL } : null,
+      };
+    }),
+  );
+}
+
 export default async function CaseStudiesIndex() {
-  const caseStudies = await getAllCaseStudies();
-  const featuredCaseStudies = await getFeaturedCaseStudies();
+  let caseStudies = await getAllCaseStudies();
+  let featuredCaseStudies = await getFeaturedCaseStudies();
   const [footer] = await Promise.all([getFooter()]);
 
+  caseStudies = await addBlurToCards(caseStudies);
+  featuredCaseStudies = await addBlurToCards(featuredCaseStudies);
+
   const cards = caseStudies.map(p => {
+    console.log(p);
     return {
       title: p.featuredLinkTitle || p.title,
       crumbs: p.crumbListCollection?.items || [],
@@ -33,6 +65,7 @@ export default async function CaseStudiesIndex() {
         width: p.coverImage.width,
         height: p.coverImage.height,
         title: p.coverImage.title || p.title,
+        blurDataURL: p.image.blurDataURL,
       },
       url: `/case-studies/${p.slug}`,
     };

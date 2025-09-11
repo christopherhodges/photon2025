@@ -1,4 +1,4 @@
-import ContentfulImage from '@/app/components/contentful-image';
+import ContentfulImage from '@/app/components/ContentfulImage';
 import { formatDate } from '@/lib/formatDate';
 
 const AuthoredBy = ({ name, image, date }) => {

@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   images: {
-    // allow remote optimization for Contentful
+    // remove: loader: "custom",
     remotePatterns: [
       { protocol: 'https', hostname: 'images.ctfassets.net' },
+      { protocol: 'https', hostname: 'downloads.ctfassets.net' },
       { protocol: 'https', hostname: 'images.contentful.com' },
     ],
-    formats: ['image/avif', 'image/webp'],
   },
   /* Pretty URL → internal route -------------------------- */
   async rewrites() {

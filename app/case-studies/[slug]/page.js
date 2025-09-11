@@ -1,5 +1,5 @@
 import AuthoredBy from '@/app/components/AuthoredBy';
-import ContentfulImage from '@/app/components/contentful-image';
+import ContentfulImage from '@/app/components/ContentfulImage';
 import CrumbList from '@/app/components/CrumbList';
 import Footer from '@/app/components/Footer';
 import RichText from '@/app/components/RichText';
