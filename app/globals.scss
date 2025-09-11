@@ -283,6 +283,11 @@ nav.navigation {
 .richText b {
   font-weight: bold;
 }
+.richText h1 + p > sup {
+  color: rgb(112, 112, 112);
+  margin-left: -6px;
+  margin-right: -6px;
+}
 .richText sup {
   font-size: inherit;
   top: 0;
