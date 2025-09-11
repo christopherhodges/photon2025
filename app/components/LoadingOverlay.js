@@ -2,22 +2,14 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-/**
- * Full-screen loading overlay that:
- * • Shows immediately on first paint.
- * • Stays visible for at least `minDuration` ms.
- * • Also waits for window "load" (or an 8s safety timeout), then fades out.
- * • Locks scroll while visible.
- * • Optional once-per-session behavior.
- */
 export default function LoadingOverlay({
   gifSrc = '/images/Photon-Loading-Animation.gif',
-  backgroundClass = 'bg-white',
-  minDuration = 2000, // ← guarantee at least 2s if you want
+  backgroundClass = 'bg-[#001740]',
+  minDuration = 2000,
   oncePerSession = true,
   sessionKey = 'photon:loadedOnce',
-  fadeMs = 320, // keep in sync with CSS transition
-  maxWaitMs = 8000, // safety valve if 'load' never fires
+  fadeMs = 620,
+  maxWaitMs = 8000,
 }) {
   const [render, setRender] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
@@ -25,11 +17,24 @@ export default function LoadingOverlay({
   const timers = useRef([]);
   const active = useRef(true);
   const prevOverflow = useRef('');
+  const overlayRef = useRef(null);
 
   const setT = (fn, ms) => {
     const id = window.setTimeout(fn, ms);
     timers.current.push(id);
     return id;
+  };
+
+  const finish = () => {
+    if (!active.current) return;
+    const root = document.documentElement;
+    root.style.overflow = prevOverflow.current;
+    try {
+      if (oncePerSession) sessionStorage.setItem(sessionKey, '1');
+    } catch {
+      /* empty */
+    }
+    setRender(false);
   };
 
   useEffect(() => {
@@ -50,7 +55,7 @@ export default function LoadingOverlay({
     prevOverflow.current = root.style.overflow;
     root.style.overflow = 'hidden';
 
-    // A: wait for the full page load (or a safety timeout)
+    // A) Wait for full page load (or safety timeout)
     const waitForLoad = new Promise(resolve => {
       if (document.readyState === 'complete') {
         resolve();
@@ -60,32 +65,24 @@ export default function LoadingOverlay({
           resolve();
         };
         window.addEventListener('load', onLoad);
-        setT(resolve, maxWaitMs); // safety
+        setT(resolve, maxWaitMs);
       }
     });
 
-    // B: guarantee minimum display time
+    // B) Guarantee minimum display time
     const waitForMin = new Promise(resolve => setT(resolve, minDuration));
 
-    // Hide only after BOTH have completed
+    // Hide after BOTH complete
     Promise.all([waitForLoad, waitForMin]).then(() => {
       if (!active.current) return;
       setFadeOut(true);
-      setT(() => {
-        if (!active.current) return;
-        setRender(false);
-        root.style.overflow = prevOverflow.current;
-        try {
-          if (oncePerSession) sessionStorage.setItem(sessionKey, '1');
-        } catch {
-          /* empty */
-        }
-      }, fadeMs);
+
+      // Fallback: if transitionend doesn't fire, remove after fadeMs+50
+      setT(finish, fadeMs + 50);
     });
 
     return () => {
       active.current = false;
-      // Cleanup timers and restore overflow
       timers.current.forEach(id => clearTimeout(id));
       timers.current = [];
       root.style.overflow = prevOverflow.current;
@@ -96,16 +93,29 @@ export default function LoadingOverlay({
 
   return (
     <div
+      ref={overlayRef}
       aria-hidden="true"
       aria-busy="true"
       className={[
         'fixed inset-0 z-[100000]',
         backgroundClass,
         'flex items-center justify-center',
-        'transition-opacity duration-300 ease-out',
+        'transition-opacity ease-out',
         'motion-reduce:transition-none',
         fadeOut ? 'opacity-0' : 'opacity-100',
       ].join(' ')}
+      // Match the CSS transition duration to fadeMs
+      style={{ transitionDuration: `${fadeMs}ms` }}
+      onTransitionEnd={e => {
+        // Only finish when the overlay's opacity transition completes
+        if (
+          e.target === e.currentTarget &&
+          e.propertyName === 'opacity' &&
+          fadeOut
+        ) {
+          finish();
+        }
+      }}
     >
       <img
         src={gifSrc}

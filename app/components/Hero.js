@@ -59,6 +59,7 @@ const Hero = ({
               priority
               sizes="(max-width: 768px) 100vw, 100vw"
               fill
+              placeholder="empty"
               className={clsx(
                 'h-full w-full object-cover object-bottom',
                 pathname === '/marketplace' && 'rounded-2xl',
@@ -87,6 +88,7 @@ const Hero = ({
                 priority
                 className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
                 src={centerImage.url}
+                placeholder="empty"
                 width={centerImage.width}
                 height={centerImage.height}
                 alt={title}
@@ -166,6 +168,7 @@ const Hero = ({
                   priority
                   className="mx-auto mt-auto h-auto w-full"
                   src={centerImage.url}
+                  placeholder="empty"
                   width={centerImage.width}
                   height={centerImage.height}
                   alt={title}
