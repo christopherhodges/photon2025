@@ -57,13 +57,13 @@ const Hero = ({
           >
             <ContentfulImage
               priority
+              sizes="(max-width: 768px) 100vw, 100vw"
+              fill
               className={clsx(
                 'h-full w-full object-cover object-bottom',
                 pathname === '/marketplace' && 'rounded-2xl',
               )}
               src={media.url}
-              width={media.width}
-              height={media.height}
               alt={title}
             />
           </div>

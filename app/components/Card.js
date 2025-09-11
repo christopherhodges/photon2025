@@ -113,7 +113,7 @@ const Card = ({
         className={clsx(
           'card__image-wrapper relative',
           imageFill
-            ? 'min-h-[180px] grow'
+            ? 'h-[290px] grow md:h-[55vw] lg:h-[18vw] xl:h-[290px]'
             : `h-[${image.height}px] max-h-[200px] md:max-h-none`,
         )}
         style={{ height: maxImageHeight ? maxImageHeight : '300px' }}
@@ -121,8 +121,8 @@ const Card = ({
         <ContentfulImage
           className={clsx('h-full w-full object-cover', !imageTop && 'mt-auto')}
           src={image.url}
-          width={image.width}
-          height={image.height}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
           alt={image.title}
         />
       </div>

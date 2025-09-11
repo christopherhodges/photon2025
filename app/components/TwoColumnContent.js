@@ -58,6 +58,7 @@ const TwoColumnContent = ({
               <ContentfulImage
                 className={!img2 ? 'h-full' : ''}
                 src={img1.url}
+                sizes="(max-width: 1024px) 100vw, 1024px"
                 width={img1.width}
                 height={img1.height}
                 alt={img1.title}

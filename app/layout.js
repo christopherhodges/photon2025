@@ -1,6 +1,7 @@
 import AnnouncementBar from '@/app/components/AnnouncementBar';
 import BodyClass from '@/app/components/BodyClass';
 import HeaderFull from '@/app/components/HeaderFull';
+import LoadingOverlay from '@/app/components/LoadingOverlay';
 import '@/app/globals.scss';
 import { getAnnouncementBar } from '@/lib/contentful/announcementBar';
 import { getNavigationMenu } from '@/lib/contentful/header';
@@ -49,6 +50,7 @@ export default async function RootLayout({ children }) {
             ></iframe>
           </noscript>
           <BodyClass />
+          <LoadingOverlay minDuration={3000} oncePerSession={true} />
 
           <AnnouncementBar
             text={announcementBar.text}
