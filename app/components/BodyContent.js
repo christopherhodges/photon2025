@@ -107,8 +107,11 @@ const BodyContent = ({ bodyContent }) => {
           );
         } else if (section.__typename === 'ComponentBasicContent') {
           return (
-            <div key={shuffleString(section.sys.id)} className="basic-content">
-              <div className="l-container">
+            <div
+              key={shuffleString(section.sys.id)}
+              className="basic-content body-content-basic"
+            >
+              <div className="l-container l-container--sm">
                 <RichText
                   key={shuffleString(section.sys.id)}
                   document={section.content.json}
