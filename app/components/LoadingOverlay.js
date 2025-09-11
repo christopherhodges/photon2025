@@ -40,7 +40,9 @@ export default function LoadingOverlay({
           setRender(false);
           return;
         }
-      } catch {}
+      } catch {
+        /* empty */
+      }
     }
 
     // Lock scroll.
@@ -75,7 +77,9 @@ export default function LoadingOverlay({
         root.style.overflow = prevOverflow.current;
         try {
           if (oncePerSession) sessionStorage.setItem(sessionKey, '1');
-        } catch {}
+        } catch {
+          /* empty */
+        }
       }, fadeMs);
     });
 
