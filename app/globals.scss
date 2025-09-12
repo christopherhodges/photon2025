@@ -40,7 +40,7 @@
   letter-spacing: 0;
 }
 
-@media (pointer: fine) {
+@media (hover: hover) and (pointer: fine) {
   html,
   body,
   body * {
@@ -191,6 +191,11 @@ h6 {
     li:nth-child(3) {
       margin-bottom: 24px;
     }
+  }
+
+  .button-primary,
+  .button-outline {
+    font-size: 16px;
   }
 }
 

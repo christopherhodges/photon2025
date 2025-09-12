@@ -2,41 +2,48 @@
 
 import { useEffect, useRef } from 'react';
 
-/**
- * CustomCursor
- * - Default: small black dot
- * - Hover (over links/buttons/inputs or [data-cursor="hover"]): bigger cyan circle
- *
- * Tweak sizes/colors via props if you want.
- */
 const HOVER_SELECTOR =
   'a, button, [role="button"], input, textarea, select, label, [data-cursor="hover"]';
 
 export default function CustomCursor({
-  size = 16, // default dot diameter (px)
-  hoverSize = 24, // hover dot diameter (px)
-  color = '#000000', // default color
-  hoverColor = '#0fd3e1', // hover color (your cyan)
-  ease = 0.2, // follow “lag” (0..1)
-  zIndex = 99999,
+  size = 16,
+  hoverSize = 24,
+  color = '#000000',
+  hoverColor = '#0fd3e1',
+  ease = 0.2,
+  zIndex = 999999,
 } = {}) {
   const elRef = useRef(null);
   const stateRef = useRef({
     x: 0,
-    y: 0, // current position
+    y: 0,
     tx: 0,
-    ty: 0, // target position
-    scale: 1,
+    ty: 0,
     hovered: false,
     raf: 0,
     visible: false,
   });
 
   useEffect(() => {
+    // ── Desktop check: requires hover + fine pointer and NO touch points.
+    // This blocks phones/tablets (including iPad with touch), but still allows desktops.
+    const mq = window.matchMedia?.('(hover: hover) and (pointer: fine)');
+    const hasHoverFinePointer = !!mq && mq.matches;
+    const hasTouch = (navigator.maxTouchPoints ?? 0) > 0;
+
+    // Optional extra guard (UA is brittle; use only if you *must* exclude tablets with mice):
+    const ua = navigator.userAgent.toLowerCase();
+    const isMobileOrTabletUA = /iphone|ipad|ipod|android|mobile|tablet/.test(
+      ua,
+    );
+
+    const isDesktopOnly =
+      hasHoverFinePointer && !hasTouch && !isMobileOrTabletUA;
+    if (!isDesktopOnly) return; // ← do not mount the custom cursor
+
     const el = document.createElement('div');
     elRef.current = el;
 
-    // Inline styles for speed (no layout thrash); Tailwind not needed here
     Object.assign(el.style, {
       position: 'fixed',
       top: '0',
@@ -47,10 +54,9 @@ export default function CustomCursor({
       background: color,
       pointerEvents: 'none',
       transform: 'translate(-50%, -50%)',
-      mixBlendMode: 'normal',
       zIndex: String(zIndex),
       willChange: 'transform, width, height, background-color, opacity',
-      opacity: '0', // fade in on first move
+      opacity: '0',
       transition:
         'width 160ms ease, height 160ms ease, background-color 160ms ease, opacity 160ms ease',
     });
@@ -66,7 +72,6 @@ export default function CustomCursor({
         s.visible = true;
         el.style.opacity = '1';
       }
-      // Determine hover state from event target each move
       const isHover = !!e.target?.closest?.(HOVER_SELECTOR);
       if (isHover !== s.hovered) {
         s.hovered = isHover;
@@ -83,40 +88,33 @@ export default function CustomCursor({
     };
 
     const onLeave = () => {
-      // When pointer leaves document (e.g., alt-tab), fade the cursor
       s.visible = false;
       el.style.opacity = '0';
     };
 
     const loop = () => {
       const { x, y, tx, ty } = s;
-      // Smooth follow
       s.x += (tx - x) * ease;
       s.y += (ty - y) * ease;
       el.style.transform = `translate(${s.x - 0.5 * parseFloat(el.style.width)}px, ${s.y - 0.5 * parseFloat(el.style.height)}px)`;
       s.raf = requestAnimationFrame(loop);
     };
 
-    // Prefer pointer events when available
     window.addEventListener('pointermove', onMove, { passive: true });
     window.addEventListener('pointerleave', onLeave, { passive: true });
-
     s.raf = requestAnimationFrame(loop);
 
-    // Respect reduced-motion (snap to target)
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleRM = () => {
-      stateRef.current.x = stateRef.current.tx;
-      stateRef.current.y = stateRef.current.ty;
+    // If the media query flips (e.g., device mode toggled), remove the cursor.
+    const mqListener = e => {
+      if (!e.matches) onLeave();
     };
-    if (mq.matches) handleRM();
-    mq.addEventListener?.('change', handleRM);
+    mq?.addEventListener?.('change', mqListener);
 
     return () => {
       cancelAnimationFrame(stateRef.current.raf);
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('pointerleave', onLeave);
-      mq.removeEventListener?.('change', handleRM);
+      mq?.removeEventListener?.('change', mqListener);
       el.remove();
     };
   }, [size, hoverSize, color, hoverColor, ease, zIndex]);

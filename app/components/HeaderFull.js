@@ -129,7 +129,7 @@ export default function HeaderFull({ menu }) {
         </div>
 
         {/* buttons */}
-        <div className="mx-4 mt-[20px] flex flex-col-reverse gap-4 rounded-[20px] bg-white p-6">
+        <div className="mx-4 mt-[20px] flex flex-col-reverse gap-3 rounded-[20px] bg-white p-6">
           {lastPart
             .filter(
               item => item.__typename === 'NavLink' && item.style !== 'default',
