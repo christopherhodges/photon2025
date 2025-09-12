@@ -40,6 +40,14 @@
   letter-spacing: 0;
 }
 
+@media (pointer: fine) {
+  html,
+  body,
+  body * {
+    cursor: none !important;
+  }
+}
+
 html,
 body {
   height: 100%;

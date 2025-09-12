@@ -1,5 +1,6 @@
 import AnnouncementBar from '@/app/components/AnnouncementBar';
 import BodyClass from '@/app/components/BodyClass';
+import CustomCursor from '@/app/components/CustomCursor';
 import HeaderFull from '@/app/components/HeaderFull';
 import LoadingOverlay from '@/app/components/LoadingOverlay';
 import '@/app/globals.scss';
@@ -50,6 +51,7 @@ export default async function RootLayout({ children }) {
             ></iframe>
           </noscript>
           <BodyClass />
+          <CustomCursor />
           <LoadingOverlay minDuration={3000} oncePerSession={true} />
 
           <AnnouncementBar
