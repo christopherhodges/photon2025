@@ -55,7 +55,7 @@ export default function BlogFilterList({ initialPosts }) {
           Filter by:
         </div>
 
-        <div className="no-scrollbar mb-[40px] flex items-center gap-3 overflow-x-auto whitespace-nowrap text-sm md:flex-wrap">
+        <div className="no-scrollbar mb-[40px] flex items-center gap-2 overflow-x-auto whitespace-nowrap text-sm md:flex-wrap">
           {allCats.map(cat => {
             const active = selected.includes(cat);
             return (

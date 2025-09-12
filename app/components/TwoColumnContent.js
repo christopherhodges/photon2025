@@ -30,7 +30,7 @@ const TwoColumnContent = ({
         >
           {content && (
             <>
-              <div className="flex flex-col items-start gap-4 font-normal lg:w-1/2">
+              <div className="gap flex flex-col items-start gap-4 font-normal lg:w-1/2">
                 <Crumb label={crumb} borderStyles="border" />
                 {title && (
                   <h2 className="text-[38px] font-light leading-[1.25]">
