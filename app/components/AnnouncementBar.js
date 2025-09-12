@@ -71,7 +71,7 @@ export default function AnnouncementBar({
   return (
     <div
       ref={barRef}
-      className="announcement-bar left-0 top-0 z-[1000] flex w-full justify-center bg-black py-[11px] hover:bg-[#001740]"
+      className="announcement-bar absolute z-[1000] flex w-full justify-center bg-black py-[11px] hover:bg-[#001740]"
     >
       <a
         target="_blank"
