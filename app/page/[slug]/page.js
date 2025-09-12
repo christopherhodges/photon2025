@@ -8,6 +8,7 @@ import { getFooter } from '@/lib/contentful/footer';
 import { getPage } from '@/lib/contentful/pages';
 import { getTestimonialItems } from '@/lib/contentful/testimonials';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
+import clsx from 'clsx';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
@@ -61,7 +62,7 @@ export default async function Page({ params }) {
   const { hero, bodyContentCollection, testDriveTitle } = page;
 
   const heroMedia =
-    hero.media && hero.media.url
+    hero && hero.media && hero.media.url
       ? {
           ...hero.media,
           blurDataURL: isSvg(hero.media.url)
@@ -72,7 +73,7 @@ export default async function Page({ params }) {
 
   return (
     <>
-      <main className="l-main">
+      <main className={clsx('l-main', !hero && 'pb-[40px]')}>
         {hero && (
           <Hero
             title={hero.title}
