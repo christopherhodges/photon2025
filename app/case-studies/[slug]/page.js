@@ -65,12 +65,14 @@ export default async function CaseStudy({ params }) {
                 image={page.authorImage}
                 date={page.date}
               />
+
               <ContentfulImage
-                className="rounded-[16px]"
+                className="max-w-1024px h-auto rounded-[16px]"
+                sizes="(max-width: 800px) 100vw, 1024px"
                 src={page.coverImage.url}
                 alt={page.coverImage.title}
-                width={page.coverImage.width}
-                height={page.coverImage.height}
+                width={1024}
+                height={1024}
               />
             </header>
           </div>

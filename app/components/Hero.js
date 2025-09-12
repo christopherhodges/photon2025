@@ -110,8 +110,8 @@ const Hero = ({
           >
             <div
               className={clsx(
-                'mx-auto mt-[40px] lg:mx-0 lg:mt-0',
-                !media ? 'max-w-none' : 'max-w-[335px] sm:max-w-[690px]',
+                'mx-auto md:mt-[40px] lg:mx-0 lg:mt-0',
+                !media ? 'max-w-none' : 'xs:max-w-[335px] sm:max-w-[690px]',
               )}
             >
               {crumb && (

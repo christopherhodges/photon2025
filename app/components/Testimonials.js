@@ -81,7 +81,7 @@ export default function Testimonials({ className, titleStyles, items = [] }) {
       <section
         className={clsx(
           className,
-          'flex h-[400px] flex-col items-center justify-center',
+          'flex flex-col items-center justify-center lg:h-[400px]',
         )}
       >
         <Spinner />

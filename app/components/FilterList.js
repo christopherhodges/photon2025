@@ -2,7 +2,7 @@ import { formatDate } from '@/lib/formatDate';
 
 const CategoryList = ({ categories, date }) => {
   return (
-    <ul className="flex flex-wrap items-center gap-2 text-[12px] md:text-[14px]">
+    <ul className="flex flex-wrap items-center gap-3 text-[12px] md:text-[14px]">
       {categories.map(c => {
         return (
           <li

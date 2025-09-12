@@ -40,7 +40,7 @@ export default async function RootLayout({ children }) {
         }}
       />
       <html lang="en" className={clsx(acidGrotesk.className)}>
-        <body className="text-[14px] lg:text-[16px]">
+        <body className="lg:text-[16px]">
           <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-5KGPPZ9"

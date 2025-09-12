@@ -113,7 +113,7 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
                 >
                   <Card
                     className={clsx(
-                      (layout !== 'zig-zag' || layout !== 'left-tall') &&
+                      layout === 'two-up' &&
                         'flex h-full flex-col justify-between',
                     )}
                     imageFill={imageFill}

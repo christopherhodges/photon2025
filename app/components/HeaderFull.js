@@ -97,7 +97,7 @@ export default function HeaderFull({ menu }) {
       {/* slide-down panel */}
       <div
         className={clsx(
-          'mobile-slide-down-panel fixed left-0 top-0 z-[9999] h-screen w-screen overflow-y-auto',
+          'mobile-slide-down-panel fixed left-0 top-0 z-[9999] h-screen w-screen overflow-y-auto pb-[50px]',
           'bg-gradient-to-br from-[#6D6BFF] via-[#9C7CFF] to-[#C5CBFF]',
           'transition-transform duration-300',
           open ? 'translate-y-0' : '-translate-y-full',
@@ -129,7 +129,7 @@ export default function HeaderFull({ menu }) {
         </div>
 
         {/* buttons */}
-        <div className="mx-4 mt-[20px] flex flex-col-reverse gap-3 rounded-[20px] bg-white p-6">
+        <div className="mx-4 mt-[20px] flex flex-col-reverse gap-4 rounded-[20px] bg-white p-6">
           {lastPart
             .filter(
               item => item.__typename === 'NavLink' && item.style !== 'default',

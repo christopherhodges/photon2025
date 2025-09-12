@@ -120,7 +120,7 @@ export default function LoadingOverlay({
       <img
         src={gifSrc}
         alt="Loading Photon Health…"
-        className="h-[15vw] w-[15vw]"
+        className="h-[200px] w-[200px] lg:h-[15vw] lg:w-[15vw]"
         decoding="async"
       />
     </div>

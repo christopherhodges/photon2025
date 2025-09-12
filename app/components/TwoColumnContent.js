@@ -33,7 +33,7 @@ const TwoColumnContent = ({
               <div className="flex flex-col items-start gap-4 font-normal lg:w-1/2">
                 <Crumb label={crumb} borderStyles="border" />
                 {title && (
-                  <h2 className="text-[38px] font-light leading-[105%]">
+                  <h2 className="text-[38px] font-light leading-[1.25]">
                     {title}
                   </h2>
                 )}
@@ -42,7 +42,7 @@ const TwoColumnContent = ({
                   options={{
                     renderNode: {
                       [BLOCKS.PARAGRAPH]: (_, children) => (
-                        <p className="mb-[30px] text-[24px] leading-[28.8px]">
+                        <p className="mb-[30px] text-[24px] leading-[1.25]">
                           {children}
                         </p>
                       ),

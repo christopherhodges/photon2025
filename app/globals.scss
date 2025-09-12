@@ -96,6 +96,10 @@ h4,
 h5,
 h6 {
   line-height: 1.05;
+
+  @media screen and (max-width: 768px) {
+    line-height: 1.25;
+  }
 }
 
 .bg-gradient-secondary {
@@ -170,6 +174,14 @@ h6 {
 
     &:after {
       border-radius: 8px;
+    }
+  }
+}
+
+.mobile-slide-down-panel {
+  ul {
+    li:nth-child(3) {
+      margin-bottom: 24px;
     }
   }
 }
@@ -381,9 +393,11 @@ input {
   }
 }
 
-.card--two-up {
-  .card__image-wrapper {
-    min-height: 500px;
+body:not(.page-case-studies) {
+  .card--two-up {
+    .card__image-wrapper {
+      min-height: 500px;
+    }
   }
 }
 
@@ -396,6 +410,8 @@ input {
 
 // Rich Text
 .richText {
+  font-weight: 300;
+
   .video-js {
     border-radius: 16px;
     overflow: hidden;
@@ -706,6 +722,10 @@ body.page-about-us {
 .basic-content .richText {
   line-height: 2;
 
+  @media screen and (max-width: 768px) {
+    line-height: 1.65;
+  }
+
   h2 {
     font-size: 32px;
     font-weight: 300;
@@ -823,7 +843,7 @@ body.page-blog {
     }
 
     p {
-      font-size: 16px;
+      font-size: 18px;
     }
   }
 
@@ -874,6 +894,10 @@ body.page-marketplace {
     color: #181919;
     font-size: 18px;
 
+    @media screen and (max-width: 768px) {
+      font-size: 16px;
+    }
+
     h2 {
       b {
         font-weight: 300;
@@ -887,6 +911,10 @@ body.page-marketplace {
       line-height: 1.5;
       font-weight: 300;
       font-size: 18px;
+
+      @media screen and (max-width: 768px) {
+        font-size: 16px;
+      }
     }
     .l-container {
       max-width: 744px;
@@ -896,7 +924,6 @@ body.page-marketplace {
   .l-container--testimonials {
     .flex.flex-col:not(header) {
       flex-direction: column-reverse;
-      justify-content: center;
       padding: 0;
     }
   }
@@ -910,6 +937,11 @@ body[class*=' page-blog'] {
     padding-top: 64px;
     padding-bottom: 64px;
     margin: 0;
+
+    @media screen and (max-width: 768px) {
+      padding-top: 32px;
+      padding-bottom: 32px;
+    }
 
     &:before {
       content: '';
