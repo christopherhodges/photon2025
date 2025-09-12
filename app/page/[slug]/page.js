@@ -7,10 +7,19 @@ import Testimonials from '@/app/components/Testimonials';
 import { getFooter } from '@/lib/contentful/footer';
 import { getPage } from '@/lib/contentful/pages';
 import { getTestimonialItems } from '@/lib/contentful/testimonials';
+import { getBlurDataURL } from '@/lib/contentfulBlur';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 const SITE = 'Photon Health';
+const isSvg = (url = '') => /\.svg($|\?)/i.test(url);
+const safeGetBlur = async url => {
+  try {
+    return await getBlurDataURL(url, { w: 24, q: 20, fm: 'jpg' });
+  } catch {
+    return null;
+  }
+};
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -51,6 +60,16 @@ export default async function Page({ params }) {
 
   const { hero, bodyContentCollection, testDriveTitle } = page;
 
+  const heroMedia =
+    hero.media && hero.media.url
+      ? {
+          ...hero.media,
+          blurDataURL: isSvg(hero.media.url)
+            ? null
+            : await safeGetBlur(hero.media.url),
+        }
+      : null;
+
   return (
     <>
       <main className="l-main">
@@ -63,7 +82,7 @@ export default async function Page({ params }) {
             crumb={hero.crumb}
             buttonText={hero.buttonText}
             buttonLink={hero.buttonLink}
-            media={hero.media}
+            media={heroMedia}
             centerImage={hero.centerImage}
             textColor={hero.textColor}
             bgColor={hero.backgroundColorPicker?.value}

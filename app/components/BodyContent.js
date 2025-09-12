@@ -139,9 +139,9 @@ const BodyContent = async ({ bodyContent }) => {
             return (
               <div
                 key={shuffleString(section.sys.id)}
-                className="basic-content"
+                className="basic-content body-content-basic"
               >
-                <div className="l-container">
+                <div className="l-container l-container--sm">
                   <RichText
                     key={shuffleString(section.sys.id)}
                     document={section.content.json}

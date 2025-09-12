@@ -22,7 +22,7 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
     'two-up': {
       grid: `grid lg:grid-cols-2 gap-${gap}`,
       item: () =>
-        'lg:rounded-[16px] rounded-[16px] h-full flex flex-col text-sm bg-white overflow-hidden',
+        'card--two-up lg:rounded-[16px] rounded-[16px] h-full flex flex-col text-sm bg-white overflow-hidden',
     },
 
     /** Simple 3-up, equal size */
@@ -89,7 +89,11 @@ const CardGrid = ({ cards, layout, gap = 8 }) => {
               }
 
               let imageFill = false;
-              if (layout === 'left-tall' || layout === 'zig-zag') {
+              if (
+                layout === 'left-tall' ||
+                layout === 'zig-zag' ||
+                layout === 'two-up'
+              ) {
                 imageFill = true;
               } else if (layout === 'three-up' && !card.imageTop) {
                 imageFill = true;

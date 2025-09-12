@@ -57,13 +57,13 @@ const Hero = ({
           >
             <ContentfulImage
               priority
-              sizes="(max-width: 768px) 100vw, 100vw"
-              fill
-              placeholder="empty"
               className={clsx(
                 'h-full w-full object-cover object-bottom',
                 pathname === '/marketplace' && 'rounded-2xl',
               )}
+              width={media.width}
+              height={media.height}
+              blurDataURL={media.blurDataURL}
               src={media.url}
               alt={title}
             />
@@ -87,8 +87,8 @@ const Hero = ({
               <ContentfulImage
                 priority
                 className="mx-auto mt-auto h-auto w-[254px] lg:w-[360px]"
+                sizes="(max-width: 800px) 100vw, 500px"
                 src={centerImage.url}
-                placeholder="empty"
                 width={centerImage.width}
                 height={centerImage.height}
                 alt={title}

@@ -381,6 +381,12 @@ input {
   }
 }
 
+.card--two-up {
+  .card__image-wrapper {
+    min-height: 500px;
+  }
+}
+
 .hero,
 .card {
   .button-primary.button--black {
