@@ -145,7 +145,7 @@ export default async function Page({ params }) {
                   */}
 
               <div className="mt-8 flex w-full flex-col items-start justify-between gap-8 lg:flex-row">
-                <div className="lg:w-[45%]">
+                <div className="w-full lg:w-[45%]">
                   <JobListings jobs={jobs} />
                 </div>
 
