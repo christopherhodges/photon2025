@@ -81,7 +81,7 @@ const Hero = ({
           {centerImage && (
             <div
               className={clsx(
-                'hero-center-image pointer-events-none absolute bottom-0 z-[0] hidden h-full w-full items-end lg:flex',
+                'hero-center-image pointer-events-none absolute bottom-0 left-0 z-[0] hidden h-full w-full items-end lg:flex',
               )}
             >
               <ContentfulImage
