@@ -2,14 +2,15 @@ import BodyContent from '@/app/components/BodyContent';
 import Crumb from '@/app/components/Crumb';
 import Footer from '@/app/components/Footer';
 import Hero from '@/app/components/Hero';
+import JobListings from '@/app/components/JobListings';
 import { SignUpForm } from '@/app/components/SignUpForm';
 import Testimonials from '@/app/components/Testimonials';
 import { getFooter } from '@/lib/contentful/footer';
+import { getAllJobListings } from '@/lib/contentful/jobListings';
 import { getPage } from '@/lib/contentful/pages';
 import { getTestimonialItems } from '@/lib/contentful/testimonials';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
 import clsx from 'clsx';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 const SITE = 'Photon Health';
@@ -46,10 +47,12 @@ export async function generateMetadata({ params }) {
     },
   };
 }
+
 export default async function Page({ params }) {
   params = await params;
   const { slug } = params;
   const { page } = await getPage(slug, false);
+  const jobs = await getAllJobListings();
   const [footer] = await Promise.all([getFooter()]);
 
   if (!page) return notFound();
@@ -98,12 +101,16 @@ export default async function Page({ params }) {
         {(slug === 'about-us' || slug === 'join-us') && (
           <div className="open-roles py-[40px]">
             <div className="l-container">
-              <div className="flex flex-col items-center justify-between gap-[40px] lg:flex-row">
-                <div className="md:w-1/2">
-                  <Crumb label="Careers" borderStyles="border" />
-                  <h2 className="mb-[20px] mt-[20px] text-[38px]">
-                    Open Roles
-                  </h2>
+              <Crumb label="Careers" borderStyles="border" />
+              <h2 className="mb-[20px] mt-[20px] text-[38px]">Open Roles</h2>
+              <a
+                target="_blank"
+                href="/careers"
+                className="button-primary radius-sm"
+              >
+                Careers
+              </a>
+              {/*
                   <a
                     target="_blank"
                     href="https://wellfound.com/company/photon-health/jobs"
@@ -135,8 +142,14 @@ export default async function Page({ params }) {
                       alt="Up Right Arrow"
                     />
                   </a>
+                  */}
+
+              <div className="mt-8 flex w-full flex-col items-start justify-between gap-8 lg:flex-row">
+                <div className="lg:w-[45%]">
+                  <JobListings jobs={jobs} />
                 </div>
-                <div className="testimonials--small w-full max-w-full lg:w-[770px]">
+
+                <div className="testimonials--small w-full lg:w-[55%]">
                   <Testimonials
                     titleStyles="mb-[20px] leading-1 md:m-0 md:m-[40px] text-[21px] md:text-[32px]"
                     items={testimonialItems}
