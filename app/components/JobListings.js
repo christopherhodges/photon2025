@@ -47,17 +47,29 @@ function Accordion({ title, items, count }) {
         </div>
 
         <div>
-          <svg
-            className={`h-5 w-5 transform transition-transform ${
-              open ? 'rotate-45' : ''
-            }`}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path d="M12 5v14M5 12h14" />
-          </svg>
+          {open ? (
+            /* minus symbol */
+            <svg
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path d="M5 12h14" />
+            </svg>
+          ) : (
+            /* plus symbol */
+            <svg
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          )}
         </div>
       </button>
 
