@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       images: [
         {
-          url: '/images/open-graph/photon-health.jpg',
+          url: '/images/open-graph/photon-health.png',
           width: 5120,
           height: 2880,
           alt: 'Photon Health',
