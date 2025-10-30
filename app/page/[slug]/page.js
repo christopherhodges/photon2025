@@ -98,7 +98,7 @@ export default async function Page({ params }) {
 
         <SignUpForm show={slug === 'sign-up'} />
 
-        {(slug === 'about-us' || slug === 'join-us') && (
+        {(slug === 'about-us' || slug === 'join-us' || slug === 'careers') && (
           <div className="open-roles py-[40px]">
             <div className="l-container">
               <Crumb label="Careers" borderStyles="border" />
