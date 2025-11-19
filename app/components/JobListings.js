@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 /** Fixed order that matches your design */
-const ORDERED_CATEGORIES = ['Development', 'Design', 'Account', 'Sales'];
 
 export default function JobListings({ jobs = [], className = '' }) {
   /** Group once (no network calls, no effects) */
@@ -13,6 +12,8 @@ export default function JobListings({ jobs = [], className = '' }) {
     acc[cat] = acc[cat] ? [...acc[cat], job] : [job];
     return acc;
   }, {});
+
+  const ORDERED_CATEGORIES = Object.keys(groups).sort();
 
   return (
     <section className={clsx(className)}>

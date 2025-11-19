@@ -101,16 +101,21 @@ export default async function Page({ params }) {
         {(slug === 'about-us' || slug === 'join-us' || slug === 'careers') && (
           <div className="open-roles py-[40px]">
             <div className="l-container">
-              <Crumb label="Careers" borderStyles="border" />
-              <h2 className="mb-[20px] mt-[20px] text-[38px]">Open Roles</h2>
-              <a
-                target="_blank"
-                href="/careers"
-                className="button-primary radius-sm"
-              >
-                Careers
-              </a>
-              {/*
+              <div className="mt-8 flex w-full flex-col items-start justify-between gap-8 lg:flex-row">
+                {jobs.length > 0 && (
+                  <div className="w-full lg:w-[45%]">
+                    <Crumb label="Careers" borderStyles="border" />
+                    <h2 className="mb-[20px] mt-[20px] text-[38px]">
+                      Open Roles
+                    </h2>
+                    <a
+                      target="_blank"
+                      href="/careers"
+                      className="button-primary radius-sm"
+                    >
+                      Careers
+                    </a>
+                    {/*
                   <a
                     target="_blank"
                     href="https://wellfound.com/company/photon-health/jobs"
@@ -144,12 +149,16 @@ export default async function Page({ params }) {
                   </a>
                   */}
 
-              <div className="mt-8 flex w-full flex-col items-start justify-between gap-8 lg:flex-row">
-                <div className="w-full lg:w-[45%]">
-                  <JobListings jobs={jobs} />
-                </div>
+                    <JobListings className="mt-4" jobs={jobs} />
+                  </div>
+                )}
 
-                <div className="testimonials--small w-full lg:w-[55%]">
+                <div
+                  className={clsx(
+                    'testimonials--small w-full',
+                    jobs.length > 0 && 'lg:w-[55%]',
+                  )}
+                >
                   <Testimonials
                     titleStyles="mb-[20px] leading-1 md:m-0 md:m-[40px] text-[21px] md:text-[32px]"
                     items={testimonialItems}
