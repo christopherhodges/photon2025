@@ -13,6 +13,8 @@ export default function JobListings({ jobs = [], className = '' }) {
     return acc;
   }, {});
 
+  console.log(groups);
+
   const ORDERED_CATEGORIES = Object.keys(groups).sort();
 
   return (

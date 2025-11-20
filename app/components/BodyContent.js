@@ -1,14 +1,18 @@
 import CardGrid from '@/app/components/CardGrid';
+import Crumb from '@/app/components/Crumb';
 import FeaturedArticles from '@/app/components/FeaturedArticles';
 import FeaturedContent from '@/app/components/FeaturedContent';
+import JobListings from '@/app/components/JobListings';
 import LogoGrid from '@/app/components/LogoGrid';
 import RichText from '@/app/components/RichText';
 import SectionHeader from '@/app/components/SectionHeader';
 import Testimonials from '@/app/components/Testimonials';
 import ThreeColumnContent from '@/app/components/ThreeColumnContent';
 import TwoColumnContent from '@/app/components/TwoColumnContent';
+import { getTestimonialItems } from '@/lib/contentful/testimonials';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
 import { shuffleString } from '@/lib/utils/shuffleString';
+import clsx from 'clsx';
 import { Fragment } from 'react';
 
 async function addBlurToCards(cards = []) {
@@ -39,6 +43,10 @@ async function addBlurToCards(cards = []) {
 }
 
 const BodyContent = async ({ bodyContent }) => {
+  const testimonialItems = await getTestimonialItems(
+    '10hDTkGuvBM07WTHTgHIMi',
+    false,
+  );
   return (
     <>
       {await Promise.all(
@@ -146,6 +154,48 @@ const BodyContent = async ({ bodyContent }) => {
                     key={shuffleString(section.sys.id)}
                     document={section.content.json}
                   />
+                </div>
+              </div>
+            );
+          } else if (section.__typename === 'ComponentCareers') {
+            const jobs = section.openRolesCollection.items;
+            return (
+              <div
+                key={shuffleString(section.sys.id)}
+                className="open-roles py-[40px]"
+              >
+                <div className="l-container">
+                  <div className="mt-8 flex w-full flex-col items-start justify-between gap-8 lg:flex-row">
+                    {jobs.length > 0 && (
+                      <div className="w-full lg:w-[45%]">
+                        <Crumb label="Careers" borderStyles="border" />
+                        <h2 className="mb-[20px] mt-[20px] text-[38px]">
+                          Open Roles
+                        </h2>
+                        <a
+                          target="_blank"
+                          href="/careers"
+                          className="button-primary radius-sm"
+                        >
+                          Careers
+                        </a>
+
+                        <JobListings className="mt-4" jobs={jobs} />
+                      </div>
+                    )}
+
+                    <div
+                      className={clsx(
+                        'testimonials--small w-full',
+                        jobs.length > 0 && 'lg:w-[55%]',
+                      )}
+                    >
+                      <Testimonials
+                        titleStyles="mb-[20px] leading-1 md:m-0 md:m-[40px] text-[21px] md:text-[32px]"
+                        items={testimonialItems}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             );

@@ -53,7 +53,6 @@ export default async function CaseStudiesIndex() {
   featuredCaseStudies = await addBlurToCards(featuredCaseStudies);
 
   const cards = caseStudies.map(p => {
-    console.log(p);
     return {
       title: p.featuredLinkTitle || p.title,
       crumbs: p.crumbListCollection?.items || [],
