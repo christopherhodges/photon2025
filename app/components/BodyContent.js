@@ -174,10 +174,10 @@ const BodyContent = async ({ bodyContent }) => {
                         </h2>
                         <a
                           target="_blank"
-                          href="/careers"
+                          href={section.link}
                           className="button-primary radius-sm"
                         >
-                          Careers
+                          {section.linkText}
                         </a>
 
                         <JobListings className="mt-4" jobs={jobs} />
