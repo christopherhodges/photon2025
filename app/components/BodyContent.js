@@ -9,6 +9,7 @@ import SectionHeader from '@/app/components/SectionHeader';
 import Testimonials from '@/app/components/Testimonials';
 import ThreeColumnContent from '@/app/components/ThreeColumnContent';
 import TwoColumnContent from '@/app/components/TwoColumnContent';
+import { getAllJobListings } from '@/lib/contentful/jobListings';
 import { getTestimonialItems } from '@/lib/contentful/testimonials';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
 import { shuffleString } from '@/lib/utils/shuffleString';
@@ -158,7 +159,7 @@ const BodyContent = async ({ bodyContent }) => {
               </div>
             );
           } else if (section.__typename === 'ComponentCareers') {
-            const jobs = section.openRolesCollection.items;
+            const jobs = await getAllJobListings();
             return (
               <div
                 key={shuffleString(section.sys.id)}
@@ -172,15 +173,17 @@ const BodyContent = async ({ bodyContent }) => {
                         <h2 className="mb-[20px] mt-[20px] text-[38px]">
                           Open Roles
                         </h2>
-                        <a
-                          target="_blank"
-                          href={section.link}
-                          className="button-primary radius-sm"
-                        >
-                          {section.linkText}
-                        </a>
 
                         <JobListings className="mt-4" jobs={jobs} />
+                        <div className="l-container--sm pt-[10px]">
+                          <a
+                            target="_blank"
+                            href={section.link}
+                            className="button-primary radius-sm"
+                          >
+                            {section.linkText}
+                          </a>
+                        </div>
                       </div>
                     )}
 
