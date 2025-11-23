@@ -24,7 +24,6 @@ module.exports = {
   /* Internal URL → canonical pretty URL  +  Sheet-based redirects -- */
   async redirects() {
     const sheetRedirects = await fetchSheetRedirects();
-
     // keep your existing internal → pretty redirect
     const canonical = [
       {
