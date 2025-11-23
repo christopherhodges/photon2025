@@ -5,12 +5,12 @@ import { getFooter } from '@/lib/contentful/footer';
 import { getAllPosts } from '@/lib/contentful/posts';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
 
-const SITE = 'Photon Health';
+const SITE = 'Photon';
 const pageTitle = '';
 
 export const metadata = {
   title: pageTitle ? `${pageTitle} | ${SITE}` : SITE,
-  description: 'Latest news & insights from Photon Health',
+  description: 'Latest news & insights from Photon',
 };
 
 async function addBlurToCards(cards = []) {
@@ -48,7 +48,7 @@ export default async function BlogIndex() {
   return (
     <>
       <main className="l-main">
-        <Hero title="Photon Blogs" />
+        <Hero title="Photon Blog" />
 
         <BlogFilterList initialPosts={cards} />
       </main>

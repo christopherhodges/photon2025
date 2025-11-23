@@ -89,7 +89,7 @@ function Accordion({ title, items, count }) {
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-1 text-sm font-medium underline-offset-2 hover:underline"
                 >
-                  View Opening
+                  Apply
                   <svg
                     className="ml-2"
                     width="11"

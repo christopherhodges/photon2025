@@ -51,7 +51,7 @@ export default async function RootLayout({ children }) {
           </noscript>
           <BodyClass />
 
-          <LoadingOverlay minDuration={3000} oncePerSession={true} />
+          <LoadingOverlay minDuration={1500} oncePerSession={true} />
 
           <AnnouncementBar
             text={announcementBar.text}
