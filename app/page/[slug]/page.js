@@ -5,10 +5,10 @@ import { SignUpForm } from '@/app/components/SignUpForm';
 import { getFooter } from '@/lib/contentful/footer';
 import { getPage } from '@/lib/contentful/pages';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
+import { buildMetadata } from '@/lib/metadata';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 
-const SITE = 'Photon Health';
 const isSvg = (url = '') => /\.svg($|\?)/i.test(url);
 const safeGetBlur = async url => {
   try {
@@ -24,23 +24,13 @@ export async function generateMetadata({ params }) {
 
   if (!page) return {};
 
-  const title = page.metaTitle ? page.metaTitle : page.title;
-
-  return {
-    title: title ? `${title} | ${SITE}` : SITE,
-    description: page.metaDescription,
-    metadataBase: new URL('https://photon.health'),
-    openGraph: {
-      images: [
-        {
-          url: '/images/open-graph/photon-health.png',
-          width: 5120,
-          height: 2880,
-          alt: 'Photon Health',
-        },
-      ],
-    },
-  };
+  return buildMetadata({
+    title: page.title,
+    metaTitle: page.metaTitle,
+    description: page.subheading,
+    image: page.hero?.media,
+    path: `/${slug}`,
+  });
 }
 
 export default async function Page({ params }) {

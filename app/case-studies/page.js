@@ -1,21 +1,22 @@
 import CardGrid from '@/app/components/CardGrid';
 import ContentSlider from '@/app/components/ContentSlider';
 import Footer from '@/app/components/Footer';
+import { SITE_NAME } from '@/lib/constants';
 import {
   getAllCaseStudies,
   getFeaturedCaseStudies,
 } from '@/lib/contentful/caseStudies';
 import { getFooter } from '@/lib/contentful/footer';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
-
-const SITE = 'Photon Health';
+import { buildMetadata } from '@/lib/metadata';
 
 const pageTitle = 'Case Studies';
 
-export const metadata = {
-  title: pageTitle ? `${pageTitle} | ${SITE}` : SITE,
-  description: 'Photon Health case studies',
-};
+export const metadata = buildMetadata({
+  title: pageTitle || SITE_NAME,
+  description: 'Photon case studies',
+  path: '/case-studies',
+});
 
 async function addBlurToCards(cards = []) {
   return Promise.all(

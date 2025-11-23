@@ -1,6 +1,6 @@
 ## Photon Website
 
-Next.js marketing site for Photon, hosted on Vercel at [photon.health](https://photon.health).
+Next.js marketing site for Photon, hosted on Vercel at [photonhealth.com](https://photonhealth.com).
 
 ### Prerequisites
 - Node 22.x (matches `engines` in `package.json`)

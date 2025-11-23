@@ -4,10 +4,9 @@ import Hero from '@/app/components/Hero';
 import { getFooter } from '@/lib/contentful/footer';
 import { getPage } from '@/lib/contentful/pages';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
+import { buildMetadata } from '@/lib/metadata';
 import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
-
-const SITE = 'Photon Health';
 
 const isSvg = (url = '') => /\.svg($|\?)/i.test(url);
 const safeGetBlur = async url => {
@@ -18,23 +17,15 @@ const safeGetBlur = async url => {
   }
 };
 
-export async function generateMetadata({ params }) {
-  const page = await getPage(params.slug); // { title }
+export async function generateMetadata() {
+  const slug = '/';
+  const { page } = await getPage(slug); // { title }
 
-  return {
-    title: page.title ? `${SITE} | ${page.title}` : SITE,
-    metadataBase: new URL('https://photon.health'),
-    openGraph: {
-      images: [
-        {
-          url: '/images/open-graph/photon-health.png',
-          width: 5120,
-          height: 2880,
-          alt: 'Photon Health',
-        },
-      ],
-    },
-  };
+  return buildMetadata({
+    description: page?.subheading,
+    image: page?.hero?.media,
+    path: slug,
+  });
 }
 
 export default async function Page() {

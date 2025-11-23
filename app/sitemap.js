@@ -1,13 +1,11 @@
+import { SITE_URL } from '@/lib/constants';
 import { getAllCaseStudies } from '@/lib/contentful/caseStudies';
 import { getAllPages } from '@/lib/contentful/pages';
 import { getAllPosts } from '@/lib/contentful/posts';
 
 // Next.js metadata route: generates /sitemap.xml at build time
 export default async function sitemap() {
-  const baseUrl = (process.env.SITE_URL || 'https://photon.health').replace(
-    /\/$/,
-    '',
-  );
+  const baseUrl = SITE_URL.replace(/\/$/, '');
 
   const [pages = [], posts = [], caseStudies = []] = await Promise.all([
     getAllPages(false).catch(() => []),

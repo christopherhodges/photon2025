@@ -1,17 +1,19 @@
 import BlogFilterList from '@/app/components/BlogFilterList';
 import Footer from '@/app/components/Footer';
 import Hero from '@/app/components/Hero';
+import { SITE_NAME } from '@/lib/constants';
 import { getFooter } from '@/lib/contentful/footer';
 import { getAllPosts } from '@/lib/contentful/posts';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
+import { buildMetadata } from '@/lib/metadata';
 
-const SITE = 'Photon';
 const pageTitle = '';
 
-export const metadata = {
-  title: pageTitle ? `${pageTitle} | ${SITE}` : SITE,
+export const metadata = buildMetadata({
+  title: pageTitle || SITE_NAME,
   description: 'Latest news & insights from Photon',
-};
+  path: '/blog',
+});
 
 async function addBlurToCards(cards = []) {
   return Promise.all(

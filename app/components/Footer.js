@@ -2,6 +2,7 @@
 import Crumb from '@/app/components/Crumb';
 import FooterNavigation from '@/app/components/FooterNavigation';
 import MailchimpForm from '@/app/components/MailchimpForm';
+import { SITE_NAME } from '@/lib/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -55,7 +56,7 @@ const Footer = ({ footer, showTestDriveSection = false, testDriveTitle }) => {
           <Image
             className="mt-[40px] h-auto w-full lg:mt-[80px]"
             src={footerItems.logo?.url || '/images/footer-placeholder.png'}
-            alt={footerItems.title || 'Photon Health'}
+            alt={footerItems.title || SITE_NAME}
             width={footerItems.logo?.width || 1600}
             height={footerItems.logo?.height || 400}
           />

@@ -6,9 +6,8 @@ import RichText from '@/app/components/RichText';
 import Testimonials from '@/app/components/Testimonials';
 import { getCaseStudy } from '@/lib/contentful/caseStudies';
 import { getFooter } from '@/lib/contentful/footer';
+import { buildMetadata } from '@/lib/metadata';
 import { notFound } from 'next/navigation';
-
-const SITE = 'Photon Health';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -16,23 +15,13 @@ export async function generateMetadata({ params }) {
 
   if (!page) return {};
 
-  const title = page.metaTitle ? page.metaTitle : page.title;
-
-  return {
-    title: title ? `${title} | ${SITE}` : SITE,
-    description: page.metaDescription,
-    metadataBase: new URL('https://photon.health'),
-    openGraph: {
-      images: [
-        {
-          url: '/images/open-graph/photon-health.png',
-          width: 5120,
-          height: 2880,
-          alt: 'Photon Health',
-        },
-      ],
-    },
-  };
+  return buildMetadata({
+    title: page.title,
+    description: page.subtitle,
+    image: page.coverImage,
+    type: 'article',
+    path: `/case-studies/${slug}`,
+  });
 }
 export default async function CaseStudy({ params }) {
   params = await params;
