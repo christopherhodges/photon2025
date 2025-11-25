@@ -1,7 +1,7 @@
 import { SITE_URL } from '@/lib/constants';
 import { getAllCaseStudies } from '@/lib/contentful/caseStudies';
 import { getAllPages } from '@/lib/contentful/pages';
-import { getAllPosts } from '@/lib/contentful/posts';
+import { getAllGhostPosts } from '@/lib/ghost/posts';
 
 // Next.js metadata route: generates /sitemap.xml at build time
 export default async function sitemap() {
@@ -9,7 +9,7 @@ export default async function sitemap() {
 
   const [pages = [], posts = [], caseStudies = []] = await Promise.all([
     getAllPages(false).catch(() => []),
-    getAllPosts(false).catch(() => []),
+    getAllGhostPosts().catch(() => []),
     getAllCaseStudies(false).catch(() => []),
   ]);
 

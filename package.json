@@ -24,6 +24,8 @@
     "@contentful/vercel-nextjs-toolkit": "latest",
     "@tailwindcss/typography": "0.5.9",
     "@tanstack/react-query": "^4.3.9",
+    "@tryghost/content-api": "^1.11.20",
+    "@tryghost/helpers": "^1.1.99",
     "apollo-link": "^1.2.14",
     "apollo-link-http": "^1.5.17",
     "autoprefixer": "10.4.15",

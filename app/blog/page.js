@@ -3,17 +3,18 @@ import Footer from '@/app/components/Footer';
 import Hero from '@/app/components/Hero';
 import { SITE_NAME } from '@/lib/constants';
 import { getFooter } from '@/lib/contentful/footer';
-import { getAllPosts } from '@/lib/contentful/posts';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
+import { getAllGhostPosts, getGhostSettings } from '@/lib/ghost/posts';
 import { buildMetadata } from '@/lib/metadata';
 
-const pageTitle = '';
-
-export const metadata = buildMetadata({
-  title: pageTitle || SITE_NAME,
-  description: 'Latest news & insights from Photon',
-  path: '/blog',
-});
+export async function generateMetadata() {
+  const settings = await getGhostSettings();
+  return buildMetadata({
+    title: settings?.title || SITE_NAME,
+    description: settings?.description,
+    path: '/blog',
+  });
+}
 
 async function addBlurToCards(cards = []) {
   return Promise.all(
@@ -43,14 +44,20 @@ async function addBlurToCards(cards = []) {
 }
 
 export default async function BlogIndex() {
-  const posts = await getAllPosts();
-  const [footer] = await Promise.all([getFooter()]);
+  const [settings, posts, footer] = await Promise.all([
+    getGhostSettings(),
+    getAllGhostPosts(),
+    getFooter(),
+  ]);
   const cards = await addBlurToCards(posts);
+
+  const title = settings?.title;
+  const subtitle = settings?.description;
 
   return (
     <>
       <main className="l-main">
-        <Hero title="Photon Blog" />
+        <Hero title={title} subtitle={subtitle} />
 
         <BlogFilterList initialPosts={cards} />
       </main>

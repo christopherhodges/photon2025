@@ -28,7 +28,7 @@ const Hero = ({
       <section
         className={clsx(
           'hero relative w-full',
-          media ? 'min-h-[50vh] lg:h-[822px]' : 'pt-[120px] lg:pt-[200px]',
+          media ? 'min-h-[50vh] lg:h-[822px]' : 'pt-[120px] lg:pt-[100px]',
           textColor === 'white' && media ? 'text-white' : 'text-black',
           bgColor && `min-h-[50vh]`,
           alignment,
