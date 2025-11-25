@@ -9,7 +9,7 @@ Next.js marketing site for Photon, hosted on Vercel at [photonhealth.com](https:
 ### Environment variables
 1) Copy the template: `cp .env.example .env`
 2) In Vercel, open Project Settings → Environment Variables and copy the values over.
-3) Place them in your local `.env`. Restart the dev server after changes.
+4) Place them in your local `.env`. Restart the dev server after changes.
 
 ### Install and run
 ```bash

@@ -3,8 +3,8 @@ import Footer from '@/app/components/Footer';
 import Hero from '@/app/components/Hero';
 import { SITE_NAME } from '@/lib/constants';
 import { getFooter } from '@/lib/contentful/footer';
-import { getAllPosts } from '@/lib/contentful/posts';
 import { getBlurDataURL } from '@/lib/contentfulBlur';
+import { getAllGhostPosts } from '@/lib/ghost/posts';
 import { buildMetadata } from '@/lib/metadata';
 
 const pageTitle = '';
@@ -43,7 +43,7 @@ async function addBlurToCards(cards = []) {
 }
 
 export default async function BlogIndex() {
-  const posts = await getAllPosts();
+  const posts = await getAllGhostPosts();
   const [footer] = await Promise.all([getFooter()]);
   const cards = await addBlurToCards(posts);
 

@@ -15,6 +15,16 @@ export default function RichText({
 }) {
   if (!document) return null;
 
+  // Allow raw HTML strings (for Ghost content) in addition to Contentful rich text documents.
+  if (typeof document === 'string') {
+    return (
+      <div
+        className={`richText ${className}`}
+        dangerouslySetInnerHTML={{ __html: document }}
+      />
+    );
+  }
+
   /* ────────────────────────────
      Fast lookup tables
   ──────────────────────────── */

@@ -30,19 +30,24 @@ export default function BlogFilterList({ initialPosts }) {
 
   /* map posts ➜ Card props */
   const cards = visiblePosts.map(p => {
+    const image =
+      p.coverImage && p.coverImage.url
+        ? {
+            url: p.coverImage.url,
+            width: p.coverImage.width,
+            height: p.coverImage.height,
+            title: p.coverImage.title || p.title,
+            blurDataURL: p.image?.blurDataURL,
+          }
+        : null;
+
     return {
       title: p.title,
-      key: p.sys.id,
-      description: p.excerpt,
+      key: p.id || p.slug,
+      description: p.subtitle,
       categories: p.categories,
-      imageTop: true,
-      image: {
-        url: p.coverImage.url,
-        width: p.coverImage.width,
-        height: p.coverImage.height,
-        title: p.coverImage.title || p.title,
-        blurDataURL: p.image.blurDataURL,
-      },
+      imageTop: !!image,
+      image,
       date: p.date,
       url: `/blog/${p.slug}`,
     };

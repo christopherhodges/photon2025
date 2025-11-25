@@ -8,6 +8,12 @@ module.exports = {
       { protocol: 'https', hostname: 'images.ctfassets.net' },
       { protocol: 'https', hostname: 'downloads.ctfassets.net' },
       { protocol: 'https', hostname: 'images.contentful.com' },
+      { protocol: 'https', hostname: 'photon.health' },
+      { protocol: 'https', hostname: 'blog.photon.health' },
+      { protocol: 'https', hostname: 'static.ghost.org' },
+      { protocol: 'https', hostname: 'www.gravatar.com' },
+      { protocol: 'https', hostname: 'gravatar.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
     ],
   },
 

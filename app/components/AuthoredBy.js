@@ -10,8 +10,8 @@ const AuthoredBy = ({ name, image, date }) => {
             className="h-full w-full object-cover"
             src={image.url}
             alt={image.title}
-            width={image.width}
-            height={image.height}
+            width={image.width || 40}
+            height={image.height || 40}
           />
         </div>
       )}

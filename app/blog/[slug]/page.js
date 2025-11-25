@@ -5,13 +5,13 @@ import Footer from '@/app/components/Footer';
 import RichText from '@/app/components/RichText';
 import Testimonials from '@/app/components/Testimonials';
 import { getFooter } from '@/lib/contentful/footer';
-import { getPost } from '@/lib/contentful/posts';
+import { getGhostPost } from '@/lib/ghost/posts';
 import { buildMetadata } from '@/lib/metadata';
 import { notFound } from 'next/navigation';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const { page } = await getPost(slug);
+  const page = await getGhostPost(slug);
 
   if (!page) return {};
 
@@ -26,10 +26,11 @@ export async function generateMetadata({ params }) {
 export default async function Post({ params }) {
   params = await params;
   const { slug } = params;
-  const { page } = await getPost(slug, false);
+  const page = await getGhostPost(slug);
   const [footer] = await Promise.all([getFooter()]);
 
-  const crumbs = page.crumbListCollection?.items ?? [];
+  const crumbs = [{ crumbTitle: page.readingTime }];
+  const subtitle = page?.subtitle;
 
   if (!page) return notFound();
 
@@ -46,21 +47,24 @@ export default async function Post({ params }) {
                 />
               )}
               <h1 className="text-[38px]">{page.title}</h1>
-              <p className="text-[24px] text-[var(--med-gray)]">
-                {page.subtitle}
-              </p>
+              {subtitle && (
+                <p className="text-[24px] text-[var(--med-gray)]">{subtitle}</p>
+              )}
               <AuthoredBy
                 name={page.author}
                 image={page.authorImage}
                 date={page.date}
               />
-              <ContentfulImage
-                className="rounded-[16px]"
-                src={page.coverImage.url}
-                alt={page.coverImage.title}
-                width={page.coverImage.width}
-                height={page.coverImage.height}
-              />
+              {page.coverImage?.url && (
+                <ContentfulImage
+                  className="max-w-1024px h-auto rounded-[16px]"
+                  sizes="(max-width: 800px) 100vw, 1024px"
+                  src={page.coverImage.url}
+                  alt={page.coverImage.title}
+                  width={1024}
+                  height={1024}
+                />
+              )}
             </header>
           </div>
           {page.featuredTestimonial && (
@@ -71,11 +75,7 @@ export default async function Post({ params }) {
           )}
           <div className="basic-content">
             <div className="l-container">
-              <RichText
-                key={page.sys.id}
-                document={page.content.json}
-                links={page.content.links}
-              />
+              <RichText key={page.slug} document={page.contentHtml} />
             </div>
           </div>
         </div>
