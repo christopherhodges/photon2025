@@ -75,7 +75,9 @@ export default async function Post({ params }) {
           )}
           <div className="basic-content">
             <div className="l-container">
-              <RichText key={page.slug} document={page.contentHtml} />
+              <article className="prose mx-auto lg:prose-lg">
+                <RichText key={page.slug} document={page.contentHtml} />
+              </article>
             </div>
           </div>
         </div>

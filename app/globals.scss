@@ -435,6 +435,133 @@ body:not(.page-case-studies) {
     border-color: #dbdbdb;
     margin-bottom: 24px;
   }
+
+  /* Ghost (Koenig) card defaults */
+  figure,
+  .kg-card,
+  .kg-embed-card,
+  .kg-gallery-card,
+  .kg-bookmark-card {
+    margin: 32px 0;
+  }
+
+  figure.kg-card {
+    width: 100%;
+  }
+
+  .kg-card figcaption {
+    color: var(--med-gray);
+    text-align: center;
+    p {
+      font-size: 14px;
+      margin-top: 12px;
+    }
+  }
+
+  .kg-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    margin: 0 auto;
+  }
+
+  .kg-width-full,
+  .kg-width-wide {
+    width: 100%;
+  }
+
+  .kg-embed-card iframe,
+  .kg-embed-card video {
+    width: 100%;
+    min-height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .kg-card .kg-video-container video {
+    margin-bottom: 0;
+  }
+
+  .kg-video-player {
+    display: none;
+  }
+
+  .kg-video-overlay {
+    display: none;
+  }
+
+  .kg-gallery-card {
+    display: grid;
+    gap: 16px;
+  }
+
+  .kg-gallery-row {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .kg-gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .kg-bookmark-card {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    border: 1px solid #dbdbdb;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .kg-bookmark-card {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .kg-bookmark-content {
+    padding: 16px;
+    display: grid;
+    gap: 6px;
+    align-content: center;
+  }
+
+  .kg-bookmark-title {
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .kg-bookmark-description {
+    color: var(--med-gray);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .kg-bookmark-metadata {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--med-gray);
+    font-size: 14px;
+  }
+
+  .kg-bookmark-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  .kg-bookmark-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .richText__image {
